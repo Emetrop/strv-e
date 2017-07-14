@@ -1,19 +1,19 @@
 import React, { PropTypes } from 'react';
 
-const Event = (title, description, startsAt, capacity, firstName, lastName, attendees) => (
+const Event = ({ title, description, startsAt, capacity, attendees, owner }) => (
   <div>
-    <div>
-      {startsAt}
-    </div>
     <h2>
       {title}
     </h2>
     <div>
-      {firstName} {lastName}
+      {startsAt}
+    </div>
+    <div>
+      {owner.firstname} {owner.lastname}
     </div>
     <div>
       {description.substring(0, 60)}
-      {description.length > 60 && '...'}
+      {description.length > 60 ? '...' : ''}
     </div>
     <div>
       {attendees.length}{' of '}{capacity}
@@ -26,12 +26,13 @@ Event.propTypes = {
   description: PropTypes.string.isRequired,
   startsAt: PropTypes.string.isRequired,
   capacity: PropTypes.number.isRequired,
+  owner: PropTypes.shape({
+    firstName: PropTypes.string.isRequired,
+    lastName: PropTypes.string.isRequired,
+  }).isRequired,
   attendees: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string.isRequired,
-      firstName: PropTypes.string.isRequired,
-      lastName: PropTypes.string.isRequired,
-      email: PropTypes.string.isRequired,
     })).isRequired,
 };
 
