@@ -1,10 +1,10 @@
-/* eslint-disable react/no-unused-prop-types */
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import Event from '../Event';
 
 const EventList = ({ events }) => (
   <div>
-    {events.map(event => <Event {...event} key={event.id} />)}
+    {events && events.map(event => <Event {...event} key={event.id} />)}
   </div>
 );
 
@@ -32,7 +32,11 @@ EventList.propTypes = {
       createdAt: PropTypes.string.isRequired,
       updatedAt: PropTypes.string.isRequired,
     }).isRequired,
-  ).isRequired,
+  ),
+};
+
+EventList.defaultProps = {
+  events: [],
 };
 
 export default EventList;
