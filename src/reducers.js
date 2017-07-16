@@ -17,6 +17,8 @@ const events = (state = [], action) => {
   }
 };
 
+export const getEventById = (state, id) => state.events.find(event => event.id === id);
+
 export default combineReducers({
   events,
   dashboard,

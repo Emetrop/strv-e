@@ -5,6 +5,7 @@ import { Route, Redirect, Switch, withRouter } from 'react-router-dom';
 import LogIn from '../LogIn';
 import SignUp from '../SignUp';
 import Dashboard from '../Dashboard';
+import EventDetail from '../EventDetail';
 
 const Routes = ({ isLoggedIn }) => (
     isLoggedIn
@@ -12,6 +13,7 @@ const Routes = ({ isLoggedIn }) => (
         <div>
           <Switch>
             <Route path="/dashboard" exact component={Dashboard} />
+            <Route path="/event/:id" exact component={EventDetail} />
             <Redirect to="/dashboard" />
           </Switch>
         </div>

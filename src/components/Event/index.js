@@ -1,10 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
-const Event = ({ title, description, startsAt, capacity, attendees, owner }) => (
+const Event = ({ title, description, startsAt, capacity, attendees, owner, id }) => (
   <div>
     <h2>
-      {title}
+      <Link to={`/event/${id}`}>
+        {title}
+      </Link>
     </h2>
     <div>
       {startsAt}
@@ -23,6 +26,7 @@ const Event = ({ title, description, startsAt, capacity, attendees, owner }) => 
 );
 
 Event.propTypes = {
+  id: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   startsAt: PropTypes.string.isRequired,
