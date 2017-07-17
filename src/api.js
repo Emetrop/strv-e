@@ -79,3 +79,53 @@ export const signUp = (payload) => {
     .then(response => response.json())
     .then(response => response);
 };
+
+export const createEvent = (payload, authToken) => {
+  const { title, description, startsAt, capacity } = payload;
+
+  const data = {
+    title,
+    description,
+    startsAt,
+    capacity,
+  };
+
+  const fetchData = {
+    method: 'POST',
+    body: JSON.stringify(data),
+    headers: {
+      'Content-Type': 'application/json',
+      APIKey,
+      Authorization: authToken,
+    },
+  };
+
+  return fetch(urls.events, fetchData)
+    .then(response => response.json())
+    .then(response => response);
+};
+
+export const updateEvent = (payload, authToken) => {
+  const { title, description, startsAt, capacity, id } = payload;
+
+  const data = {
+    title,
+    description,
+    startsAt,
+    capacity,
+  };
+
+  const fetchData = {
+    method: 'PATCH',
+    body: JSON.stringify(data),
+    headers: {
+      'Content-Type': 'application/json',
+      APIKey,
+      Authorization: authToken,
+    },
+  };
+
+  return fetch(`${urls.events}/${id}`, fetchData)
+    .then(response => response.json())
+    .then(response => response);
+};
