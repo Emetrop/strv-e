@@ -1,5 +1,6 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import createSagaMiddleware from 'redux-saga';
+import { persistStore, autoRehydrate } from 'redux-persist';
 import rootReducer from './reducers';
 import rootSaga from './sagas';
 
@@ -10,11 +11,13 @@ const configureStore = () => {
     rootReducer,
     compose(
       applyMiddleware(sagaMiddleware),
+      autoRehydrate(),
       window.devToolsExtension ? window.devToolsExtension() : f => f,
     ),
   );
 
   sagaMiddleware.run(rootSaga);
+  persistStore(store);
 
   return store;
 };
