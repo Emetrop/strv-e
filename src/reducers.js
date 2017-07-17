@@ -21,6 +21,25 @@ const events = (state = [], action) => {
 
 export const getEventById = (state, id) => state.events.find(event => event.id === id);
 
+const getOrganizedEvents = (state) => {
+  const events = state.events;
+  const id = state.logIn.user.id;
+
+  return events.filter(e => e.owner.id === id);
+};
+
+const getParticipatedEvents = (state) => {
+  const events = state.events;
+  const id = state.logIn.user.id;
+
+  return events.filter(
+    e => (!e.attendees ? false : e.attendees.some(a => a.id === id)),
+  );
+};
+
+export const getProfileEvents = state =>
+  [...getOrganizedEvents(state), ...getParticipatedEvents(state)];
+
 export default combineReducers({
   events,
   dashboard,
