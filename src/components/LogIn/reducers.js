@@ -53,7 +53,7 @@ const error = (state = {}, action) => {
   }
 };
 
-const loggedUser = (state = {}, action) => {
+const user = (state = {}, action) => {
   switch (action.type) {
     case LOGIN_SUCCESS:
       return action.payload;
@@ -71,5 +71,5 @@ export default combineReducers({
   isWaiting,
   isError,
   error,
-  loggedUser,
+  user,
 });
