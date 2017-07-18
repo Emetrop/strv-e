@@ -10,6 +10,7 @@
   },
   "rules": {
     "react/jsx-filename-extension": 0, // No, JSX belongs to .js files.
-    "no-shadow": 0 // Shadowing is a nice language feature. Naming is hard.
+    "no-shadow": 0, // Shadowing is a nice language feature. Naming is hard.
+    "no-use-before-define": 0
   }
 }
