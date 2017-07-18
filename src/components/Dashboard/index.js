@@ -2,64 +2,47 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import EventList from '../EventList';
-import { loadEvents } from './actions';
+import { loadEntities } from '../../actions';
+import { getEvents, getUsers } from '../../selectors';
 
 class Dashboard extends Component {
   componentDidMount() {
-    const { loadEvents } = this.props;
-    loadEvents();
+    const { loadEntities } = this.props;
+    loadEntities();
   }
 
   render() {
-    const { events } = this.props;
+    const { events, users } = this.props;
 
     return (
       <div>
-        <EventList events={events} />
+        <EventList events={Object.values(events)} users={users} />
       </div>
     );
   }
 }
 
 Dashboard.propTypes = {
-  events: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      title: PropTypes.string.isRequired,
-      description: PropTypes.string.isRequired,
-      startsAt: PropTypes.string.isRequired,
-      capacity: PropTypes.number.isRequired,
-      owner: PropTypes.shape({
-        id: PropTypes.string.isRequired,
-        firstName: PropTypes.string.isRequired,
-        lastName: PropTypes.string.isRequired,
-        email: PropTypes.string.isRequired,
-      }).isRequired,
-      attendees: PropTypes.arrayOf(
-        PropTypes.shape({
-          id: PropTypes.string.isRequired,
-          firstName: PropTypes.string.isRequired,
-          lastName: PropTypes.string.isRequired,
-          email: PropTypes.string.isRequired,
-        })),
-      createdAt: PropTypes.string.isRequired,
-      updatedAt: PropTypes.string.isRequired,
-    }).isRequired,
-  ),
-  loadEvents: PropTypes.func.isRequired,
+// eslint-disable-next-line react/forbid-prop-types
+  events: PropTypes.object,
+// eslint-disable-next-line react/forbid-prop-types
+  users: PropTypes.object,
+  loadEntities: PropTypes.func.isRequired,
 };
 
 Dashboard.defaultProps = {
-  events: [],
+  events: {},
+  users: {},
 };
 
 const mapStateToProps = state => ({
-  events: state.events,
+  events: getEvents(state),
+  users: getUsers(state),
 });
 
 const mapDispatchToProps = dispatch => ({
-  loadEvents() {
-    dispatch(loadEvents());
+  loadEntities() {
+    dispatch(loadEntities());
   },
 });
 

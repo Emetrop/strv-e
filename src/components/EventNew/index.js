@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import EventForm from '../EventForm';
-import { createEventSubmit } from './actions';
+import { createEventSubmit } from '../../actions';
 
 // eslint-disable-next-line react/prefer-stateless-function
 class EventNew extends Component {

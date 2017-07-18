@@ -2,22 +2,16 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Redirect, withRouter } from 'react-router-dom';
-import { updateEventSubmit } from './actions';
+import { updateEventSubmit } from '../../actions';
 import EventForm from '../EventForm';
+import { getEventById } from '../../selectors';
 
+// eslint-disable-next-line react/prefer-stateless-function
 class EventEdit extends Component {
-  getCurrentEvent() {
-    const { match, events, uid } = this.props;
-
-    return events.find(event => event.id === match.params.id && event.owner.id === uid);
-  }
-
   render() {
-    const { onSubmit, error } = this.props;
+    const { onSubmit, error, event, uid } = this.props;
 
-    const event = this.getCurrentEvent();
-
-    if (!event) return <Redirect to="/dashboard" />;
+    if (!event || event.owner !== uid) return <Redirect to="/dashboard" />;
 
     return (
       <div>
@@ -28,34 +22,19 @@ class EventEdit extends Component {
 }
 
 EventEdit.propTypes = {
-  events: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      title: PropTypes.string.isRequired,
-      description: PropTypes.string.isRequired,
-      startsAt: PropTypes.string.isRequired,
-      capacity: PropTypes.number.isRequired,
-      owner: PropTypes.shape({
-        id: PropTypes.string.isRequired,
-        firstName: PropTypes.string.isRequired,
-        lastName: PropTypes.string.isRequired,
-        email: PropTypes.string.isRequired,
-      }).isRequired,
-      attendees: PropTypes.arrayOf(
-        PropTypes.shape({
-          id: PropTypes.string.isRequired,
-          firstName: PropTypes.string.isRequired,
-          lastName: PropTypes.string.isRequired,
-          email: PropTypes.string.isRequired,
-        })).isRequired,
-      createdAt: PropTypes.string.isRequired,
-      updatedAt: PropTypes.string.isRequired,
-    }).isRequired,
-  ).isRequired,
+  event: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    startsAt: PropTypes.string.isRequired,
+    capacity: PropTypes.number.isRequired,
+    owner: PropTypes.string.isRequired,
+    attendees: PropTypes.arrayOf(PropTypes.string).isRequired,
+    createdAt: PropTypes.string.isRequired,
+    updatedAt: PropTypes.string.isRequired,
+  }).isRequired,
   onSubmit: PropTypes.func.isRequired,
   uid: PropTypes.string.isRequired,
-// eslint-disable-next-line react/forbid-prop-types
-  match: PropTypes.object.isRequired,
   error: PropTypes.shape({
     error: PropTypes.string,
     errors: PropTypes.arrayOf(
@@ -70,11 +49,15 @@ EventEdit.defaultProps = {
   error: {},
 };
 
-const mapStateToProps = state => ({
-  events: state.events,
-  uid: state.logIn.user.id,
-  error: state.eventEdit.error,
-});
+const mapStateToProps = (state, props) => {
+  const id = props.match.params.id;
+
+  return ({
+    event: getEventById(state, id),
+    uid: state.logIn.user.id,
+    error: state.eventEdit.error,
+  });
+};
 
 const mapDispatchToProps = (dispatch, props) => {
   const id = props.match.params.id;

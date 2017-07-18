@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Input from '../Input';
 import messages from './errorMessages';
-import { signUpSubmit } from './actions';
+import { signUpSubmit } from '../../actions';
 
 class SignUp extends Component {
   getInputError(name) {

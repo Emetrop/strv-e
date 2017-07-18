@@ -2,37 +2,19 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Event from '../Event';
-import { getEventById } from '../../reducers';
+import { getEventById, getUserByEventAuthorId } from '../../selectors';
 
-const EventDetail = ({ event }) => (
+const EventDetail = ({ event, user }) => (
   <div>
-    <Event {...event} />
+    <Event {...event} {...user} />
   </div>
 );
 
 EventDetail.propTypes = {
-  event: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-    startsAt: PropTypes.string.isRequired,
-    capacity: PropTypes.number.isRequired,
-    owner: PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      firstName: PropTypes.string.isRequired,
-      lastName: PropTypes.string.isRequired,
-      email: PropTypes.string.isRequired,
-    }).isRequired,
-    attendees: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.string.isRequired,
-        firstName: PropTypes.string.isRequired,
-        lastName: PropTypes.string.isRequired,
-        email: PropTypes.string.isRequired,
-      })).isRequired,
-    createdAt: PropTypes.string.isRequired,
-    updatedAt: PropTypes.string.isRequired,
-  }).isRequired,
+// eslint-disable-next-line react/forbid-prop-types,react/require-default-props
+  event: PropTypes.object,
+// eslint-disable-next-line react/require-default-props,react/forbid-prop-types
+  user: PropTypes.object,
 };
 
 const mapStateToProps = (state, params) => {
@@ -40,6 +22,7 @@ const mapStateToProps = (state, params) => {
 
   return {
     event: getEventById(state, id),
+    user: getUserByEventAuthorId(state, id),
   };
 };
 
