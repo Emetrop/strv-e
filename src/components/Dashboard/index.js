@@ -38,7 +38,7 @@ const mapStateToProps = (state) => {
   // If we'd just passed the current timestamp to
   // function as an argument we couldn't cache this
   // result with reselect library and it'd be bad...
-  const timestamp = Math.floor(Date.now() / 1000000) * 1000000;
+  const timestamp = Math.floor(Date.now() / (100 * 1000)) * (100 * 1000);
 
   return ({
     events: getFilteredEvents(state, timestamp),
