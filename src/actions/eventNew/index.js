@@ -1,6 +1,5 @@
 import * as actionTypes from '../../constants/actionTypes';
 
-// Action Creators
 export const createEventSubmit = payload => ({
   type: actionTypes.CREATE_EVENT_SUBMIT,
   payload,

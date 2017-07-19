@@ -1,6 +1,5 @@
 import * as actionTypes from '../../constants/actionTypes';
 
-// Action Creators
 // Triggered whenever the user clicks the signUp submit button
 export const signUpSubmit = data => ({
   type: actionTypes.SIGNUP_SUBMIT,

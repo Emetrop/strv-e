@@ -1,6 +1,5 @@
 import * as actionTypes from '../../constants/actionTypes';
 
-// Action Creators
 // Triggered whenever the user clicks the logIn submit button
 export const logInSubmit = data => ({
   type: actionTypes.LOGIN_SUBMIT,

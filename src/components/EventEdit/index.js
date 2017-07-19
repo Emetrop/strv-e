@@ -5,14 +5,14 @@ import { Redirect, withRouter } from 'react-router-dom';
 import * as Immutable from 'immutable';
 import { updateEventSubmit } from '../../actions';
 import EventForm from '../EventForm';
-import { getEventById } from '../../selectors';
+import { getEventById, getCurrentUser } from '../../selectors';
 
 // eslint-disable-next-line react/prefer-stateless-function
 class EventEdit extends Component {
   render() {
-    const { onSubmit, error, event, uid } = this.props;
+    const { onSubmit, error, event, user } = this.props;
 
-    if (!event || event.get('owner') !== uid) return <Redirect to="/dashboard" />;
+    if (!event || event.get('owner') !== user.get('id')) return <Redirect to="/dashboard" />;
 
     return (
       <div>
@@ -32,7 +32,7 @@ class EventEdit extends Component {
 EventEdit.propTypes = {
   event: PropTypes.instanceOf(Immutable.Map).isRequired,
   onSubmit: PropTypes.func.isRequired,
-  uid: PropTypes.string.isRequired,
+  user: PropTypes.instanceOf(Immutable.Map).isRequired,
   error: PropTypes.instanceOf(Immutable.Map),
 };
 
@@ -45,7 +45,7 @@ const mapStateToProps = (state, props) => {
 
   return ({
     event: getEventById(state, id),
-    uid: state.getIn(['logIn', 'user', 'id']),
+    user: getCurrentUser(state),
     error: state.getIn(['eventEdit', 'error']),
   });
 };

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import * as Immutable from 'immutable';
 import EventList from '../EventList';
 import { loadEntities } from '../../actions';
-import { getEvents, getUsers } from '../../selectors';
+import { getFilteredEvents, getUsers } from '../../selectors';
 
 class Dashboard extends Component {
   componentDidMount() {
@@ -34,10 +34,17 @@ Dashboard.defaultProps = {
   users: Immutable.Map({}),
 };
 
-const mapStateToProps = state => ({
-  events: getEvents(state),
-  users: getUsers(state),
-});
+const mapStateToProps = (state) => {
+  // If we'd just passed the current timestamp to
+  // function as an argument we couldn't cache this
+  // result with reselect library and it'd be bad...
+  const timestamp = Math.floor(Date.now() / 1000000) * 1000000;
+
+  return ({
+    events: getFilteredEvents(state, timestamp),
+    users: getUsers(state),
+  });
+};
 
 const mapDispatchToProps = dispatch => ({
   loadEntities() {
