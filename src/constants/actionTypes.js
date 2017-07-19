@@ -24,3 +24,5 @@ export const SIGNUP_SUBMIT = 'eventio/signUp/SIGNUP_SUBMIT';
 export const SIGNUP_REQUEST = 'eventio/signUp/SIGNUP_REQUEST';
 export const SIGNUP_SUCCESS = 'eventio/signUp/SIGNUP_SUCCESS';
 export const SIGNUP_ERROR = 'eventio/signUp/SIGNUP_ERROR';
+
+export const SET_EVENT_FILTER = 'eventio/filter/SET_EVENT_FILTER';

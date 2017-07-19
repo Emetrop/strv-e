@@ -4,6 +4,7 @@ import logIn from './logIn';
 import signUp from './signUp';
 import eventNew from './eventNew';
 import eventEdit from './eventEdit';
+import filter from './filter';
 
 export default combineReducers({
   entities,
@@ -11,4 +12,5 @@ export default combineReducers({
   signUp,
   eventNew,
   eventEdit,
+  filter,
 });

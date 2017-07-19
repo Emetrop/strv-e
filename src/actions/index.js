@@ -3,6 +3,7 @@ import { updateEventSubmit, updateEventRequest, updateEventSuccess, updateEventE
 import { createEventSubmit, createEventRequest, createEventSuccess, createEventError } from './eventNew';
 import { logInSubmit, logInRequest, logInSuccess, logInError, logOut } from './logIn';
 import { signUpSubmit, signUpRequest, signUpSuccess, signUpError } from './signUp';
+import { filterEvents } from './filter';
 
 export {
   loadEntities,
@@ -27,4 +28,5 @@ export {
   signUpRequest,
   signUpSuccess,
   signUpError,
+  filterEvents,
 };
