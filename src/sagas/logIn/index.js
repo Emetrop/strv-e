@@ -28,7 +28,7 @@ function* handleLoginRequest() {
       if (response.error) {
         yield put(logInError(Immutable.fromJS(response)));
       } else {
-        const authToken = yield call(getAuthToken, payload);
+        const authToken = yield call(getAuthToken, payload.toObject());
 
         yield put(logInSuccess(Immutable.fromJS({ ...response, authToken })));
         yield put(mergeEntities(Immutable.fromJS({ users: { [response.id]: response } })));
