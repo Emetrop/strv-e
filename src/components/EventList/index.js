@@ -1,34 +1,35 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import * as Immutable from 'immutable';
 import Event from '../Event';
 
 const EventList = ({ events, users }) => (
   <div>
-    {events.map(event =>
-      <Event {...event} {...users[event.owner]} id={event.id} key={event.id} />)}
+    {events.valueSeq().map((event) => {
+      const user = users.get(event.get('owner'));
+      return (<Event
+        title={event.get('title')}
+        description={event.get('description')}
+        startsAt={event.get('startsAt')}
+        capacity={event.get('capacity')}
+        attendees={event.get('attendees').size}
+        firstName={user.get('firstName')}
+        lastName={user.get('lastName')}
+        id={event.get('id')}
+        key={event.get('id')}
+      />);
+    })}
   </div>
 );
 
 EventList.propTypes = {
-  events: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      title: PropTypes.string.isRequired,
-      description: PropTypes.string.isRequired,
-      startsAt: PropTypes.string.isRequired,
-      capacity: PropTypes.number.isRequired,
-      owner: PropTypes.string.isRequired,
-      attendees: PropTypes.arrayOf(PropTypes.string).isRequired,
-      createdAt: PropTypes.string.isRequired,
-      updatedAt: PropTypes.string.isRequired,
-    }).isRequired,
-  ),
-// eslint-disable-next-line react/forbid-prop-types,react/require-default-props
-  users: PropTypes.object,
+  events: PropTypes.instanceOf(Immutable.Map),
+  users: PropTypes.instanceOf(Immutable.Map),
 };
 
 EventList.defaultProps = {
-  events: [],
+  events: Immutable.Map({}),
+  users: Immutable.Map({}),
 };
 
 export default EventList;

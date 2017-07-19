@@ -1,4 +1,4 @@
-import { combineReducers } from 'redux';
+import { combineReducers } from 'redux-immutable';
 import entities from './entities';
 import logIn from './logIn';
 import signUp from './signUp';

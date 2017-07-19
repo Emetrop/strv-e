@@ -1,31 +1,31 @@
-export const getEvents = state => state.entities.events;
+export const getEvents = state => state.getIn(['entities', 'events']);
 
-export const getUsers = state => state.entities.users;
+export const getUsers = state => state.getIn(['entities', 'users']);
 
-export const getUserById = (state, id) => state.entities.users[id];
+export const getUserById = (state, id) => state.getIn(['entities', 'users', id]);
 
-export const getEventById = (state, id) => state.entities.events[id];
+export const getEventById = (state, id) => state.getIn(['entities', 'events', id]);
 
 export const getUserByEventAuthorId = (state, id) => {
   const event = getEventById(state, id);
-  return state.entities.users[event.owner];
+  return state.getIn(['entities', 'users', event.get('owner')]);
 };
 
 const getOrganizedEvents = (state) => {
-  const events = state.entities.events;
-  const id = state.logIn.user.id;
+  const events = state.getIn(['entities', 'events']);
+  const id = state.getIn(['logIn', 'user', 'id']);
 
-  return Object.values(events).filter(e => e.owner === id);
+  return events.filter(e => e.get('owner') === id);
 };
 
 const getParticipatedEvents = (state) => {
-  const events = state.entities.events;
-  const id = state.logIn.user.id;
+  const events = state.getIn(['entities', 'events']);
+  const id = state.getIn(['logIn', 'user', 'id']);
 
-  return Object.values(events).filter(
-    e => (!e.attendees ? false : e.attendees.includes(id)),
+  return events.filter(
+    e => (!e.has('attendees') ? false : e.get('attendees').has(id)),
   );
 };
 
 export const getProfileEvents = state =>
-  [...getOrganizedEvents(state), ...getParticipatedEvents(state)];
+  getOrganizedEvents(state).merge(getParticipatedEvents(state));

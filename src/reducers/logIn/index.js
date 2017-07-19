@@ -1,4 +1,5 @@
-import { combineReducers } from 'redux';
+import { combineReducers } from 'redux-immutable';
+import * as Immutable from 'immutable';
 import * as actionTypes from '../../constants/actionTypes';
 
 const isLoggedIn = (state = false, action) => {
@@ -40,27 +41,27 @@ const isError = (state = false, action) => {
   }
 };
 
-const error = (state = {}, action) => {
+const error = (state = Immutable.Map({}), action) => {
   switch (action.type) {
     case actionTypes.LOGIN_ERROR:
       return action.payload;
     case actionTypes.LOGIN_SUBMIT:
     case actionTypes.LOGIN_REQUEST:
     case actionTypes.LOGOUT:
-      return {};
+      return Immutable.Map({});
     default:
       return state;
   }
 };
 
-const user = (state = {}, action) => {
+const user = (state = Immutable.Map({}), action) => {
   switch (action.type) {
     case actionTypes.LOGIN_SUCCESS:
       return action.payload;
     case actionTypes.LOGIN_SUBMIT:
     case actionTypes.LOGIN_REQUEST:
     case actionTypes.LOGOUT:
-      return {};
+      return Immutable.Map({});
     default:
       return state;
   }

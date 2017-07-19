@@ -1,4 +1,5 @@
-import { combineReducers } from 'redux';
+import { combineReducers } from 'redux-immutable';
+import * as Immutable from 'immutable';
 import * as actionTypes from '../../constants/actionTypes';
 
 const isWaiting = (state = false, action) => {
@@ -26,13 +27,13 @@ const isError = (state = false, action) => {
   }
 };
 
-const error = (state = {}, action) => {
+const error = (state = Immutable.Map({}), action) => {
   switch (action.type) {
     case actionTypes.SIGNUP_ERROR:
       return action.payload;
     case actionTypes.SIGNUP_SUBMIT:
     case actionTypes.SIGNUP_REQUEST:
-      return {};
+      return Immutable.Map({});
     default:
       return state;
   }

@@ -2,15 +2,21 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import * as Immutable from 'immutable';
 import EventForm from '../EventForm';
 import { createEventSubmit } from '../../actions';
 
 // eslint-disable-next-line react/prefer-stateless-function
 class EventNew extends Component {
   render() {
+    const { onSubmit, error } = this.props;
+
     return (
       <div>
-        <EventForm {...this.props} />
+        <EventForm
+          onSubmit={onSubmit}
+          error={error.toJS()}
+        />
       </div>
     );
   }
@@ -18,27 +24,20 @@ class EventNew extends Component {
 
 EventNew.propTypes = {
   onSubmit: PropTypes.func.isRequired,
-  error: PropTypes.shape({
-    error: PropTypes.string,
-    errors: PropTypes.arrayOf(
-      PropTypes.shape({
-        message: PropTypes.string.isRequired,
-        path: PropTypes.string.isRequired,
-      })),
-  }),
+  error: PropTypes.instanceOf(Immutable.Map),
 };
 
 EventNew.defaultProps = {
-  error: {},
+  error: Immutable.Map({}),
 };
 
 const mapStateToProps = state => ({
-  error: state.eventNew.error,
+  error: state.getIn(['eventNew', 'error']),
 });
 
 const mapDispatchToProps = dispatch => ({
   onSubmit(values) {
-    dispatch(createEventSubmit(values));
+    dispatch(createEventSubmit(Immutable.fromJS(values)));
   },
 });
 

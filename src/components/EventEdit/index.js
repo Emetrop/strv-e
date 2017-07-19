@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Redirect, withRouter } from 'react-router-dom';
+import * as Immutable from 'immutable';
 import { updateEventSubmit } from '../../actions';
 import EventForm from '../EventForm';
 import { getEventById } from '../../selectors';
@@ -11,42 +12,32 @@ class EventEdit extends Component {
   render() {
     const { onSubmit, error, event, uid } = this.props;
 
-    if (!event || event.owner !== uid) return <Redirect to="/dashboard" />;
+    if (!event || event.get('owner') !== uid) return <Redirect to="/dashboard" />;
 
     return (
       <div>
-        <EventForm {...event} onSubmit={onSubmit} error={error} />
+        <EventForm
+          title={event.get('title')}
+          description={event.get('description')}
+          startsAt={event.get('startsAt')}
+          capacity={event.get('capacity')}
+          onSubmit={onSubmit}
+          error={error.toJS()}
+        />
       </div>
     );
   }
 }
 
 EventEdit.propTypes = {
-  event: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-    startsAt: PropTypes.string.isRequired,
-    capacity: PropTypes.number.isRequired,
-    owner: PropTypes.string.isRequired,
-    attendees: PropTypes.arrayOf(PropTypes.string).isRequired,
-    createdAt: PropTypes.string.isRequired,
-    updatedAt: PropTypes.string.isRequired,
-  }).isRequired,
+  event: PropTypes.instanceOf(Immutable.Map).isRequired,
   onSubmit: PropTypes.func.isRequired,
   uid: PropTypes.string.isRequired,
-  error: PropTypes.shape({
-    error: PropTypes.string,
-    errors: PropTypes.arrayOf(
-      PropTypes.shape({
-        message: PropTypes.string.isRequired,
-        path: PropTypes.string.isRequired,
-      })),
-  }),
+  error: PropTypes.instanceOf(Immutable.Map),
 };
 
 EventEdit.defaultProps = {
-  error: {},
+  error: Immutable.Map({}),
 };
 
 const mapStateToProps = (state, props) => {
@@ -54,8 +45,8 @@ const mapStateToProps = (state, props) => {
 
   return ({
     event: getEventById(state, id),
-    uid: state.logIn.user.id,
-    error: state.eventEdit.error,
+    uid: state.getIn(['logIn', 'user', 'id']),
+    error: state.getIn(['eventEdit', 'error']),
   });
 };
 
@@ -64,7 +55,7 @@ const mapDispatchToProps = (dispatch, props) => {
 
   return {
     onSubmit(target) {
-      dispatch(updateEventSubmit({ ...target, id }));
+      dispatch(updateEventSubmit(Immutable.fromJS({ ...target, id })));
     },
   };
 };

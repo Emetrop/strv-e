@@ -6,7 +6,16 @@ import { getEventById, getUserByEventAuthorId } from '../../selectors';
 
 const EventDetail = ({ event, user }) => (
   <div>
-    <Event {...event} {...user} />
+    <Event
+      title={event.get('title')}
+      description={event.get('description')}
+      startsAt={event.get('startsAt')}
+      capacity={event.get('capacity')}
+      attendees={event.get('attendees').size}
+      firstName={user.get('firstName')}
+      lastName={user.get('lastName')}
+      id={event.get('id')}
+    />
   </div>
 );
 

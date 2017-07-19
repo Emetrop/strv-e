@@ -38,7 +38,7 @@ Routes.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  isLoggedIn: state.logIn.isLoggedIn,
+  isLoggedIn: state.getIn(['logIn', 'isLoggedIn']),
 });
 
 export default withRouter(connect(mapStateToProps)(Routes));

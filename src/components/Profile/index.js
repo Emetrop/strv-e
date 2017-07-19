@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import * as Immutable from 'immutable';
 import EventList from '../EventList';
 import { getProfileEvents, getUsers } from '../../selectors';
 
@@ -11,22 +12,20 @@ class Profile extends Component {
 
     return (
       <div>
-        <EventList events={Object.values(events)} users={users} />
+        <EventList events={events} users={users} />
       </div>
     );
   }
 }
 
 Profile.propTypes = {
-// eslint-disable-next-line react/forbid-prop-types
-  events: PropTypes.array,
-// eslint-disable-next-line react/forbid-prop-types
-  users: PropTypes.object,
+  events: PropTypes.instanceOf(Immutable.Map),
+  users: PropTypes.instanceOf(Immutable.Map),
 };
 
 Profile.defaultProps = {
-  events: [],
-  users: {},
+  events: Immutable.Map({}),
+  users: Immutable.Map({}),
 };
 
 const mapStateToProps = state => ({

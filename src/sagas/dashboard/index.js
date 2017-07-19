@@ -1,6 +1,7 @@
 /* eslint-disable no-constant-condition */
 import { take, put, fork, call, race } from 'redux-saga/effects';
 import { normalize } from 'normalizr';
+import { fromJS } from 'immutable';
 import { loadEntitiesRequest, loadEntitiesError, loadEntitiesSuccess } from '../../actions';
 import * as actionTypes from '../../constants/actionTypes';
 import { getEvents } from '../../api';
@@ -31,7 +32,7 @@ function* handleLoadEntitiesRequest() {
         yield put(loadEntitiesError(response));
       } else {
         const normalizedData = normalize(response, [eventSchema]);
-        yield put(loadEntitiesSuccess(normalizedData.entities));
+        yield put(loadEntitiesSuccess(fromJS(normalizedData.entities)));
       }
     } catch (e) {
       yield put(loadEntitiesError(e));

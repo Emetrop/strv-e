@@ -6,22 +6,22 @@ import Input from '../Input';
 import InputDateTime from '../InputDateTime';
 
 class EventForm extends Component {
-  getInputError(name) {
+  getInputError(fieldName) {
     const { error } = this.props;
 
     if (!error) return '';
 
-    const fieldError = !error.errors ? false : error.errors.find(e => e.path === name);
+    const fieldError = !error.errors ? false : error.errors.find(e => e.path === fieldName);
 
     // Error with defined field
     if (fieldError) {
-      const message = messages.find(m => m.id === fieldError.message && m.field === name);
+      const message = messages.find(m => m.id === fieldError.message && m.field === fieldName);
 
       return message ? message.message : fieldError.message;
     }
 
     // Error without defined field
-    const generalError = messages.find(m => m.id === error.error && m.field === name);
+    const generalError = messages.find(m => m.id === error.error && m.field === fieldName);
 
     return !generalError ? '' : generalError.message;
   }

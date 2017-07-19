@@ -1,32 +1,44 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import * as Immutable from 'immutable';
 import Input from '../Input';
 import messages from './errorMessages';
 import { signUpSubmit } from '../../actions';
 
 class SignUp extends Component {
-  getInputError(name) {
+  getInputError(fieldName) {
     const { error } = this.props;
 
     if (!error) return '';
 
     // Error with defined field
-    if (error.errors && error.errors[name]) {
-      const message = messages.find(m => m.id === error.errors[name].message && m.field === name);
+    if (error.has('errors') && error.get('errors').has(fieldName)) {
+      const message = messages.find(m => m.id === error.getIn(['errors', fieldName, 'message']) && m.field === fieldName);
 
-      return message ? message.message : error.errors[name].message;
+      return message ? message.message : error.getIn(['errors', fieldName, 'message']);
     }
 
     // Error without defined field
-    const generalError = messages.find(m => m.id === error.error && m.field === name);
+    const generalError = messages.find(m => m.id === error.get('error') && m.field === fieldName);
 
     return generalError ? generalError.message : '';
   }
 
-  render() {
+  handleSubmit(event) {
+    event.preventDefault();
+
     const { onSubmit } = this.props;
 
+    onSubmit(Immutable.fromJS({
+      firstName: event.target.firstName.value,
+      lastName: event.target.lastName.value,
+      email: event.target.email.value,
+      password: event.target.password.value,
+    }));
+  }
+
+  render() {
     const formError = this.getInputError('form');
 
     return (
@@ -34,16 +46,7 @@ class SignUp extends Component {
         <h1>Get started absolutely free.</h1>
         <p>Enter your details below.</p>
         {formError && <p>{formError}</p>}
-        <form onSubmit={(e) => {
-          e.preventDefault();
-          onSubmit({
-            firstName: e.target.firstName.value,
-            lastName: e.target.lastName.value,
-            email: e.target.email.value,
-            password: e.target.password.value,
-          });
-        }}
-        >
+        <form onSubmit={e => this.handleSubmit(e)}>
           <Input name="firstName" label="First name" type="text" error={this.getInputError('firstName')} />
           <Input name="lastName" label="Last name" type="text" error={this.getInputError('lastName')} />
           <Input name="email" label="Email" type="email" error={this.getInputError('email')} />
@@ -58,20 +61,15 @@ class SignUp extends Component {
 
 SignUp.propTypes = {
   onSubmit: PropTypes.func.isRequired,
-  error: PropTypes.shape({
-    error: PropTypes.string,
-    errors: PropTypes.shape({
-      message: PropTypes.string,
-    }),
-  }),
+  error: PropTypes.instanceOf(Immutable.Map),
 };
 
 SignUp.defaultProps = {
-  error: {},
+  error: Immutable.Map({}),
 };
 
 const mapStateToProps = state => ({
-  error: state.signUp.error,
+  error: state.getIn(['signUp', 'error']),
 });
 
 const mapDispatchToProps = dispatch => ({
