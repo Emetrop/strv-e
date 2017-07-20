@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import * as Immutable from 'immutable';
 import { Link } from 'react-router-dom';
-import Event from '../Event';
+import Event, { getEventButtonType } from '../Event';
 import EventDetailAttendees from './attendees';
 import PageHeader from '../PageHeader';
 import { getEventWithAuthorAndAttendees, getCurrentUserID } from '../../selectors';
-import { getFormattedDateTime } from '../../actions';
+import { getFormattedDateTime, leaveEvent, joinEvent } from '../../actions';
 
-const EventDetail = ({ event, currentUserID }) => (
+const EventDetail = ({ event, currentUserID, leaveEvent, joinEvent }) => (
   <div>
     <PageHeader
       contentMiddle={<Link to="/dashboard">Back to events</Link>}
@@ -23,6 +23,9 @@ const EventDetail = ({ event, currentUserID }) => (
         attendees={event.has('attendees') ? event.get('attendees').size : 0}
         firstName={event.getIn(['owner', 'firstName'])}
         lastName={event.getIn(['owner', 'lastName'])}
+        buttonType={getEventButtonType(event, currentUserID)}
+        leaveEvent={leaveEvent}
+        joinEvent={joinEvent}
         id={event.get('id')}
       />
     </div>
@@ -37,6 +40,8 @@ const EventDetail = ({ event, currentUserID }) => (
 
 EventDetail.propTypes = {
   event: PropTypes.instanceOf(Immutable.Map).isRequired,
+  leaveEvent: PropTypes.func.isRequired,
+  joinEvent: PropTypes.func.isRequired,
   currentUserID: PropTypes.string.isRequired,
 };
 
@@ -49,4 +54,13 @@ const mapStateToProps = (state, params) => {
   };
 };
 
-export default connect(mapStateToProps)(EventDetail);
+const mapDispatchToProps = dispatch => ({
+  leaveEvent(id) {
+    dispatch(leaveEvent(id));
+  },
+  joinEvent(id) {
+    dispatch(joinEvent(id));
+  },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(EventDetail);

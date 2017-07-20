@@ -21,25 +21,28 @@ export const getEventFilterTimestamp = state => state.getIn(['filter', 'eventFil
 export const getFilteredEvents = createSelector(
   [getEvents, getUsers, getEventFilterTimestamp],
   (events, users, timestamp) => {
-    const eventsWithAuthors = events.map(e => e.set('owner', users.get(e.get('owner'))));
+    const eventsWithUsers = events
+      .map(e => e.set('owner', users.get(e.get('owner'))))
+      .map(e => e.set('attendees', e.get('attendees').map(id => users.get(id))));
+
     let filteredEvents = Immutable.Map();
 
     filteredEvents = filteredEvents
       .set(
         filterTypes.PAST,
-        eventsWithAuthors.filter(e => new Date(e.get('startsAt')).getTime() < timestamp),
+        eventsWithUsers.filter(e => new Date(e.get('startsAt')).getTime() < timestamp),
       );
 
     filteredEvents = filteredEvents
       .set(
         filterTypes.FUTURE,
-        eventsWithAuthors.filter(e => new Date(e.get('startsAt')).getTime() > timestamp),
+        eventsWithUsers.filter(e => new Date(e.get('startsAt')).getTime() > timestamp),
       );
 
     filteredEvents = filteredEvents
       .set(
         filterTypes.ALL,
-        eventsWithAuthors,
+        eventsWithUsers,
       );
 
     return filteredEvents;
