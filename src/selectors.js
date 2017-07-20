@@ -1,3 +1,5 @@
+import * as Immutable from 'immutable';
+import { createSelector } from 'reselect';
 import * as filterTypes from './constants/eventFilter';
 
 export const getEvents = state => state.getIn(['entities', 'events']);
@@ -8,53 +10,58 @@ export const getUserById = (state, id) => state.getIn(['entities', 'users', id])
 
 export const getEventById = (state, id) => state.getIn(['entities', 'events', id]);
 
-export const getEventAttendees = (state, id) => {
-  const attendeesIDs = state.getIn(['entities', 'events', id, 'attendees']);
-
-  return attendeesIDs.map(aid => getUserById(state, aid));
-};
-
 export const getCurrentUser = state => state.getIn(['logIn', 'user']);
 
 export const getCurrentUserID = state => state.getIn(['logIn', 'user', 'id']);
 
-export const getCurrentEventFilter = state => state.getIn(['filter', 'eventFilterType']);
+export const getEventFilterType = state => state.getIn(['filter', 'eventFilterType']);
 
-export const getFilteredEvents = (state, timestampNow) => {
-  const events = getEvents(state);
-  const filter = state.getIn(['filter', 'eventFilterType']);
+export const getEventFilterTimestamp = state => state.getIn(['filter', 'eventFilterTimestamp']);
 
-  if (filter === filterTypes.PAST) {
-    return events.filter(e => new Date(e.get('startsAt')).getTime() < timestampNow);
-  }
+export const getFilteredEvents = createSelector(
+  [getEvents, getUsers, getEventFilterTimestamp],
+  (events, users, timestamp) => {
+    const eventsWithAuthors = events.map(e => e.set('owner', users.get(e.get('owner'))));
+    let filteredEvents = Immutable.Map();
 
-  if (filter === filterTypes.FUTURE) {
-    return events.filter(e => new Date(e.get('startsAt')).getTime() > timestampNow);
-  }
+    filteredEvents = filteredEvents
+      .set(
+        filterTypes.PAST,
+        eventsWithAuthors.filter(e => new Date(e.get('startsAt')).getTime() < timestamp),
+      );
 
-  return events;
-};
+    filteredEvents = filteredEvents
+      .set(
+        filterTypes.FUTURE,
+        eventsWithAuthors.filter(e => new Date(e.get('startsAt')).getTime() > timestamp),
+      );
 
-export const getUserByEventAuthorID = (state, id) => {
-  const event = getEventById(state, id);
-  return state.getIn(['entities', 'users', event.get('owner')]);
-};
+    filteredEvents = filteredEvents
+      .set(
+        filterTypes.ALL,
+        eventsWithAuthors,
+      );
 
-const getOrganizedEvents = (state) => {
-  const events = state.getIn(['entities', 'events']);
-  const id = state.getIn(['logIn', 'user', 'id']);
+    return filteredEvents;
+  },
+);
 
-  return events.filter(e => e.get('owner') === id);
-};
+export const getProfileEvents = createSelector(
+  [getEvents, getUsers, getCurrentUserID],
+  (events, users, id) => {
+    const eventsWithAuthors = events.map(e => e.set('owner', users.get(e.get('owner'))));
 
-const getParticipatedEvents = (state) => {
-  const events = state.getIn(['entities', 'events']);
-  const id = state.getIn(['logIn', 'user', 'id']);
+    const organizedEvents = eventsWithAuthors.filter(e => e.getIn(['owner', 'id']) === id);
+    const participatedEvents = eventsWithAuthors.filter(
+      e => (!e.has('attendees') ? false : e.get('attendees').has(id)));
 
-  return events.filter(
-    e => (!e.has('attendees') ? false : e.get('attendees').has(id)),
-  );
-};
+    return organizedEvents.merge(participatedEvents);
+  },
+);
 
-export const getProfileEvents = state =>
-  getOrganizedEvents(state).merge(getParticipatedEvents(state));
+export const getEventWithAuthorAndAttendees = createSelector(
+  [getEventById, getUsers],
+  (event, users) => event
+      .set('owner', users.get(event.get('owner')))
+      .set('attendees', event.get('attendees').map(id => users.get(id))),
+);

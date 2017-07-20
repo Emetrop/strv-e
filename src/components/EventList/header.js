@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import * as filterTypes from '../../constants/eventFilter';
 import { filterEvents } from '../../actions';
-import { getCurrentEventFilter } from '../../selectors';
+import { getEventFilterType } from '../../selectors';
 
 // eslint-disable-next-line react/prefer-stateless-function
 class EventListHeader extends Component {
@@ -54,7 +54,7 @@ EventListHeader.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  currentFilter: getCurrentEventFilter(state),
+  currentFilter: getEventFilterType(state),
 });
 
 const mapDispatchToProps = dispatch => ({

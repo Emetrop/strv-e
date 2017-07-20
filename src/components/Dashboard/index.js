@@ -3,52 +3,53 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import * as Immutable from 'immutable';
 import EventList from '../EventList';
-import { loadEntities } from '../../actions';
-import { getFilteredEvents, getUsers } from '../../selectors';
+import { loadEntities, setEventFilterTimestamp, getCurrentTimestamp } from '../../actions';
+import { getFilteredEvents, getUsers, getEventFilterType } from '../../selectors';
 
 class Dashboard extends Component {
   componentDidMount() {
-    const { loadEntities } = this.props;
+    const { loadEntities, setEventFilterTimestamp } = this.props;
+
+    setEventFilterTimestamp(getCurrentTimestamp());
     loadEntities();
   }
 
   render() {
-    const { events, users } = this.props;
+    const { filteredEvents, users, filter } = this.props;
 
     return (
       <div>
-        <EventList events={events} users={users} />
+        <EventList events={filteredEvents.get(filter)} users={users} />
       </div>
     );
   }
 }
 
 Dashboard.propTypes = {
-  events: PropTypes.instanceOf(Immutable.Map),
+  filteredEvents: PropTypes.instanceOf(Immutable.Map),
   users: PropTypes.instanceOf(Immutable.Map),
   loadEntities: PropTypes.func.isRequired,
+  setEventFilterTimestamp: PropTypes.func.isRequired,
+  filter: PropTypes.string.isRequired,
 };
 
 Dashboard.defaultProps = {
-  events: Immutable.Map({}),
+  filteredEvents: Immutable.Map({}),
   users: Immutable.Map({}),
 };
 
-const mapStateToProps = (state) => {
-  // If we'd just passed the current timestamp to
-  // function as an argument we couldn't cache this
-  // result with reselect library and it'd be bad...
-  const timestamp = Math.floor(Date.now() / (100 * 1000)) * (100 * 1000);
-
-  return ({
-    events: getFilteredEvents(state, timestamp),
-    users: getUsers(state),
-  });
-};
+const mapStateToProps = state => ({
+  filteredEvents: getFilteredEvents(state),
+  users: getUsers(state),
+  filter: getEventFilterType(state),
+});
 
 const mapDispatchToProps = dispatch => ({
   loadEntities() {
     dispatch(loadEntities());
+  },
+  setEventFilterTimestamp(timestamp) {
+    dispatch(setEventFilterTimestamp(timestamp));
   },
 });
 

@@ -4,9 +4,9 @@ import { connect } from 'react-redux';
 import * as Immutable from 'immutable';
 import Event from '../Event';
 import EventDetailAttendees from './attendees';
-import { getEventById, getUserByEventAuthorID, getEventAttendees, getCurrentUserID } from '../../selectors';
+import { getEventWithAuthorAndAttendees, getCurrentUserID } from '../../selectors';
 
-const EventDetail = ({ event, user, attendees, currentUserID }) => (
+const EventDetail = ({ event, currentUserID }) => (
   <div>
     <div>
       <Event
@@ -14,36 +14,31 @@ const EventDetail = ({ event, user, attendees, currentUserID }) => (
         description={event.get('description')}
         startsAt={event.get('startsAt')}
         capacity={event.get('capacity')}
-        attendees={event.get('attendees').size}
-        firstName={user.get('firstName')}
-        lastName={user.get('lastName')}
+        attendees={event.has('attendees') ? event.get('attendees').size : 0}
+        firstName={event.getIn(['owner', 'firstName'])}
+        lastName={event.getIn(['owner', 'lastName'])}
         id={event.get('id')}
       />
     </div>
     <div>
-      <EventDetailAttendees users={attendees.toJS()} currentUserID={currentUserID} />
+      <EventDetailAttendees
+        currentUserID={currentUserID}
+        users={event.has('attendees') ? event.get('attendees').toJS() : []}
+      />
     </div>
   </div>
 );
 
 EventDetail.propTypes = {
   event: PropTypes.instanceOf(Immutable.Map).isRequired,
-  user: PropTypes.instanceOf(Immutable.Map).isRequired,
-  attendees: PropTypes.instanceOf(Immutable.List),
   currentUserID: PropTypes.string.isRequired,
-};
-
-EventDetail.defaultProps = {
-  attendees: Immutable.List([]),
 };
 
 const mapStateToProps = (state, params) => {
   const id = params.match.params.id;
 
   return {
-    event: getEventById(state, id),
-    user: getUserByEventAuthorID(state, id),
-    attendees: getEventAttendees(state, id),
+    event: getEventWithAuthorAndAttendees(state, id),
     currentUserID: getCurrentUserID(state),
   };
 };
