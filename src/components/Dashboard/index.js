@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import * as Immutable from 'immutable';
+import { Link } from 'react-router-dom';
 import EventList from '../EventList';
 import { loadEntities, setEventFilterTimestamp, getCurrentTimestamp } from '../../actions';
 import { getFilteredEvents, getEventFilterType } from '../../selectors';
@@ -22,6 +23,7 @@ class Dashboard extends Component {
       <div>
         <PageHeader contentRight={<PageHeaderMenu />} />
         <EventList events={filteredEvents.get(filter)} />
+        <Link to="/event/new">New event</Link>
       </div>
     );
   }
