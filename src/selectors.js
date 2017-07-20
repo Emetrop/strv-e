@@ -52,11 +52,14 @@ export const getFilteredEvents = createSelector(
 export const getProfileEvents = createSelector(
   [getEvents, getUsers, getCurrentUserID],
   (events, users, id) => {
-    const eventsWithAuthors = events.map(e => e.set('owner', users.get(e.get('owner'))));
+    const eventsWithUsers = events
+      .map(e => e.set('owner', users.get(e.get('owner'))))
+      .map(e => e.set('attendees', e.get('attendees').map(id => users.get(id))));
 
-    const organizedEvents = eventsWithAuthors.filter(e => e.getIn(['owner', 'id']) === id);
-    const participatedEvents = eventsWithAuthors.filter(
-      e => (!e.has('attendees') ? false : e.get('attendees').has(id)));
+    const organizedEvents = eventsWithUsers
+      .filter(e => e.getIn(['owner', 'id']) === id);
+    const participatedEvents = eventsWithUsers
+      .filter(e => (!e.has('attendees') ? false : e.get('attendees').find(a => a.get('id') === id)));
 
     return organizedEvents.merge(participatedEvents);
   },
