@@ -129,3 +129,33 @@ export const updateEvent = (payload, authToken) => {
     .then(response => response.json())
     .then(response => response);
 };
+
+export const joinEvent = (id, authToken) => {
+  const fetchData = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      APIKey,
+      Authorization: authToken,
+    },
+  };
+
+  return fetch(`${urls.events}/${id}/attendees/me`, fetchData)
+    .then(response => response.json())
+    .then(response => response);
+};
+
+export const leaveEvent = (id, authToken) => {
+  const fetchData = {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      APIKey,
+      Authorization: authToken,
+    },
+  };
+
+  return fetch(`${urls.events}/${id}/attendees/me`, fetchData)
+    .then(response => response.json())
+    .then(response => response);
+};

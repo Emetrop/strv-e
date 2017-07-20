@@ -25,3 +25,10 @@ export function mergeEntities(payload) {
     payload,
   };
 }
+
+export function updateEntity(payload) {
+  return {
+    type: actionTypes.UPDATE_ENTITY,
+    payload,
+  };
+}

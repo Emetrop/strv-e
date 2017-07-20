@@ -7,6 +7,8 @@ const entities = (state = Immutable.fromJS({ users: {}, events: {} }), action) =
       return action.payload;
     case actionTypes.MERGE_ENTITIES:
       return state.merge(action.payload);
+    case actionTypes.UPDATE_ENTITY:
+      return state.setIn(action.payload.path, action.payload.value);
     case actionTypes.LOAD_ENTITIES_ERROR:
     case actionTypes.LOGOUT:
       return Immutable.fromJS({ users: {}, events: {} });

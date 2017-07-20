@@ -4,6 +4,8 @@ import logIn from './logIn';
 import signUp from './signUp';
 import eventNew from './eventNew';
 import eventEdit from './eventEdit';
+import eventJoin from './eventJoin';
+import eventLeave from './eventLeave';
 
 export default function* rootSaga() {
   yield fork(dashboard);
@@ -11,4 +13,6 @@ export default function* rootSaga() {
   yield fork(signUp);
   yield fork(eventNew);
   yield fork(eventEdit);
+  yield fork(eventJoin);
+  yield fork(eventLeave);
 }

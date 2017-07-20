@@ -3,6 +3,7 @@ export const LOAD_ENTITIES_REQUEST = 'eventio/entities/LOAD_ENTITIES_REQUEST';
 export const LOAD_ENTITIES_SUCCESS = 'eventio/entities/LOAD_ENTITIES_SUCCESS';
 export const LOAD_ENTITIES_ERROR = 'eventio/entities/LOAD_ENTITIES_ERROR';
 export const MERGE_ENTITIES = 'eventio/entities/MERGE_ENTITIES';
+export const UPDATE_ENTITY = 'eventio/entities/UPDATE_ENTITY';
 
 export const UPDATE_EVENT_SUBMIT = 'eventio/edit/UPDATE_EVENT';
 export const UPDATE_EVENT_REQUEST = 'eventio/edit/UPDATE_EVENT_REQUEST';
@@ -27,3 +28,13 @@ export const SIGNUP_ERROR = 'eventio/signUp/SIGNUP_ERROR';
 
 export const SET_EVENT_FILTER = 'eventio/filter/SET_EVENT_FILTER';
 export const SET_EVENT_FILTER_TIMESTAMP = 'eventio/filter/SET_EVENT_FILTER_TIMESTAMP';
+
+export const LEAVE_EVENT = 'eventio/EVENT/LEAVE_EVENT';
+export const LEAVE_EVENT_REQUEST = 'eventio/EVENT/LEAVE_EVENT_REQUEST';
+export const LEAVE_EVENT_ERROR = 'eventio/EVENT/LEAVE_EVENT_ERROR';
+export const LEAVE_EVENT_SUCCESS = 'eventio/EVENT/LEAVE_EVENT_SUCCESS';
+
+export const JOIN_EVENT = 'eventio/EVENT/JOIN_EVENT';
+export const JOIN_EVENT_REQUEST = 'eventio/EVENT/JOIN_EVENT_REQUEST';
+export const JOIN_EVENT_ERROR = 'eventio/EVENT/JOIN_EVENT_ERROR';
+export const JOIN_EVENT_SUCCESS = 'eventio/EVENT/JOIN_EVENT_SUCCESS';
