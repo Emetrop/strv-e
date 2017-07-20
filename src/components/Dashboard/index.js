@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import * as Immutable from 'immutable';
 import EventList from '../EventList';
 import { loadEntities, setEventFilterTimestamp, getCurrentTimestamp } from '../../actions';
-import { getFilteredEvents, getUsers, getEventFilterType } from '../../selectors';
+import { getFilteredEvents, getEventFilterType } from '../../selectors';
 
 class Dashboard extends Component {
   componentDidMount() {
@@ -15,11 +15,11 @@ class Dashboard extends Component {
   }
 
   render() {
-    const { filteredEvents, users, filter } = this.props;
+    const { filteredEvents, filter } = this.props;
 
     return (
       <div>
-        <EventList events={filteredEvents.get(filter)} users={users} />
+        <EventList events={filteredEvents.get(filter)} />
       </div>
     );
   }
@@ -27,7 +27,6 @@ class Dashboard extends Component {
 
 Dashboard.propTypes = {
   filteredEvents: PropTypes.instanceOf(Immutable.Map),
-  users: PropTypes.instanceOf(Immutable.Map),
   loadEntities: PropTypes.func.isRequired,
   setEventFilterTimestamp: PropTypes.func.isRequired,
   filter: PropTypes.string.isRequired,
@@ -35,12 +34,10 @@ Dashboard.propTypes = {
 
 Dashboard.defaultProps = {
   filteredEvents: Immutable.Map({}),
-  users: Immutable.Map({}),
 };
 
 const mapStateToProps = state => ({
   filteredEvents: getFilteredEvents(state),
-  users: getUsers(state),
   filter: getEventFilterType(state),
 });
 
