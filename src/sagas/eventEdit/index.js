@@ -4,6 +4,7 @@ import * as Immutable from 'immutable';
 import { updateEventRequest, updateEventError, updateEventSuccess } from '../../actions';
 import * as actionTypes from '../../constants/actionTypes';
 import { updateEvent } from '../../api';
+import history from '../../history';
 
 function* handleUpdateEventSubmit() {
   while (true) {
@@ -29,6 +30,7 @@ function* handleUpdateEventRequest() {
         yield put(updateEventError(Immutable.fromJS(response)));
       } else {
         yield put(updateEventSuccess(Immutable.fromJS(response)));
+        history.push('/dashboard');
       }
     } catch (e) {
       yield put(updateEventError(Immutable.fromJS(e)));

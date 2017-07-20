@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
-import { BrowserRouter } from 'react-router-dom';
+import { Router } from 'react-router';
 import { persistStore } from 'redux-persist-immutable';
 import configureStore from '../../configureStore';
+import history from '../../history';
 import Routes from '../Routes';
 import './index.css';
 
@@ -25,9 +26,9 @@ class App extends Component {
 
     return (
       <Provider store={store}>
-        <BrowserRouter>
+        <Router history={history}>
           <Routes />
-        </BrowserRouter>
+        </Router>
       </Provider>
     );
   }

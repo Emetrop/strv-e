@@ -4,6 +4,7 @@ import * as Immutable from 'immutable';
 import { createEventRequest, createEventError, createEventSuccess } from '../../actions';
 import * as actionTypes from '../../constants/actionTypes';
 import { createEvent } from '../../api';
+import history from '../../history';
 
 function* handleCreateEventSubmit() {
   while (true) {
@@ -29,6 +30,7 @@ function* handleCreateEventRequest() {
         yield put(createEventError(Immutable.fromJS(response)));
       } else {
         yield put(createEventSuccess(Immutable.fromJS(response)));
+        history.push('/dashboard');
       }
     } catch (e) {
       yield put(createEventError(Immutable.fromJS(e)));
