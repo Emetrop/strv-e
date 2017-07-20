@@ -16,8 +16,7 @@ const Event = ({ title, description, startsAt, capacity, attendees, firstName, l
       {firstName} {lastName}
     </div>
     <div>
-      {description.substring(0, 60)}
-      {description.length > 60 ? '...' : ''}
+      {description}
     </div>
     <div>
       {attendees}{' of '}{capacity}

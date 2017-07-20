@@ -4,6 +4,7 @@ import { createEventSubmit, createEventRequest, createEventSuccess, createEventE
 import { logInSubmit, logInRequest, logInSuccess, logInError, logOut } from './logIn';
 import { signUpSubmit, signUpRequest, signUpSuccess, signUpError } from './signUp';
 import { filterEvents, setEventFilterTimestamp, getCurrentTimestamp } from './filter';
+import { getFormattedDateTime } from './utils';
 
 export {
   loadEntities,
@@ -31,4 +32,5 @@ export {
   filterEvents,
   setEventFilterTimestamp,
   getCurrentTimestamp,
+  getFormattedDateTime,
 };

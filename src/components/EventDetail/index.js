@@ -5,6 +5,7 @@ import * as Immutable from 'immutable';
 import Event from '../Event';
 import EventDetailAttendees from './attendees';
 import { getEventWithAuthorAndAttendees, getCurrentUserID } from '../../selectors';
+import { getFormattedDateTime } from '../../actions';
 
 const EventDetail = ({ event, currentUserID }) => (
   <div>
@@ -12,7 +13,7 @@ const EventDetail = ({ event, currentUserID }) => (
       <Event
         title={event.get('title')}
         description={event.get('description')}
-        startsAt={event.get('startsAt')}
+        startsAt={getFormattedDateTime(event.get('startsAt'))}
         capacity={event.get('capacity')}
         attendees={event.has('attendees') ? event.get('attendees').size : 0}
         firstName={event.getIn(['owner', 'firstName'])}
