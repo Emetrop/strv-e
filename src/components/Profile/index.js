@@ -5,6 +5,7 @@ import * as Immutable from 'immutable';
 import EventList from '../EventList';
 import { getProfileEvents, getCurrentUser } from '../../selectors';
 import ProfileHeader from './header';
+import PageHeader, { PageHeaderMenu } from '../PageHeader';
 
 // eslint-disable-next-line react/prefer-stateless-function
 class Profile extends Component {
@@ -13,6 +14,7 @@ class Profile extends Component {
 
     return (
       <div>
+        <PageHeader contentRight={<PageHeaderMenu />} />
         <ProfileHeader
           firstName={user.get('firstName')}
           lastName={user.get('lastName')}

@@ -6,6 +6,7 @@ import * as Immutable from 'immutable';
 import { updateEventSubmit } from '../../actions';
 import EventForm from '../EventForm';
 import { getEventById, getCurrentUser } from '../../selectors';
+import PageHeader, { PageHeaderMenu } from '../PageHeader';
 
 // eslint-disable-next-line react/prefer-stateless-function
 class EventEdit extends Component {
@@ -16,6 +17,7 @@ class EventEdit extends Component {
 
     return (
       <div>
+        <PageHeader contentRight={<PageHeaderMenu />} />
         <EventForm
           title={event.get('title')}
           description={event.get('description')}

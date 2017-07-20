@@ -2,13 +2,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import * as Immutable from 'immutable';
+import { Link } from 'react-router-dom';
 import Event from '../Event';
 import EventDetailAttendees from './attendees';
+import PageHeader from '../PageHeader';
 import { getEventWithAuthorAndAttendees, getCurrentUserID } from '../../selectors';
 import { getFormattedDateTime } from '../../actions';
 
 const EventDetail = ({ event, currentUserID }) => (
   <div>
+    <PageHeader
+      contentMiddle={<Link to="/dashboard">Back to events</Link>}
+    />
     <div>
       <Event
         title={event.get('title')}
