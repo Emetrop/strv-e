@@ -9,7 +9,7 @@ const InputDateTime = ({ label, error, name, type, value }) => {
     enableTime: type === 'time' || type === 'datetime',
     noCalendar: type === 'time',
     altInput: true,
-    minDate: 'today',
+    // minDate: 'today', doesn't work right now
   };
 
   return (
