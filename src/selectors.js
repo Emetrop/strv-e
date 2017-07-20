@@ -8,7 +8,15 @@ export const getUserById = (state, id) => state.getIn(['entities', 'users', id])
 
 export const getEventById = (state, id) => state.getIn(['entities', 'events', id]);
 
+export const getEventAttendees = (state, id) => {
+  const attendeesIDs = state.getIn(['entities', 'events', id, 'attendees']);
+
+  return attendeesIDs.map(aid => getUserById(state, aid));
+};
+
 export const getCurrentUser = state => state.getIn(['logIn', 'user']);
+
+export const getCurrentUserID = state => state.getIn(['logIn', 'user', 'id']);
 
 export const getCurrentEventFilter = state => state.getIn(['filter', 'eventFilterType']);
 
@@ -27,7 +35,7 @@ export const getFilteredEvents = (state, timestampNow) => {
   return events;
 };
 
-export const getUserByEventAuthorId = (state, id) => {
+export const getUserByEventAuthorID = (state, id) => {
   const event = getEventById(state, id);
   return state.getIn(['entities', 'users', event.get('owner')]);
 };

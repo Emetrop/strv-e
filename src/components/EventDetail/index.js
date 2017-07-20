@@ -1,29 +1,40 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import * as Immutable from 'immutable';
 import Event from '../Event';
-import { getEventById, getUserByEventAuthorId } from '../../selectors';
+import EventDetailAttendees from './attendees';
+import { getEventById, getUserByEventAuthorID, getEventAttendees, getCurrentUserID } from '../../selectors';
 
-const EventDetail = ({ event, user }) => (
+const EventDetail = ({ event, user, attendees, currentUserID }) => (
   <div>
-    <Event
-      title={event.get('title')}
-      description={event.get('description')}
-      startsAt={event.get('startsAt')}
-      capacity={event.get('capacity')}
-      attendees={event.get('attendees').size}
-      firstName={user.get('firstName')}
-      lastName={user.get('lastName')}
-      id={event.get('id')}
-    />
+    <div>
+      <Event
+        title={event.get('title')}
+        description={event.get('description')}
+        startsAt={event.get('startsAt')}
+        capacity={event.get('capacity')}
+        attendees={event.get('attendees').size}
+        firstName={user.get('firstName')}
+        lastName={user.get('lastName')}
+        id={event.get('id')}
+      />
+    </div>
+    <div>
+      <EventDetailAttendees users={attendees.toJS()} currentUserID={currentUserID} />
+    </div>
   </div>
 );
 
 EventDetail.propTypes = {
-// eslint-disable-next-line react/forbid-prop-types,react/require-default-props
-  event: PropTypes.object,
-// eslint-disable-next-line react/require-default-props,react/forbid-prop-types
-  user: PropTypes.object,
+  event: PropTypes.instanceOf(Immutable.Map).isRequired,
+  user: PropTypes.instanceOf(Immutable.Map).isRequired,
+  attendees: PropTypes.instanceOf(Immutable.List),
+  currentUserID: PropTypes.string.isRequired,
+};
+
+EventDetail.defaultProps = {
+  attendees: Immutable.List([]),
 };
 
 const mapStateToProps = (state, params) => {
@@ -31,7 +42,9 @@ const mapStateToProps = (state, params) => {
 
   return {
     event: getEventById(state, id),
-    user: getUserByEventAuthorId(state, id),
+    user: getUserByEventAuthorID(state, id),
+    attendees: getEventAttendees(state, id),
+    currentUserID: getCurrentUserID(state),
   };
 };
 
