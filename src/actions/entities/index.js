@@ -32,3 +32,10 @@ export function updateEntity(payload) {
     payload,
   };
 }
+
+export function deleteEntity(path) {
+  return {
+    type: actionTypes.DELETE_ENTITY,
+    path,
+  };
+}

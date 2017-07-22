@@ -4,11 +4,17 @@ export const LOAD_ENTITIES_SUCCESS = 'eventio/entities/LOAD_ENTITIES_SUCCESS';
 export const LOAD_ENTITIES_ERROR = 'eventio/entities/LOAD_ENTITIES_ERROR';
 export const MERGE_ENTITIES = 'eventio/entities/MERGE_ENTITIES';
 export const UPDATE_ENTITY = 'eventio/entities/UPDATE_ENTITY';
+export const DELETE_ENTITY = 'eventio/entities/DELETE_ENTITY';
 
 export const UPDATE_EVENT_SUBMIT = 'eventio/edit/UPDATE_EVENT';
 export const UPDATE_EVENT_REQUEST = 'eventio/edit/UPDATE_EVENT_REQUEST';
 export const UPDATE_EVENT_SUCCESS = 'eventio/edit/UPDATE_EVENT_SUCCESS';
 export const UPDATE_EVENT_ERROR = 'eventio/edit/UPDATE_EVENT_ERROR';
+
+export const DELETE_EVENT = 'eventio/delete/DELETE_EVENT';
+export const DELETE_EVENT_REQUEST = 'eventio/delete/DELETE_EVENT_REQUEST';
+export const DELETE_EVENT_SUCCESS = 'eventio/delete/DELETE_EVENT_SUCCESS';
+export const DELETE_EVENT_ERROR = 'eventio/delete/DELETE_EVENT_ERROR';
 
 export const CREATE_EVENT_SUBMIT = 'eventio/create/CREATE_EVENT_SUBMIT';
 export const CREATE_EVENT_REQUEST = 'eventio/create/CREATE_EVENT_REQUEST';

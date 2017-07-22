@@ -20,3 +20,24 @@ export const updateEventError = errors => ({
   error: true,
   payload: errors,
 });
+
+export const deleteEvent = id => ({
+  type: actionTypes.DELETE_EVENT,
+  id,
+});
+
+export const deleteEventRequest = id => ({
+  type: actionTypes.DELETE_EVENT_REQUEST,
+  id,
+});
+
+export const deleteEventSuccess = data => ({
+  type: actionTypes.DELETE_EVENT_SUCCESS,
+  payload: data,
+});
+
+export const deleteEventError = errors => ({
+  type: actionTypes.DELETE_EVENT_ERROR,
+  error: true,
+  payload: errors,
+});

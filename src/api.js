@@ -159,3 +159,25 @@ export const leaveEvent = (id, authToken) => {
     .then(response => response.json())
     .then(response => response);
 };
+
+export const deleteEvent = (id, authToken) => {
+  const fetchData = {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      APIKey,
+      Authorization: authToken,
+    },
+  };
+
+  return fetch(`${urls.events}/${id}`, fetchData)
+    .then((response) => {
+      if (!response.ok) {
+        return {
+          error: response.statusText,
+        };
+      }
+
+      return response;
+    });
+};

@@ -1,5 +1,6 @@
-import { loadEntities, loadEntitiesRequest, loadEntitiesSuccess, loadEntitiesError, mergeEntities, updateEntity } from './entities';
-import { updateEventSubmit, updateEventRequest, updateEventSuccess, updateEventError } from './eventEdit';
+import { loadEntities, loadEntitiesRequest, loadEntitiesSuccess, loadEntitiesError, mergeEntities, updateEntity, deleteEntity } from './entities';
+import { updateEventSubmit, updateEventRequest, updateEventSuccess, updateEventError,
+         deleteEvent, deleteEventRequest, deleteEventSuccess, deleteEventError } from './eventEdit';
 import { createEventSubmit, createEventRequest, createEventSuccess, createEventError } from './eventNew';
 import { logInSubmit, logInRequest, logInSuccess, logInError, logOut } from './logIn';
 import { signUpSubmit, signUpRequest, signUpSuccess, signUpError } from './signUp';
@@ -15,10 +16,15 @@ export {
   loadEntitiesError,
   mergeEntities,
   updateEntity,
+  deleteEntity,
   updateEventSubmit,
   updateEventRequest,
   updateEventSuccess,
   updateEventError,
+  deleteEvent,
+  deleteEventRequest,
+  deleteEventSuccess,
+  deleteEventError,
   createEventSubmit,
   createEventRequest,
   createEventSuccess,
