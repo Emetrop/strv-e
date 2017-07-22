@@ -6,6 +6,7 @@ import { leaveEventRequest, leaveEventError, leaveEventSuccess, updateEntity } f
 import * as actionTypes from '../../constants/actionTypes';
 import { leaveEvent } from '../../api';
 import { eventSchema } from '../../schemas';
+import { getAuthToken } from '../../selectors';
 
 function* handleLeaveEventSubmit() {
   while (true) {
@@ -24,7 +25,7 @@ function* handleLeaveEventRequest() {
   while (true) {
     try {
       const { id } = yield take(actionTypes.LEAVE_EVENT_REQUEST);
-      const authToken = yield select(state => state.getIn(['logIn', 'user', 'authToken']));
+      const authToken = yield select(state => getAuthToken(state));
       const response = yield call(leaveEvent, id, authToken);
 
       if (response.error) {

@@ -6,6 +6,7 @@ import { joinEventRequest, joinEventError, joinEventSuccess, updateEntity } from
 import * as actionTypes from '../../constants/actionTypes';
 import { joinEvent } from '../../api';
 import { eventSchema } from '../../schemas';
+import { getAuthToken } from '../../selectors';
 
 function* handleJoinEventSubmit() {
   while (true) {
@@ -24,7 +25,7 @@ function* handleJoinEventRequest() {
   while (true) {
     try {
       const { id } = yield take(actionTypes.JOIN_EVENT_REQUEST);
-      const authToken = yield select(state => state.getIn(['logIn', 'user', 'authToken']));
+      const authToken = yield select(state => getAuthToken(state));
       const response = yield call(joinEvent, id, authToken);
 
       if (response.error) {

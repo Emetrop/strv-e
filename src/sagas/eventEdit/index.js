@@ -5,6 +5,7 @@ import { updateEventRequest, updateEventError, updateEventSuccess } from '../../
 import * as actionTypes from '../../constants/actionTypes';
 import { updateEvent } from '../../api';
 import history from '../../history';
+import { getAuthToken } from '../../selectors';
 
 function* handleUpdateEventSubmit() {
   while (true) {
@@ -23,7 +24,7 @@ function* handleUpdateEventRequest() {
   while (true) {
     try {
       const { payload } = yield take(actionTypes.UPDATE_EVENT_REQUEST);
-      const authToken = yield select(state => state.getIn(['logIn', 'user', 'authToken']));
+      const authToken = yield select(state => getAuthToken(state));
       const response = yield call(updateEvent, payload.toObject(), authToken);
 
       if (response.error) {

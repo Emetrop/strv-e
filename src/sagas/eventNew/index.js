@@ -5,6 +5,7 @@ import { createEventRequest, createEventError, createEventSuccess } from '../../
 import * as actionTypes from '../../constants/actionTypes';
 import { createEvent } from '../../api';
 import history from '../../history';
+import { getAuthToken } from '../../selectors';
 
 function* handleCreateEventSubmit() {
   while (true) {
@@ -23,7 +24,7 @@ function* handleCreateEventRequest() {
   while (true) {
     try {
       const { payload } = yield take(actionTypes.CREATE_EVENT_REQUEST);
-      const authToken = yield select(state => state.getIn(['logIn', 'user', 'authToken']));
+      const authToken = yield select(state => getAuthToken(state));
       const response = yield call(createEvent, payload.toObject(), authToken);
 
       if (response.error) {

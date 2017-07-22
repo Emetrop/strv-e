@@ -20,6 +20,8 @@ export const getEventFilterTimestamp = state => state.getIn(['settings', 'eventF
 
 export const getEventListView = state => state.getIn(['settings', 'eventListView']);
 
+export const getAuthToken = state => state.getIn(['logIn', 'user', 'authToken']);
+
 export const getFilteredEvents = createSelector(
   [getEvents, getUsers, getEventFilterTimestamp],
   (events, users, timestamp) => {
@@ -69,7 +71,11 @@ export const getProfileEvents = createSelector(
 
 export const getEventWithAuthorAndAttendees = createSelector(
   [getEventById, getUsers],
-  (event, users) => event
+  (event, users) => {
+    if (!event) return Immutable.Map({});
+
+    return event
       .set('owner', users.get(event.get('owner')))
-      .set('attendees', event.get('attendees').map(id => users.get(id))),
+      .set('attendees', event.get('attendees').map(id => users.get(id)));
+  },
 );
