@@ -1,6 +1,6 @@
 import * as Immutable from 'immutable';
 import { createSelector } from 'reselect';
-import * as filterTypes from './constants/eventFilter';
+import * as filterTypes from './constants/eventFilters';
 
 export const getEvents = state => state.getIn(['entities', 'events']);
 
@@ -14,9 +14,11 @@ export const getCurrentUser = state => state.getIn(['logIn', 'user']);
 
 export const getCurrentUserID = state => state.getIn(['logIn', 'user', 'id']);
 
-export const getEventFilterType = state => state.getIn(['filter', 'eventFilterType']);
+export const getEventFilterType = state => state.getIn(['settings', 'eventFilterType']);
 
-export const getEventFilterTimestamp = state => state.getIn(['filter', 'eventFilterTimestamp']);
+export const getEventFilterTimestamp = state => state.getIn(['settings', 'eventFilterTimestamp']);
+
+export const getEventListView = state => state.getIn(['settings', 'eventListView']);
 
 export const getFilteredEvents = createSelector(
   [getEvents, getUsers, getEventFilterTimestamp],

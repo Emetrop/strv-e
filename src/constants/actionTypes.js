@@ -26,8 +26,9 @@ export const SIGNUP_REQUEST = 'eventio/signUp/SIGNUP_REQUEST';
 export const SIGNUP_SUCCESS = 'eventio/signUp/SIGNUP_SUCCESS';
 export const SIGNUP_ERROR = 'eventio/signUp/SIGNUP_ERROR';
 
-export const SET_EVENT_FILTER = 'eventio/filter/SET_EVENT_FILTER';
-export const SET_EVENT_FILTER_TIMESTAMP = 'eventio/filter/SET_EVENT_FILTER_TIMESTAMP';
+export const SET_EVENT_FILTER = 'eventio/settings/SET_EVENT_FILTER';
+export const SET_EVENT_FILTER_TIMESTAMP = 'eventio/settings/SET_EVENT_FILTER_TIMESTAMP';
+export const SET_EVENT_LIST_VIEW = 'eventio/settings/SET_EVENT_LIST_VIEW';
 
 export const LEAVE_EVENT = 'eventio/EVENT/LEAVE_EVENT';
 export const LEAVE_EVENT_REQUEST = 'eventio/EVENT/LEAVE_EVENT_REQUEST';

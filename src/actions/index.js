@@ -3,7 +3,7 @@ import { updateEventSubmit, updateEventRequest, updateEventSuccess, updateEventE
 import { createEventSubmit, createEventRequest, createEventSuccess, createEventError } from './eventNew';
 import { logInSubmit, logInRequest, logInSuccess, logInError, logOut } from './logIn';
 import { signUpSubmit, signUpRequest, signUpSuccess, signUpError } from './signUp';
-import { filterEvents, setEventFilterTimestamp, getCurrentTimestamp } from './filter';
+import { filterEvents, setEventFilterTimestamp, getCurrentTimestamp, setEventListView } from './settings';
 import { getFormattedDateTime } from './utils';
 import { leaveEvent, leaveEventRequest, leaveEventError, leaveEventSuccess,
          joinEvent, joinEventRequest, joinEventError, joinEventSuccess } from './event';
@@ -35,6 +35,7 @@ export {
   filterEvents,
   setEventFilterTimestamp,
   getCurrentTimestamp,
+  setEventListView,
   getFormattedDateTime,
   leaveEvent,
   leaveEventRequest,
