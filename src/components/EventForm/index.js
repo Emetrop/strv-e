@@ -1,14 +1,12 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import messages from './errorMessages';
 import Input from '../Input';
 import InputDateTime from '../InputDateTime';
 
-class EventForm extends Component {
-  getInputError(fieldName) {
-    const { error } = this.props;
-
+const EventForm = ({ title, description, capacity, startsAt, onSubmit, error }) => {
+  const getInputError = (fieldName) => {
     if (!error) return '';
 
     const fieldError = !error.errors ? false : error.errors.find(e => e.path === fieldName);
@@ -24,12 +22,10 @@ class EventForm extends Component {
     const generalError = messages.find(m => m.id === error.error && m.field === fieldName);
 
     return !generalError ? '' : generalError.message;
-  }
+  };
 
-  handleSubmit(event) {
+  const handleSubmit = (event) => {
     event.preventDefault();
-
-    const { onSubmit } = this.props;
 
     onSubmit({
       title: event.target.title.value,
@@ -37,31 +33,22 @@ class EventForm extends Component {
       startsAt: `${event.target.date.value}T${event.target.time.value}:00.000Z`,
       capacity: event.target.capacity.value,
     });
-  }
+  };
 
-  render() {
-    const {
-      title,
-      description,
-      capacity,
-      startsAt,
-    } = this.props;
+  const formError = getInputError('form');
 
-    const formError = this.getInputError('form');
-
-    return (
-      <form onSubmit={e => this.handleSubmit(e)}>
-        {formError && <p>{formError}</p>}
-        <Input name="title" label="Title" type="text" value={title} error={this.getInputError('title')} />
-        <Input name="description" label="Description" type="text" value={description} error={this.getInputError('description')} />
-        <InputDateTime name="date" label="Date" type="date" value={startsAt} error={this.getInputError('startsAt')} />
-        <InputDateTime name="time" label="Time" type="time" value={startsAt} error={this.getInputError('startsAt')} />
-        <Input name="capacity" label="Capacity" type="number" value={capacity.toString()} min="1" error={this.getInputError('capacity')} />
-        <button type="submit">Save</button>
-      </form>
-    );
-  }
-}
+  return (
+    <form onSubmit={handleSubmit}>
+      {formError && <p>{formError}</p>}
+      <Input name="title" label="Title" type="text" value={title} error={getInputError('title')} />
+      <Input name="description" label="Description" type="text" value={description} error={getInputError('description')} />
+      <InputDateTime name="date" label="Date" type="date" value={startsAt} error={getInputError('startsAt')} />
+      <InputDateTime name="time" label="Time" type="time" value={startsAt} error={getInputError('startsAt')} />
+      <Input name="capacity" label="Capacity" type="number" value={capacity.toString()} min="1" error={getInputError('capacity')} />
+      <button type="submit">Save</button>
+    </form>
+  );
+};
 
 EventForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
@@ -71,11 +58,10 @@ EventForm.propTypes = {
   startsAt: PropTypes.string,
   error: PropTypes.shape({
     error: PropTypes.string,
-    errors: PropTypes.arrayOf(
-      PropTypes.shape({
-        message: PropTypes.string.isRequired,
-        path: PropTypes.string.isRequired,
-      })),
+    errors: PropTypes.oneOfType([
+      PropTypes.object,
+      PropTypes.array,
+    ]),
   }),
 };
 
