@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import * as Immutable from 'immutable';
 import Event, { getEventButtonType } from '../Event';
-import EventListHeader from './header';
 import { getFormattedDateTime, leaveEvent, joinEvent } from '../../actions';
 import { getCurrentUserID } from '../../selectors';
 
@@ -17,26 +16,21 @@ const EventList = ({ events, leaveEvent, joinEvent, currentUserID }) => {
 
   return (
     <div>
-      <div>
-        <EventListHeader />
-      </div>
-      <div>
-        {events.valueSeq().map(event => (
-          <Event
-            title={event.get('title')}
-            description={getDescription(event)}
-            startsAt={getFormattedDateTime(event.get('startsAt'))}
-            capacity={event.get('capacity')}
-            attendees={event.get('attendees').size}
-            firstName={event.getIn(['owner', 'firstName'])}
-            lastName={event.getIn(['owner', 'lastName'])}
-            id={event.get('id')}
-            buttonType={getEventButtonType(event, currentUserID)}
-            leaveEvent={leaveEvent}
-            joinEvent={joinEvent}
-            key={event.get('id')}
-          />))}
-      </div>
+      {events.valueSeq().map(event => (
+        <Event
+          title={event.get('title')}
+          description={getDescription(event)}
+          startsAt={getFormattedDateTime(event.get('startsAt'))}
+          capacity={event.get('capacity')}
+          attendees={event.get('attendees').size}
+          firstName={event.getIn(['owner', 'firstName'])}
+          lastName={event.getIn(['owner', 'lastName'])}
+          id={event.get('id')}
+          buttonType={getEventButtonType(event, currentUserID)}
+          leaveEvent={leaveEvent}
+          joinEvent={joinEvent}
+          key={event.get('id')}
+        />))}
     </div>
   );
 };

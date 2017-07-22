@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Redirect, withRouter } from 'react-router-dom';
@@ -7,29 +7,30 @@ import { updateEventSubmit } from '../../actions';
 import EventForm from '../EventForm';
 import { getEventById, getCurrentUser } from '../../selectors';
 import PageHeader, { PageHeaderMenu } from '../PageHeader';
+import ContentHeader from '../ContentHeader';
+import EventDelete from './delete';
 
-// eslint-disable-next-line react/prefer-stateless-function
-class EventEdit extends Component {
-  render() {
-    const { onSubmit, error, event, user } = this.props;
+const EventEdit = ({ onSubmit, error, event, user }) => {
+  if (!event || event.get('owner') !== user.get('id')) return <Redirect to="/dashboard" />;
 
-    if (!event || event.get('owner') !== user.get('id')) return <Redirect to="/dashboard" />;
-
-    return (
-      <div>
-        <PageHeader contentRight={<PageHeaderMenu />} />
-        <EventForm
-          title={event.get('title')}
-          description={event.get('description')}
-          startsAt={event.get('startsAt')}
-          capacity={event.get('capacity')}
-          onSubmit={onSubmit}
-          error={error.toJS()}
-        />
-      </div>
-    );
-  }
-}
+  return (
+    <div>
+      <PageHeader contentRight={<PageHeaderMenu />} />
+      <ContentHeader
+        contentLeft={<h3>DETAIL EVENT: #{event.get('id')}</h3>}
+        contentRight={<EventDelete id={event.get('id')} />}
+      />
+      <EventForm
+        title={event.get('title')}
+        description={event.get('description')}
+        startsAt={event.get('startsAt')}
+        capacity={event.get('capacity')}
+        onSubmit={onSubmit}
+        error={error.toJS()}
+      />
+    </div>
+  );
+};
 
 EventEdit.propTypes = {
   event: PropTypes.instanceOf(Immutable.Map).isRequired,

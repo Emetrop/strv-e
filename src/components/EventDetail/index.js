@@ -2,41 +2,49 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import * as Immutable from 'immutable';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import Event, { getEventButtonType } from '../Event';
 import EventDetailAttendees from './attendees';
 import PageHeader from '../PageHeader';
 import { getEventWithAuthorAndAttendees, getCurrentUserID } from '../../selectors';
 import { getFormattedDateTime, leaveEvent, joinEvent } from '../../actions';
+import ContentHeader from '../ContentHeader';
 
-const EventDetail = ({ event, currentUserID, leaveEvent, joinEvent }) => (
-  <div>
-    <PageHeader
-      contentMiddle={<Link to="/dashboard">Back to events</Link>}
-    />
+const EventDetail = ({ event, currentUserID, leaveEvent, joinEvent }) => {
+  if (event.isEmpty()) return <Redirect to="/dashboard" />;
+
+  return (
     <div>
-      <Event
-        title={event.get('title')}
-        description={event.get('description')}
-        startsAt={getFormattedDateTime(event.get('startsAt'))}
-        capacity={event.get('capacity')}
-        attendees={event.has('attendees') ? event.get('attendees').size : 0}
-        firstName={event.getIn(['owner', 'firstName'])}
-        lastName={event.getIn(['owner', 'lastName'])}
-        buttonType={getEventButtonType(event, currentUserID)}
-        leaveEvent={leaveEvent}
-        joinEvent={joinEvent}
-        id={event.get('id')}
+      <PageHeader
+        contentMiddle={<Link to="/dashboard">Back to events</Link>}
       />
-    </div>
-    <div>
-      <EventDetailAttendees
-        currentUserID={currentUserID}
-        users={event.has('attendees') ? event.get('attendees').toJS() : []}
+      <ContentHeader
+        contentLeft={<h3>DETAIL EVENT: #{event.get('id')}</h3>}
       />
+      <div>
+        <Event
+          title={event.get('title')}
+          description={event.get('description')}
+          startsAt={getFormattedDateTime(event.get('startsAt'))}
+          capacity={event.get('capacity')}
+          attendees={event.has('attendees') ? event.get('attendees').size : 0}
+          firstName={event.getIn(['owner', 'firstName'])}
+          lastName={event.getIn(['owner', 'lastName'])}
+          buttonType={getEventButtonType(event, currentUserID)}
+          leaveEvent={leaveEvent}
+          joinEvent={joinEvent}
+          id={event.get('id')}
+        />
+      </div>
+      <div>
+        <EventDetailAttendees
+          currentUserID={currentUserID}
+          users={event.has('attendees') ? event.get('attendees').toJS() : []}
+        />
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 EventDetail.propTypes = {
   event: PropTypes.instanceOf(Immutable.Map).isRequired,
