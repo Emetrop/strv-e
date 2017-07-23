@@ -1,7 +1,12 @@
 import * as Immutable from 'immutable';
 import * as actionTypes from '../../constants/actionTypes';
 
-const entities = (state = Immutable.fromJS({ users: {}, events: {} }), action) => {
+const initialState = Immutable.fromJS({
+  users: {},
+  events: {},
+});
+
+const entities = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.LOAD_ENTITIES_SUCCESS:
       return action.payload;
@@ -13,7 +18,7 @@ const entities = (state = Immutable.fromJS({ users: {}, events: {} }), action) =
       return state.deleteIn(action.path);
     case actionTypes.LOAD_ENTITIES_ERROR:
     case actionTypes.LOGOUT:
-      return Immutable.fromJS({ users: {}, events: {} });
+      return initialState;
     default:
       return state;
   }
