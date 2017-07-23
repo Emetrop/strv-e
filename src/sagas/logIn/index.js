@@ -1,29 +1,18 @@
 /* eslint-disable no-constant-condition */
-import { take, put, fork, call, race } from 'redux-saga/effects';
+import { take, put, call } from 'redux-saga/effects';
 import * as Immutable from 'immutable';
 import { logInRequest, logInError, logInSuccess, mergeEntities, setFormErrors } from '../../actions';
 import * as actionTypes from '../../constants/actionTypes';
-import { logIn, getAuthToken } from '../../api';
+import { logIn as logInAPI, getAuthToken } from '../../api';
 
-function* handleLoginSubmit() {
-  while (true) {
-    const { payload } = yield take(actionTypes.LOGIN_SUBMIT);
-
-    yield put(logInRequest(payload));
-
-    yield race({
-      success: take(actionTypes.LOGIN_SUCCESS),
-      error: take(actionTypes.LOGIN_ERROR),
-    });
-  }
-}
-
-function* handleLoginRequest() {
+function* logIn() {
   while (true) {
     try {
-      const { payload } = yield take(actionTypes.LOGIN_REQUEST);
+      const { payload } = yield take(actionTypes.LOGIN_SUBMIT);
 
-      const response = yield call(logIn, payload.toObject());
+      yield put(logInRequest(payload));
+
+      const response = yield call(logInAPI, payload.toObject());
 
       if (response.error) {
         yield put(logInError(Immutable.fromJS(response)));
@@ -41,7 +30,4 @@ function* handleLoginRequest() {
   }
 }
 
-export default function* auth() {
-  yield fork(handleLoginRequest);
-  yield fork(handleLoginSubmit);
-}
+export default logIn;

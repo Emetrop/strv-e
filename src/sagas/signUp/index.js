@@ -1,28 +1,17 @@
 /* eslint-disable no-constant-condition */
-import { take, put, fork, call, race } from 'redux-saga/effects';
+import { take, put, call } from 'redux-saga/effects';
 import * as Immutable from 'immutable';
 import { signUpRequest, signUpError, signUpSuccess, setFormErrors } from '../../actions';
 import * as actionTypes from '../../constants/actionTypes';
 import { signUp as signUpAPI } from '../../api';
 import history from '../../history';
 
-function* handleSignUpSubmit() {
-  while (true) {
-    const { payload } = yield take(actionTypes.SIGNUP_SUBMIT);
-
-    yield put(signUpRequest(payload));
-
-    yield race({
-      success: take(actionTypes.SIGNUP_SUCCESS),
-      error: take(actionTypes.SIGNUP_ERROR),
-    });
-  }
-}
-
-function* handleSignUpRequest() {
+function* signUp() {
   while (true) {
     try {
-      const { payload } = yield take(actionTypes.SIGNUP_REQUEST);
+      const { payload } = yield take(actionTypes.SIGNUP_SUBMIT);
+
+      yield put(signUpRequest(payload));
 
       const response = yield call(signUpAPI, payload.toObject());
 
@@ -40,7 +29,4 @@ function* handleSignUpRequest() {
   }
 }
 
-export default function* signUp() {
-  yield fork(handleSignUpRequest);
-  yield fork(handleSignUpSubmit);
-}
+export default signUp;

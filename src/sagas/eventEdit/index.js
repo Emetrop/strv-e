@@ -1,5 +1,5 @@
 /* eslint-disable no-constant-condition */
-import { take, put, fork, call, race, select } from 'redux-saga/effects';
+import { take, put, call, select } from 'redux-saga/effects';
 import * as Immutable from 'immutable';
 import { updateEventRequest, updateEventError, updateEventSuccess, setFormErrors } from '../../actions';
 import * as actionTypes from '../../constants/actionTypes';
@@ -7,23 +7,13 @@ import { updateEvent } from '../../api';
 import history from '../../history';
 import { getAuthToken } from '../../selectors';
 
-function* handleUpdateEventSubmit() {
-  while (true) {
-    const { payload } = yield take(actionTypes.UPDATE_EVENT_SUBMIT);
-
-    yield put(updateEventRequest(payload));
-
-    yield race({
-      success: take(actionTypes.UPDATE_EVENT_SUCCESS),
-      error: take(actionTypes.UPDATE_EVENT_ERROR),
-    });
-  }
-}
-
-function* handleUpdateEventRequest() {
+function* eventEdit() {
   while (true) {
     try {
-      const { payload } = yield take(actionTypes.UPDATE_EVENT_REQUEST);
+      const { payload } = yield take(actionTypes.UPDATE_EVENT_SUBMIT);
+
+      yield put(updateEventRequest(payload));
+
       const authToken = yield select(state => getAuthToken(state));
       const response = yield call(updateEvent, payload.toObject(), authToken);
 
@@ -41,7 +31,4 @@ function* handleUpdateEventRequest() {
   }
 }
 
-export default function* update() {
-  yield fork(handleUpdateEventRequest);
-  yield fork(handleUpdateEventSubmit);
-}
+export default eventEdit;

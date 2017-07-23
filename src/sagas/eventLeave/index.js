@@ -1,5 +1,5 @@
 /* eslint-disable no-constant-condition */
-import { take, put, fork, call, race, select } from 'redux-saga/effects';
+import { take, put, call, select } from 'redux-saga/effects';
 import * as Immutable from 'immutable';
 import { normalize } from 'normalizr';
 import { leaveEventRequest, leaveEventError, leaveEventSuccess, updateEntity } from '../../actions';
@@ -8,23 +8,13 @@ import { leaveEvent } from '../../api';
 import { eventSchema } from '../../schemas';
 import { getAuthToken } from '../../selectors';
 
-function* handleLeaveEventSubmit() {
-  while (true) {
-    const { id } = yield take(actionTypes.LEAVE_EVENT);
-
-    yield put(leaveEventRequest(id));
-
-    yield race({
-      success: take(actionTypes.LEAVE_EVENT_SUCCESS),
-      error: take(actionTypes.LEAVE_EVENT_ERROR),
-    });
-  }
-}
-
-function* handleLeaveEventRequest() {
+function* eventLeave() {
   while (true) {
     try {
-      const { id } = yield take(actionTypes.LEAVE_EVENT_REQUEST);
+      const { id } = yield take(actionTypes.LEAVE_EVENT);
+
+      yield put(leaveEventRequest(id));
+
       const authToken = yield select(state => getAuthToken(state));
       const response = yield call(leaveEvent, id, authToken);
 
@@ -50,7 +40,4 @@ function* handleLeaveEventRequest() {
   }
 }
 
-export default function* update() {
-  yield fork(handleLeaveEventRequest);
-  yield fork(handleLeaveEventSubmit);
-}
+export default eventLeave;

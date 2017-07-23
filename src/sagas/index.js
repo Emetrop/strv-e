@@ -1,5 +1,5 @@
 import { fork } from 'redux-saga/effects';
-import dashboard from './dashboard';
+import entities from './entities';
 import logIn from './logIn';
 import signUp from './signUp';
 import eventNew from './eventNew';
@@ -9,7 +9,7 @@ import eventLeave from './eventLeave';
 import eventDelete from './eventDelete';
 
 export default function* rootSaga() {
-  yield fork(dashboard);
+  yield fork(entities);
   yield fork(logIn);
   yield fork(signUp);
   yield fork(eventNew);

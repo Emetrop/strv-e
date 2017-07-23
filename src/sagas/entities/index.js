@@ -1,5 +1,5 @@
 /* eslint-disable no-constant-condition */
-import { take, put, fork, call, race } from 'redux-saga/effects';
+import { take, put, fork, call } from 'redux-saga/effects';
 import { normalize } from 'normalizr';
 import { fromJS } from 'immutable';
 import { loadEntitiesRequest, loadEntitiesError, loadEntitiesSuccess } from '../../actions';
@@ -9,22 +9,10 @@ import { eventSchema } from '../../schemas';
 
 function* handleLoadEntities() {
   while (true) {
-    yield take(actionTypes.LOAD_ENTITIES);
-
-    yield put(loadEntitiesRequest());
-
-    // eslint-disable-next-line no-unused-vars
-    const { error, success } = yield race({
-      success: take(actionTypes.LOAD_ENTITIES_SUCCESS),
-      error: take(actionTypes.LOAD_ENTITIES_ERROR),
-    });
-  }
-}
-
-function* handleLoadEntitiesRequest() {
-  while (true) {
     try {
-      yield take(actionTypes.LOAD_ENTITIES_REQUEST);
+      yield take(actionTypes.LOAD_ENTITIES);
+
+      yield put(loadEntitiesRequest());
 
       const response = yield call(getEvents);
 
@@ -40,7 +28,6 @@ function* handleLoadEntitiesRequest() {
   }
 }
 
-export default function* events() {
+export default function* entities() {
   yield fork(handleLoadEntities);
-  yield fork(handleLoadEntitiesRequest);
 }
