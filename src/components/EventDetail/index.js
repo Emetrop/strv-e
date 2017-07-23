@@ -5,7 +5,7 @@ import * as Immutable from 'immutable';
 import { Link, Redirect } from 'react-router-dom';
 import Event, { getEventButtonType } from '../Event';
 import EventDetailAttendees from './attendees';
-import PageHeader from '../PageHeader';
+import PageHeader, { PageHeaderMenu } from '../PageHeader';
 import { getEventWithAuthorAndAttendees, getCurrentUserID } from '../../selectors';
 import { getFormattedDateTime, leaveEvent, joinEvent } from '../../actions';
 import ContentHeader from '../ContentHeader';
@@ -17,6 +17,7 @@ const EventDetail = ({ event, currentUserID, leaveEvent, joinEvent }) => {
     <div>
       <PageHeader
         contentMiddle={<Link to="/dashboard">Back to events</Link>}
+        contentRight={<PageHeaderMenu />}
       />
       <ContentHeader
         contentLeft={<h3>DETAIL EVENT: #{event.get('id')}</h3>}
