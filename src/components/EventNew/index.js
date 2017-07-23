@@ -4,37 +4,71 @@ import PropTypes from 'prop-types';
 import * as Immutable from 'immutable';
 import { Link } from 'react-router-dom';
 import EventForm from '../EventForm';
-import { createEventSubmit } from '../../actions';
+import { createEventSubmit, setFormErrors } from '../../actions';
 import PageHeader from '../PageHeader';
+import { getFormErrors } from '../../selectors';
 
-const EventNew = ({ onSubmit, error }) => (
-  <div>
-    <PageHeader
-      contentRight={<Link to="/dashboard">Close</Link>}
-    />
-    <EventForm
-      onSubmit={onSubmit}
-      error={error.toJS()}
-    />
-  </div>
-);
+const EventNew = ({ onSubmit, errors, setFormErrors }) => {
+  const validate = (values) => {
+    const errors = {};
+
+    if (!values.title) {
+      errors.title = { message: 'Title has to be filled up' };
+    }
+
+    if (!values.description) {
+      errors.description = { message: 'Description has to be filled up' };
+    }
+
+    if (!values.capacity) {
+      errors.capacity = { message: 'Capacity has to be filled up' };
+    }
+
+    if (!values.date || !values.time) {
+      errors.startsAt = { message: 'Date and time have to be filled up' };
+    } else if (new Date(values.startsAt).getTime() < Date.now()) {
+      errors.startsAt = { message: 'Date and time have to be in future' };
+    }
+
+    return errors;
+  };
+
+  const handleSubmit = (values) => {
+    const errors = validate(values);
+
+    if (Object.keys(errors).length > 0) setFormErrors('eventNew', Immutable.fromJS(errors));
+    else onSubmit(Immutable.fromJS(values));
+  };
+
+  return (
+    <div>
+      <PageHeader
+        contentRight={<Link to="/dashboard">Close</Link>}
+      />
+      <EventForm
+        onSubmit={handleSubmit}
+        errors={errors}
+      />
+    </div>
+  );
+};
 
 EventNew.propTypes = {
   onSubmit: PropTypes.func.isRequired,
-  error: PropTypes.instanceOf(Immutable.Map),
-};
-
-EventNew.defaultProps = {
-  error: Immutable.Map({}),
+  setFormErrors: PropTypes.func.isRequired,
+  errors: PropTypes.instanceOf(Immutable.Map).isRequired,
 };
 
 const mapStateToProps = state => ({
-  error: state.getIn(['eventNew', 'error']),
+  errors: getFormErrors(state, 'eventNew'),
 });
 
 const mapDispatchToProps = dispatch => ({
   onSubmit(values) {
-    dispatch(createEventSubmit(Immutable.fromJS(values)));
+    dispatch(createEventSubmit(values));
+  },
+  setFormErrors(formName, errors) {
+    dispatch(setFormErrors(formName, errors));
   },
 });
 

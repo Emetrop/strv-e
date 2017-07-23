@@ -1,51 +1,37 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
-import messages from './errorMessages';
+import * as Immutable from 'immutable';
 import Input from '../Input';
-import InputDateTime from '../InputDateTime';
+import InputDateTime, { inputDateTimeTypes } from '../InputDateTime';
+import { buttonTypes } from '../Button';
+import { getInputError } from '../../actions/utils';
 
-const EventForm = ({ title, description, capacity, startsAt, onSubmit, error }) => {
-  const getInputError = (fieldName) => {
-    if (!error) return '';
-
-    const fieldError = !error.errors ? false : error.errors.find(e => e.path === fieldName);
-
-    // Error with defined field
-    if (fieldError) {
-      const message = messages.find(m => m.id === fieldError.message && m.field === fieldName);
-
-      return message ? message.message : fieldError.message;
-    }
-
-    // Error without defined field
-    const generalError = messages.find(m => m.id === error.error && m.field === fieldName);
-
-    return !generalError ? '' : generalError.message;
-  };
-
+const EventForm = ({ title, description, capacity, startsAt, onSubmit, errors }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
     onSubmit({
       title: event.target.title.value,
       description: event.target.description.value,
-      startsAt: `${event.target.date.value}T${event.target.time.value}:00.000Z`,
+      date: event.target.date.value,
+      time: event.target.time.value,
       capacity: event.target.capacity.value,
+      startsAt: `${event.target.date.value}T${event.target.time.value}:00.000Z`,
     });
   };
 
-  const formError = getInputError('form');
+  const formError = getInputError(errors, 'form');
 
   return (
     <form onSubmit={handleSubmit}>
       {formError && <p>{formError}</p>}
-      <Input name="title" label="Title" type="text" value={title} error={getInputError('title')} />
-      <Input name="description" label="Description" type="text" value={description} error={getInputError('description')} />
-      <InputDateTime name="date" label="Date" type="date" value={startsAt} error={getInputError('startsAt')} />
-      <InputDateTime name="time" label="Time" type="time" value={startsAt} error={getInputError('startsAt')} />
-      <Input name="capacity" label="Capacity" type="number" value={capacity.toString()} min="1" error={getInputError('capacity')} />
-      <button type="submit">Save</button>
+      <Input name="title" label="Title" type="text" value={title} error={getInputError(errors, 'title')} />
+      <Input name="description" label="Description" type="text" value={description} error={getInputError(errors, 'description')} />
+      <InputDateTime name="date" label="Date" type={inputDateTimeTypes.DATE} value={startsAt} error={getInputError(errors, 'startsAt')} />
+      <InputDateTime name="time" label="Time" type={inputDateTimeTypes.TIME} value={startsAt} error={getInputError(errors, 'startsAt')} />
+      <Input name="capacity" label="Capacity" type="number" value={capacity.toString()} min="1" error={getInputError(errors, 'capacity')} />
+      <button type={buttonTypes.SUBMIT}>Save</button>
     </form>
   );
 };
@@ -56,13 +42,7 @@ EventForm.propTypes = {
   description: PropTypes.string,
   capacity: PropTypes.number,
   startsAt: PropTypes.string,
-  error: PropTypes.shape({
-    error: PropTypes.string,
-    errors: PropTypes.oneOfType([
-      PropTypes.object,
-      PropTypes.array,
-    ]),
-  }),
+  errors: PropTypes.instanceOf(Immutable.Map).isRequired,
 };
 
 EventForm.defaultProps = {
@@ -70,7 +50,6 @@ EventForm.defaultProps = {
   description: '',
   capacity: 10,
   startsAt: '',
-  error: {},
 };
 
 export default withRouter(EventForm);

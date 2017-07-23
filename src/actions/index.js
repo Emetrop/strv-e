@@ -8,6 +8,7 @@ import { filterEvents, setEventFilterTimestamp, getCurrentTimestamp, setEventLis
 import { getFormattedDateTime } from './utils';
 import { leaveEvent, leaveEventRequest, leaveEventError, leaveEventSuccess,
          joinEvent, joinEventRequest, joinEventError, joinEventSuccess } from './event';
+import { setFormErrors } from './forms';
 
 export {
   loadEntities,
@@ -51,4 +52,5 @@ export {
   joinEventRequest,
   joinEventError,
   joinEventSuccess,
+  setFormErrors,
 };

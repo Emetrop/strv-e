@@ -5,6 +5,11 @@ const messages = [
     message: 'Password is not correct',
   },
   {
+    id: 'User.Exists',
+    field: 'email',
+    message: 'User with this email already exists',
+  },
+  {
     id: 'Candidate.MissingAPIKey',
     field: 'form',
     message: 'API key has not been set up',
@@ -15,14 +20,14 @@ const messages = [
     message: 'API key is invalid',
   },
   {
-    id: '"password" is not allowed to be empty',
-    field: 'password',
-    message: 'Password has to be filled up',
+    id: 'User.NotAuthenticated',
+    field: 'form',
+    message: 'You are not logged in',
   },
   {
-    id: '"email" is not allowed to be empty',
-    field: 'email',
-    message: 'Email has to be filled up',
+    id: 'Auth.InvalidToken',
+    field: 'form',
+    message: 'Authorization token is expired',
   },
 ];
 

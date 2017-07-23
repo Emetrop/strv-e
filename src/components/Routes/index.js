@@ -9,6 +9,7 @@ import EventNew from '../EventNew';
 import EventEdit from '../EventEdit';
 import LogIn from '../LogIn';
 import SignUp from '../SignUp';
+import { isLoggedIn } from '../../selectors';
 
 const Routes = ({ isLoggedIn }) => (
     isLoggedIn
@@ -38,7 +39,7 @@ Routes.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  isLoggedIn: state.getIn(['logIn', 'isLoggedIn']),
+  isLoggedIn: isLoggedIn(state),
 });
 
 export default withRouter(connect(mapStateToProps)(Routes));

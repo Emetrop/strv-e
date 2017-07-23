@@ -21,11 +21,11 @@ export const CREATE_EVENT_REQUEST = 'eventio/create/CREATE_EVENT_REQUEST';
 export const CREATE_EVENT_SUCCESS = 'eventio/create/CREATE_EVENT_SUCCESS';
 export const CREATE_EVENT_ERROR = 'eventio/create/CREATE_EVENT_ERROR';
 
-export const LOGIN_SUBMIT = 'eventio/logIn/LOGIN_SUBMIT';
-export const LOGIN_REQUEST = 'eventio/logIn/LOGIN_REQUEST';
-export const LOGIN_SUCCESS = 'eventio/logIn/LOGIN_SUCCESS';
-export const LOGIN_ERROR = 'eventio/logIn/LOGIN_ERROR';
-export const LOGOUT = 'eventio/logIn/LOGOUT';
+export const LOGIN_SUBMIT = 'eventio/loggedInUser/LOGIN_SUBMIT';
+export const LOGIN_REQUEST = 'eventio/loggedInUser/LOGIN_REQUEST';
+export const LOGIN_SUCCESS = 'eventio/loggedInUser/LOGIN_SUCCESS';
+export const LOGIN_ERROR = 'eventio/loggedInUser/LOGIN_ERROR';
+export const LOGOUT = 'eventio/loggedInUser/LOGOUT';
 
 export const SIGNUP_SUBMIT = 'eventio/signUp/SIGNUP_SUBMIT';
 export const SIGNUP_REQUEST = 'eventio/signUp/SIGNUP_REQUEST';
@@ -45,3 +45,6 @@ export const JOIN_EVENT = 'eventio/EVENT/JOIN_EVENT';
 export const JOIN_EVENT_REQUEST = 'eventio/EVENT/JOIN_EVENT_REQUEST';
 export const JOIN_EVENT_ERROR = 'eventio/EVENT/JOIN_EVENT_ERROR';
 export const JOIN_EVENT_SUCCESS = 'eventio/EVENT/JOIN_EVENT_SUCCESS';
+
+export const SET_FORM_ERRORS = 'eventio/forms/SET_FORM_ERRORS';
+export const CLEAN_FORMS_ERRORS = 'eventio/forms/CLEAN_FORMS_ERRORS';

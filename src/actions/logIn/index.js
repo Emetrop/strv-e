@@ -1,12 +1,12 @@
 import * as actionTypes from '../../constants/actionTypes';
 
-// Triggered whenever the user clicks the logIn submit button
+// Triggered whenever the user clicks the loggedInUser submit button
 export const logInSubmit = data => ({
   type: actionTypes.LOGIN_SUBMIT,
   payload: data,
 });
 
-// Triggered whenever a logIn request is dispatched from whenever point in the code
+// Triggered whenever a loggedInUser request is dispatched from whenever point in the code
 export const logInRequest = data => ({
   type: actionTypes.LOGIN_REQUEST,
   payload: data,

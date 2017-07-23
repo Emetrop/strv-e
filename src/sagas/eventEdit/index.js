@@ -1,7 +1,7 @@
 /* eslint-disable no-constant-condition */
 import { take, put, fork, call, race, select } from 'redux-saga/effects';
 import * as Immutable from 'immutable';
-import { updateEventRequest, updateEventError, updateEventSuccess } from '../../actions';
+import { updateEventRequest, updateEventError, updateEventSuccess, setFormErrors } from '../../actions';
 import * as actionTypes from '../../constants/actionTypes';
 import { updateEvent } from '../../api';
 import history from '../../history';
@@ -29,12 +29,14 @@ function* handleUpdateEventRequest() {
 
       if (response.error) {
         yield put(updateEventError(Immutable.fromJS(response)));
+        yield put(setFormErrors('eventEdit', Immutable.Map(response)));
       } else {
         yield put(updateEventSuccess(Immutable.fromJS(response)));
         history.push('/dashboard');
       }
     } catch (e) {
       yield put(updateEventError(Immutable.fromJS(e)));
+      yield put(setFormErrors('eventEdit', Immutable.fromJS(e)));
     }
   }
 }

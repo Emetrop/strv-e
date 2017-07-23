@@ -10,9 +10,9 @@ export const getUserById = (state, id) => state.getIn(['entities', 'users', id])
 
 export const getEventById = (state, id) => state.getIn(['entities', 'events', id]);
 
-export const getCurrentUser = state => state.getIn(['logIn', 'user']);
+export const getCurrentUser = state => state.get('loggedInUser');
 
-export const getCurrentUserID = state => state.getIn(['logIn', 'user', 'id']);
+export const getCurrentUserID = state => state.getIn(['loggedInUser', 'id']);
 
 export const getEventFilterType = state => state.getIn(['settings', 'eventFilterType']);
 
@@ -20,7 +20,11 @@ export const getEventFilterTimestamp = state => state.getIn(['settings', 'eventF
 
 export const getEventListView = state => state.getIn(['settings', 'eventListView']);
 
-export const getAuthToken = state => state.getIn(['logIn', 'user', 'authToken']);
+export const getAuthToken = state => state.getIn(['loggedInUser', 'authToken']);
+
+export const getFormErrors = (state, formName) => state.getIn(['forms', formName, 'errors']);
+
+export const isLoggedIn = state => state.hasIn(['loggedInUser', 'authToken']);
 
 export const getFilteredEvents = createSelector(
   [getEvents, getUsers, getEventFilterTimestamp],

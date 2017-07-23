@@ -6,6 +6,11 @@ import Event, { getEventButtonType } from '../Event';
 import { getFormattedDateTime, leaveEvent, joinEvent } from '../../actions';
 import { getCurrentUserID } from '../../selectors';
 
+export const eventListViews = {
+  GRID: 'GRID',
+  LIST: 'LIST',
+};
+
 const EventList = ({ events, leaveEvent, joinEvent, currentUserID }) => {
   const getDescription = (event) => {
     let descrition = event.get('description').substring(0, 60);

@@ -2,19 +2,28 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import ButtonLink from '../ButtonLink';
-import Button from '../Button';
+import Button, { buttonTypes } from '../Button';
+
+export const eventButtonTypes = {
+  EDIT: 'edit',
+  JOIN: 'join',
+  LEAVE: 'leave',
+  EXPIRED: 'expired',
+};
 
 const Event = ({ title, description, startsAt, capacity,
                  attendees, firstName, lastName, id,
                  buttonType, leaveEvent, joinEvent }) => {
   const getButton = () => {
     switch (buttonType) {
-      case 'edit':
+      case eventButtonTypes.EDIT:
         return <ButtonLink url={`/event/${id}/edit`}>Edit</ButtonLink>;
-      case 'leave':
-        return <Button type="button" onClick={() => leaveEvent(id)}>Leave</Button>;
-      case 'join':
-        return <Button type="button" onClick={() => joinEvent(id)}>Join</Button>;
+      case eventButtonTypes.LEAVE:
+        return <Button type={buttonTypes.BUTTON} onClick={() => leaveEvent(id)}>Leave</Button>;
+      case eventButtonTypes.JOIN:
+        return <Button type={buttonTypes.BUTTON} onClick={() => joinEvent(id)}>Join</Button>;
+      case eventButtonTypes.EXPIRED:
+        return <span />;
       default:
         throw new Error(`Unknown buttonType: ${buttonType}`);
     }
@@ -55,18 +64,25 @@ Event.propTypes = {
   firstName: PropTypes.string.isRequired,
   lastName: PropTypes.string.isRequired,
   attendees: PropTypes.number.isRequired,
-  buttonType: PropTypes.oneOf(['edit', 'leave', 'join']).isRequired,
+  buttonType: PropTypes.oneOf([
+    eventButtonTypes.EDIT,
+    eventButtonTypes.LEAVE,
+    eventButtonTypes.JOIN,
+    eventButtonTypes.EXPIRED,
+  ]).isRequired,
   leaveEvent: PropTypes.func.isRequired,
   joinEvent: PropTypes.func.isRequired,
 };
 
 export const getEventButtonType = (event, currentUserID) => {
-  if (event.getIn(['owner', 'id']) === currentUserID) return 'edit';
+  if (new Date(event.get('startsAt')).getTime() < Date.now()) return eventButtonTypes.EXPIRED;
+
+  if (event.getIn(['owner', 'id']) === currentUserID) return eventButtonTypes.EDIT;
 
   if (event.has('attendees') &&
-      event.get('attendees').find(a => a.get('id') === currentUserID)) return 'leave';
+      event.get('attendees').find(a => a.get('id') === currentUserID)) return eventButtonTypes.LEAVE;
 
-  return 'join';
+  return eventButtonTypes.JOIN;
 };
 
 export default Event;

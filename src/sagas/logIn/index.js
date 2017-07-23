@@ -1,7 +1,7 @@
 /* eslint-disable no-constant-condition */
 import { take, put, fork, call, race } from 'redux-saga/effects';
 import * as Immutable from 'immutable';
-import { logInRequest, logInError, logInSuccess, mergeEntities } from '../../actions';
+import { logInRequest, logInError, logInSuccess, mergeEntities, setFormErrors } from '../../actions';
 import * as actionTypes from '../../constants/actionTypes';
 import { logIn, getAuthToken } from '../../api';
 
@@ -27,6 +27,7 @@ function* handleLoginRequest() {
 
       if (response.error) {
         yield put(logInError(Immutable.fromJS(response)));
+        yield put(setFormErrors('logIn', Immutable.Map(response)));
       } else {
         const authToken = yield call(getAuthToken, payload.toObject());
 
@@ -35,6 +36,7 @@ function* handleLoginRequest() {
       }
     } catch (e) {
       yield put(logInError(Immutable.fromJS(e)));
+      yield put(setFormErrors('logIn', Immutable.Map(e)));
     }
   }
 }

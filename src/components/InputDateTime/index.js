@@ -3,11 +3,17 @@ import PropTypes from 'prop-types';
 import Flatpickr from 'react-flatpickr';
 import 'flatpickr/dist/themes/light.css';
 
+export const inputDateTimeTypes = {
+  DATE: 'date',
+  TIME: 'time',
+  DATETIME: 'datetime',
+};
+
 const InputDateTime = ({ label, error, name, type, value }) => {
   const options = {
     defaultDate: value,
-    enableTime: type === 'time' || type === 'datetime',
-    noCalendar: type === 'time',
+    enableTime: type === inputDateTimeTypes.TIME || type === inputDateTimeTypes.DATETIME,
+    noCalendar: type === inputDateTimeTypes.TIME,
     altInput: true,
     // minDate: 'today', doesn't work right now
   };
@@ -26,7 +32,11 @@ const InputDateTime = ({ label, error, name, type, value }) => {
 InputDateTime.propTypes = {
   label: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  type: PropTypes.oneOf(['date', 'time', 'datetime']),
+  type: PropTypes.oneOf([
+    inputDateTimeTypes.DATE,
+    inputDateTimeTypes.TIME,
+    inputDateTimeTypes.DATETIME,
+  ]).isRequired,
   error: PropTypes.string,
   value: PropTypes.string,
 };
@@ -34,7 +44,6 @@ InputDateTime.propTypes = {
 InputDateTime.defaultProps = {
   error: '',
   value: '',
-  type: 'date',
 };
 
 export default InputDateTime;
