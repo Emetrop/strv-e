@@ -49,7 +49,7 @@ EventForm.defaultProps = {
   title: '',
   description: '',
   capacity: 10,
-  startsAt: '',
+  startsAt: Date.now(),
 };
 
 export default withRouter(EventForm);
