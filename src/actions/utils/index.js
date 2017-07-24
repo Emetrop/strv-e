@@ -23,7 +23,7 @@ const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
 export const getFormattedDateTime = (dateTime) => {
   const date = new Date(dateTime);
 
-  const day = date.getDay();
+  const day = date.getDate();
   const month = monthNames[date.getMonth()];
   const year = date.getFullYear();
   const hours = (date.getHours() + 24) % 12 || 12;
