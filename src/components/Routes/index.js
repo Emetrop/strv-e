@@ -14,7 +14,7 @@ import { isLoggedIn } from '../../selectors';
 const Routes = ({ isLoggedIn }) => (
     isLoggedIn
       ?
-        <div>
+        <div className="page page--nonPublic">
           <Switch>
             <Route path="/dashboard" exact component={Dashboard} />
             <Route path="/profile" exact component={Profile} />
@@ -25,7 +25,7 @@ const Routes = ({ isLoggedIn }) => (
           </Switch>
         </div>
       :
-        <div>
+        <div className="page page--public">
           <Switch>
             <Route path="/login" exact component={LogIn} />
             <Route path="/signup" exact component={SignUp} />

@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import * as Immutable from 'immutable';
 import { logOut } from '../../actions';
 import { getCurrentUser } from '../../selectors';
+import { Default } from '../Responsive';
 
 class PageHeaderMenu extends Component {
   constructor(props) {
@@ -24,23 +25,25 @@ class PageHeaderMenu extends Component {
     const { user, logOut } = this.props;
 
     return (
-      <div>
-        <span>
+      <div className="pageHeader__menuContainer">
+        <span className="pageHeader__circle">
           {user.get('firstName').substring(0, 1)}
           {user.get('lastName').substring(0, 1)}
         </span>
-        <span>
-          {user.get('firstName')} {user.get('lastName')}
-        </span>
-        <span role="presentation" onClick={() => this.toggleMenu()}>Menu</span>
-        <ul className={this.state.isMenuOpened ? 'active' : ''} >
-          <li>
-            <Link to="/profile" >
+        <Default>
+          <span className="pageHeader__name">
+            {user.get('firstName')} {user.get('lastName')}
+          </span>
+        </Default>
+        <span role="presentation" className="pageHeader__arrowDown" onClick={() => this.toggleMenu()} />
+        <ul className={this.state.isMenuOpened ? 'pageHeader__menu pageHeader__menu--active' : 'pageHeader__menu'} >
+          <li className="pageHeader__menuItem">
+            <Link to="/profile" className="pageHeader__menuLink">
               Profile
             </Link>
           </li>
-          <li>
-            <Link to="#" onClick={logOut} >
+          <li className="pageHeader__menuItem">
+            <Link to="#" onClick={logOut} className="pageHeader__menuLink">
               Log out
             </Link>
           </li>

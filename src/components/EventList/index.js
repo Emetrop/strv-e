@@ -2,25 +2,25 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import * as Immutable from 'immutable';
-import Event, { getEventButtonType } from '../Event';
+import Event, { getEventButtonType, eventStyleTypes } from '../Event';
 import { getFormattedDateTime, leaveEvent, joinEvent } from '../../actions';
-import { getCurrentUserID } from '../../selectors';
+import { getCurrentUserID, getEventListView } from '../../selectors';
+import EventListFilter, { eventListFilters } from './filter';
+import EventListViewToggle, { eventListViews } from './viewToggle';
+import './styles.css';
 
-export const eventListViews = {
-  GRID: 'GRID',
-  LIST: 'LIST',
-};
-
-const EventList = ({ events, leaveEvent, joinEvent, currentUserID }) => {
+const EventList = ({ events, leaveEvent, joinEvent, currentUserID, currentListView }) => {
   const getDescription = (event) => {
-    let descrition = event.get('description').substring(0, 60);
-    descrition += event.get('description').length > 60 ? '...' : '';
+    const maxLength = currentListView === eventListViews.GRID ? 60 : 30;
+
+    let descrition = event.get('description').substring(0, maxLength);
+    descrition += event.get('description').length > maxLength ? '...' : '';
 
     return descrition;
   };
 
   return (
-    <div>
+    <div className="containerResponsive">
       {events.valueSeq().map(event => (
         <Event
           title={event.get('title')}
@@ -34,6 +34,11 @@ const EventList = ({ events, leaveEvent, joinEvent, currentUserID }) => {
           buttonType={getEventButtonType(event, currentUserID)}
           leaveEvent={leaveEvent}
           joinEvent={joinEvent}
+          eventStyle={
+            currentListView === eventListViews.GRID ?
+              eventStyleTypes.BLOCK :
+              eventStyleTypes.LIST
+          }
           key={event.get('id')}
         />))}
     </div>
@@ -45,6 +50,10 @@ EventList.propTypes = {
   leaveEvent: PropTypes.func.isRequired,
   joinEvent: PropTypes.func.isRequired,
   currentUserID: PropTypes.string.isRequired,
+  currentListView: PropTypes.oneOf([
+    eventListViews.GRID,
+    eventListViews.LIST,
+  ]).isRequired,
 };
 
 EventList.defaultProps = {
@@ -53,6 +62,7 @@ EventList.defaultProps = {
 
 const mapStateToProps = state => ({
   currentUserID: getCurrentUserID(state),
+  currentListView: getEventListView(state),
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -63,5 +73,12 @@ const mapDispatchToProps = dispatch => ({
     dispatch(joinEvent(id));
   },
 });
+
+export {
+  EventListFilter,
+  EventListViewToggle,
+  eventListViews,
+  eventListFilters,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(EventList);

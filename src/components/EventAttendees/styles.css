@@ -1,0 +1,40 @@
+.attendees__container {
+  border-radius: 2px;
+  box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.11);
+  padding: 32px;
+  background-color: #ffffff; }
+  @media (min-width: 640px) {
+    .attendees__container {
+      min-height: calc(296px - 2*32px); } }
+
+.attendees__zero {
+  color: #949ea8; }
+
+.attendees__title {
+  font-size: 22px;
+  line-height: 1.45;
+  color: #323c46;
+  font-weight: normal;
+  margin: 0 0 23px; }
+
+.attendees__name {
+  border-radius: 100px;
+  background-color: #d9dce1;
+  font-size: 13px;
+  line-height: 2.38;
+  text-align: center;
+  color: #949ea8;
+  display: inline-block;
+  padding: 0 16px;
+  margin: 0 8px 8px 0; }
+
+.attendees__you {
+  border-radius: 100px;
+  border: solid 2px #d9dce1;
+  font-size: 13px;
+  line-height: 2;
+  text-align: center;
+  color: #949ea8;
+  display: inline-block;
+  padding: 0 16px;
+  margin: 0 8px 8px 0; }

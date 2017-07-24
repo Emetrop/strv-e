@@ -19,12 +19,12 @@ const InputDateTime = ({ label, error, name, type, value }) => {
   };
 
   return (
-    <div>
-      <label htmlFor={name}>
-        {label}
-      </label>
-      <span><Flatpickr name={name} options={options} /></span>
-      {error && <div>{error}</div>}
+    <div className="input__group">
+      <span><Flatpickr name={name} className={error ? 'input input--error' : 'input'} options={options} /></span>
+      <span className="input__highlight" />
+      <span className="input__bar" />
+      <label className="input__label input__label--dateTime" htmlFor={name}>{label}</label>
+      {error && <span className="input__error">{error}</span>}
     </div>
   );
 };

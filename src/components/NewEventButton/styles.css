@@ -1,0 +1,13 @@
+.newEventButton {
+  display: inline-block;
+  width: 56px;
+  height: 56px;
+  background: url(../../images/add.svg) no-repeat;
+  background-size: 56px;
+  position: fixed;
+  right: 16px;
+  bottom: 16px; }
+  @media (min-width: 640px) {
+    .newEventButton {
+      right: 32px;
+      bottom: 32px; } }

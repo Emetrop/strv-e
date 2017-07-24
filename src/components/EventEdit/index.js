@@ -5,10 +5,14 @@ import { Redirect, withRouter } from 'react-router-dom';
 import * as Immutable from 'immutable';
 import { updateEventSubmit, setFormErrors } from '../../actions';
 import EventForm from '../EventForm';
-import { getEventById, getCurrentUser, getFormErrors } from '../../selectors';
+import { getEventWithAuthorAndAttendees, getCurrentUser, getFormErrors } from '../../selectors';
 import PageHeader, { PageHeaderMenu } from '../PageHeader';
 import ContentHeader from '../ContentHeader';
+import EventAttendees from '../EventAttendees';
 import EventDelete from './delete';
+import EventEditConfirmButton from './confirmButton';
+import { Mobile, Default } from '../Responsive';
+import './styles.css';
 
 const EventEdit = ({ onSubmit, errors, event, user, setFormErrors, match }) => {
   const validate = (values) => {
@@ -24,6 +28,8 @@ const EventEdit = ({ onSubmit, errors, event, user, setFormErrors, match }) => {
 
     if (!values.capacity) {
       errors.capacity = { message: 'Capacity has to be filled up' };
+    } else if (!isFinite(values.capacity) || parseInt(values.capacity, 10) < 1) {
+      errors.capacity = { message: 'Capacity has to be a number bigger then 0' };
     }
 
     if (!values.date || !values.time) {
@@ -43,23 +49,48 @@ const EventEdit = ({ onSubmit, errors, event, user, setFormErrors, match }) => {
     else onSubmit(Immutable.fromJS({ ...values, id }));
   };
 
-  if (!event || event.get('owner') !== user.get('id')) return <Redirect to="/dashboard" />;
+  if (!event || event.getIn(['owner', 'id']) !== user.get('id')) return <Redirect to="/dashboard" />;
 
   return (
     <div>
       <PageHeader contentRight={<PageHeaderMenu />} />
       <ContentHeader
-        contentLeft={<h3>DETAIL EVENT: #{event.get('id')}</h3>}
+        contentLeft={
+          <div>
+            <Mobile>
+              <h3 className="eventEdit__title">DETAIL EVENT:<br />#{event.get('id')}</h3>
+            </Mobile>
+            <Default>
+              <h3 className="eventEdit__title">DETAIL EVENT: #{event.get('id')}</h3>
+            </Default>
+          </div>
+          }
         contentRight={<EventDelete id={event.get('id')} />}
       />
-      <EventForm
-        title={event.get('title')}
-        description={event.get('description')}
-        startsAt={event.get('startsAt')}
-        capacity={event.get('capacity')}
-        onSubmit={handleSubmit}
-        errors={errors}
-      />
+      <div className="containerResponsive">
+        <div className="eventEdit__event">
+          <div className="eventEdit__eventContent">
+            <EventForm
+              title={event.get('title')}
+              description={event.get('description')}
+              startsAt={event.get('startsAt')}
+              capacity={event.get('capacity').toString()}
+              onSubmit={handleSubmit}
+              errors={errors}
+            >
+              <EventEditConfirmButton />
+            </EventForm>
+          </div>
+        </div>
+        <Default>
+          <div className="eventEdit__attendees">
+            <EventAttendees
+              currentUserID={user.get('id')}
+              users={event.has('attendees') ? event.get('attendees').toJS() : []}
+            />
+          </div>
+        </Default>
+      </div>
     </div>
   );
 };
@@ -81,7 +112,7 @@ const mapStateToProps = (state, props) => {
   const id = props.match.params.id;
 
   return ({
-    event: getEventById(state, id),
+    event: getEventWithAuthorAndAttendees(state, id),
     user: getCurrentUser(state),
     errors: getFormErrors(state, 'eventEdit'),
   });

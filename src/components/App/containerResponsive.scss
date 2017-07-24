@@ -1,0 +1,23 @@
+@import "../App/variables.scss";
+@import "../App/flexboxgrid.scss";
+
+.containerResponsive {
+  @extend .row;
+  min-width: 300px;
+  max-width: 390px;
+  margin: 0 auto;
+
+  @media (min-width: $tablet-min-width) {
+    & {
+      min-width: 620px;
+      max-width: 780px;
+    }
+  }
+
+  @media (min-width: $desktop-min-width) {
+    & {
+      min-width: 1000px;
+      max-width: 1216px;
+    }
+  }
+}

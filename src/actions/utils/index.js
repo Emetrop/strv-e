@@ -28,7 +28,7 @@ export const getFormattedDateTime = (dateTime) => {
   const year = date.getFullYear();
   const hours = (date.getHours() + 24) % 12 || 12;
   const mintes = date.getMinutes() < 10 ? `0${date.getMinutes()}` : date.getMinutes();
-  const ampm = date.getHours() >= 12 ? 'pm' : 'am';
+  const ampm = date.getHours() >= 12 ? 'PM' : 'AM';
 
   return `${month} ${day}, ${year} - ${hours}:${mintes} ${ampm}`;
 };

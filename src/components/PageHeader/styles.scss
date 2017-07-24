@@ -1,0 +1,152 @@
+@import "../App/variables.scss";
+
+.pageHeader {
+  &__container {
+    display: flex;
+    justify-content: space-between;
+    padding: 24px;
+
+    @media (min-width: $tablet-min-width) {
+      & {
+        padding: 32px;
+      }
+    }
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    min-width: 80px;
+
+    @media (min-width: $tablet-min-width) {
+      & {
+        min-width: 100px;
+      }
+    }
+  }
+
+  &__logo {
+    display: inline-block;
+    width: 22px;
+    height: 23px;
+    background: url(../../images/logo.svg) no-repeat;
+    background-size: 22px 23px;
+
+    @media (min-width: $tablet-min-width) {
+      & {
+        width: 28px;
+        height: 29px;
+        background-size: 28px 29px;
+      }
+    }
+
+    &Link {
+      display: inline-flex;
+    }
+  }
+
+  &__name {
+    margin-left: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.71;
+    text-align: right;
+    color: $font-color;
+    position: relative;
+    bottom: -1px;
+  }
+
+  &__circle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    background-color: $element-background-color;
+    font-size: 11.2px;
+    font-weight: 500;
+    line-height: 1;
+    color: $font-color;
+
+    @media (min-width: $tablet-min-width) {
+      & {
+        width: 40px;
+        height: 40px;
+        font-size: 14px;
+      }
+    }
+  }
+
+  &__arrowDown {
+    margin-left: 6px;
+    color: $element-background-color;
+    width: 14px;
+    height: 7px;
+    background: url(../../images/arrowHeader.svg) no-repeat;
+    background-size: 14px 7px;
+    cursor: pointer;
+  }
+
+  &__menu {
+    display: none;
+    margin: 0;
+    padding: 16px;
+    border-radius: 10px;
+    position: absolute;
+    z-index: 1;
+    right: 5px;
+    top: 70px;
+    box-sizing: border-box;
+    width: 162px;
+    background-color: $white-color;
+    box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.2);
+    list-style-type: none;
+
+    @media (min-width: $tablet-min-width) {
+      & {
+        top: 80px;
+      }
+    }
+
+    &::after {
+      content: "";
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 0 13px 13px 13px;
+      border-color: transparent transparent $white-color transparent;
+      position: absolute;
+      top: -13px;
+      right: 18px;
+    }
+
+    &Container {
+      display: flex;
+      margin-left: auto;
+      align-items: center;
+    }
+
+    &--active {
+      display: block;
+    }
+  }
+
+  &__menuItem {
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.71;
+  }
+
+  &__menuLink {
+    display: inline-block;
+    width: 100%;
+    text-decoration: none;
+    color: $link-color;
+  }
+
+  &__menuLink:hover, .menuLink:active {
+    color: $font-dark-color;
+  }
+}

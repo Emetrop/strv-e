@@ -3,12 +3,15 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import * as Immutable from 'immutable';
 import { Link, Redirect } from 'react-router-dom';
-import Event, { getEventButtonType } from '../Event';
-import EventDetailAttendees from './attendees';
+import Event, { getEventButtonType, eventStyleTypes } from '../Event';
+import EventAttendees from '../EventAttendees';
 import PageHeader, { PageHeaderMenu } from '../PageHeader';
 import { getEventWithAuthorAndAttendees, getCurrentUserID } from '../../selectors';
 import { getFormattedDateTime, leaveEvent, joinEvent } from '../../actions';
 import ContentHeader from '../ContentHeader';
+import { Default, Mobile } from '../Responsive';
+import { NewEventButton } from '../NewEventButton';
+import './styles.css';
 
 const EventDetail = ({ event, currentUserID, leaveEvent, joinEvent }) => {
   if (event.isEmpty()) return <Redirect to="/dashboard" />;
@@ -16,33 +19,52 @@ const EventDetail = ({ event, currentUserID, leaveEvent, joinEvent }) => {
   return (
     <div>
       <PageHeader
-        contentMiddle={<Link to="/dashboard">Back to events</Link>}
+        contentMiddle={
+          <Default>
+            <Link to="/dashboard" className="eventDetail__backLink">
+              <span className="eventDetail__backIcon" />
+              <span className="eventDetail__backText">Back to events</span>
+            </Link>
+          </Default>}
         contentRight={<PageHeaderMenu />}
       />
       <ContentHeader
-        contentLeft={<h3>DETAIL EVENT: #{event.get('id')}</h3>}
+        contentLeft={
+          <div>
+            <Mobile>
+              <h3 className="eventDetail__title">DETAIL EVENT:<br />#{event.get('id')}</h3>
+            </Mobile>
+            <Default>
+              <h3 className="eventDetail__title">DETAIL EVENT: #{event.get('id')}</h3>
+            </Default>
+          </div>
+        }
       />
-      <div>
-        <Event
-          title={event.get('title')}
-          description={event.get('description')}
-          startsAt={getFormattedDateTime(event.get('startsAt'))}
-          capacity={event.get('capacity')}
-          attendees={event.has('attendees') ? event.get('attendees').size : 0}
-          firstName={event.getIn(['owner', 'firstName'])}
-          lastName={event.getIn(['owner', 'lastName'])}
-          buttonType={getEventButtonType(event, currentUserID)}
-          leaveEvent={leaveEvent}
-          joinEvent={joinEvent}
-          id={event.get('id')}
-        />
+      <div className="containerResponsive">
+        <div className="eventDetail__event">
+          <Event
+            title={event.get('title')}
+            description={event.get('description')}
+            startsAt={getFormattedDateTime(event.get('startsAt'))}
+            capacity={event.get('capacity')}
+            attendees={event.has('attendees') ? event.get('attendees').size : 0}
+            firstName={event.getIn(['owner', 'firstName'])}
+            lastName={event.getIn(['owner', 'lastName'])}
+            buttonType={getEventButtonType(event, currentUserID)}
+            leaveEvent={leaveEvent}
+            joinEvent={joinEvent}
+            id={event.get('id')}
+            eventStyle={eventStyleTypes.FULLWIDTH}
+          />
+        </div>
+        <div className="eventDetail__attendees">
+          <EventAttendees
+            currentUserID={currentUserID}
+            users={event.has('attendees') ? event.get('attendees').toJS() : []}
+          />
+        </div>
       </div>
-      <div>
-        <EventDetailAttendees
-          currentUserID={currentUserID}
-          users={event.has('attendees') ? event.get('attendees').toJS() : []}
-        />
-      </div>
+      <NewEventButton />
     </div>
   );
 };

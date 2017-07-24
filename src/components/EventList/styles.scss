@@ -1,0 +1,168 @@
+@import "../App/variables.scss";
+
+.listView {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+
+  &__item {
+    height: 16px;
+    display: flex;
+    align-items: center;
+
+    &--first {
+      margin-right: 15px;
+    }
+  }
+
+  &__icon {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    outline: none;
+    opacity: 0.1;
+
+    &:hover {
+      opacity: 1;
+    }
+
+    &--active {
+      opacity: 1;
+    }
+
+    &Container {
+      outline: none;
+    }
+  }
+}
+
+.listFilter {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  font-weight: 600;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 2;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  width: 500px;
+
+  &__container {
+    position: relative;
+    width: 200px;
+    line-height: 24px;
+  }
+
+  &__menu {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    font-weight: 600;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 2;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    width: 500px;
+
+    &Item {
+      display: inline-block;
+      margin-right: 32px;
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 2;
+      letter-spacing: 1px;
+      color: $link-color;
+      cursor: pointer;
+
+      &--active {
+        color: $font-dark-color;
+      }
+
+      &:hover {
+        color: $font-dark-color;
+      }
+    }
+  }
+}
+
+.listFilterMobile {
+  &__show {
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 2;
+    letter-spacing: 1px;
+    color: $font-color;
+    text-transform: uppercase;
+  }
+
+  &__selected {
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 2;
+    letter-spacing: 1px;
+    color: $font-dark-color;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+
+  &__arrowDown {
+    display: inline-block;
+    margin-left: 6px;
+    color: $element-background-color;
+    width: 14px;
+    height: 7px;
+    background: url(../../images/arrowDown.svg) no-repeat;
+    background-size: 14px 7px;
+    cursor: pointer;
+  }
+
+  &__menu {
+    display: none;
+    margin: 0;
+    padding: 16px;
+    border-radius: 10px;
+    position: absolute;
+    z-index: 1;
+    left: 51px;
+    top: 35px;
+    background-color: $white-color;
+    box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.2);
+    list-style-type: none;
+
+    &::after {
+      content: "";
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 0 13px 13px 13px;
+      border-color: transparent transparent $white-color transparent;
+      position: absolute;
+      top: -13px;
+      right: 20px;
+    }
+
+    &--active {
+      display: block;
+    }
+
+    &Item {
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 1.71;
+      color: $link-color;
+      outline: none;
+
+      &--active {
+        color: $font-dark-color;
+      }
+
+      &:hover {
+        color: $font-dark-color;
+      }
+    }
+  }
+}

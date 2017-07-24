@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import * as Immutable from 'immutable';
-import { Link } from 'react-router-dom';
-import EventList from '../EventList';
+import EventList, { EventListFilter, EventListViewToggle } from '../EventList';
 import { loadEntities, setEventFilterTimestamp, getCurrentTimestamp } from '../../actions';
 import { getFilteredEvents, getEventFilterType } from '../../selectors';
 import PageHeader, { PageHeaderMenu } from '../PageHeader';
-import ContentHeader, { EventListFilter, EventListViewToggle } from '../ContentHeader';
+import ContentHeader from '../ContentHeader';
+import { NewEventButton } from '../NewEventButton';
 
 class Dashboard extends Component {
   componentDidMount() {
@@ -28,7 +28,7 @@ class Dashboard extends Component {
           contentRight={<EventListViewToggle />}
         />
         <EventList events={filteredEvents.get(filter)} />
-        <Link to="/event/new">New event</Link>
+        <NewEventButton />
       </div>
     );
   }

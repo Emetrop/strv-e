@@ -1,0 +1,73 @@
+@import "../App/variables.scss";
+@import "../App/flexboxgrid.scss";
+
+.profileHeader {
+  @extend .col-xs-12;
+
+  &__content {
+    border-radius: 2px;
+    box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.11);
+    background-color: white;
+    padding: 60px 40px 40px;
+    margin-top: 96px;
+    text-align: center;
+
+    @media (min-width: $tablet-min-width) {
+      & {
+        margin-top: 90px;
+      }
+    }
+  }
+
+  &__circle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    background-color: #d9dce1;
+    position: absolute;
+    left: 50%;
+    top: 116px;
+    margin-left: -60px;
+    color: #949ea8;
+    font-size: 27px;
+
+    @media (min-width: $tablet-min-width) {
+      & {
+        top: 135px;
+      }
+    }
+  }
+
+  &__name {
+    font-size: 18px;
+    line-height: 2.67;
+    color: #323c46;
+    margin-bottom: -10px;
+    margin-top: 24px;
+  }
+
+  &__email {
+    font-size: 14px;
+    line-height: 1.71;
+    text-align: center;
+    color: #949ea8;
+  }
+
+  &__title {
+    margin: 0;
+    font-size: 22px;
+    line-height: 2.18;
+    color: $font-dark-color;
+    font-weight: normal;
+
+    @media (min-width: $tablet-min-width) {
+      & {
+        font-size: 28px;
+        line-height: 1.71;
+      }
+    }
+  }
+}

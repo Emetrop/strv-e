@@ -7,6 +7,9 @@ import EventForm from '../EventForm';
 import { createEventSubmit, setFormErrors } from '../../actions';
 import PageHeader from '../PageHeader';
 import { getFormErrors } from '../../selectors';
+import { Mobile, Default } from '../Responsive';
+import Button, { buttonTypes, buttonColorTypes, buttonSizeTypes } from '../Button';
+import './styles.css';
 
 const EventNew = ({ onSubmit, errors, setFormErrors }) => {
   const validate = (values) => {
@@ -22,6 +25,8 @@ const EventNew = ({ onSubmit, errors, setFormErrors }) => {
 
     if (!values.capacity) {
       errors.capacity = { message: 'Capacity has to be filled up' };
+    } else if (!isFinite(values.capacity) || parseInt(values.capacity, 10) < 1) {
+      errors.capacity = { message: 'Capacity has to be a number bigger then 0' };
     }
 
     if (!values.date || !values.time) {
@@ -43,12 +48,40 @@ const EventNew = ({ onSubmit, errors, setFormErrors }) => {
   return (
     <div>
       <PageHeader
-        contentRight={<Link to="/dashboard">Close</Link>}
+        contentRight={
+          <div className="eventNew__close">
+            <Mobile>
+              <Link to="/dashboard" className="eventNew__closeLink">
+                <span className="eventNew__closeIcon" />
+              </Link>
+            </Mobile>
+            <Default>
+              <Link to="/dashboard" className="eventNew__closeLink">
+                <span className="eventNew__closeIcon" />
+                <span className="eventNew__closeText">Close</span>
+              </Link>
+            </Default>
+          </div>
+        }
       />
-      <EventForm
-        onSubmit={handleSubmit}
-        errors={errors}
-      />
+      <div className="eventNew__form">
+        <div className="eventNew__content">
+          <h1 className="eventNew__title">Create new event</h1>
+          <p className="eventNew__hint">Enter details below.</p>
+          <EventForm
+            onSubmit={handleSubmit}
+            errors={errors}
+          >
+            <div className="eventNew__button">
+              <Button
+                type={buttonTypes.SUBMIT}
+                color={buttonColorTypes.GREEN}
+                size={buttonSizeTypes.LARGE}
+              >CREATE NEW EVENT</Button>
+            </div>
+          </EventForm>
+        </div>
+      </div>
     </div>
   );
 };

@@ -1,0 +1,40 @@
+@import "../App/variables.scss";
+@import "../App/flexboxgrid.scss";
+
+.eventDetail {
+  &__title {
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 2;
+    letter-spacing: 1px;
+    color: #a9aeb4;
+    margin: 0;
+  }
+
+  &__backLink {
+    font-size: 16px;
+    color: $font-dark-color;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+  }
+
+  &__backIcon {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background: url(../../images/back.svg) no-repeat;
+    background-size: 16px;
+    margin-right: 8px;
+  }
+
+  &__event {
+    @extend .col-xs-12, .col-sm-6, .col-md-8;
+    margin-bottom: 16px;
+  }
+
+  &__attendees {
+    @extend .col-xs-12, .col-sm-6, .col-md-4;
+    margin-bottom: 16px;
+  }
+}

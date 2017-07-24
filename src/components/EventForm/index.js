@@ -2,12 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import * as Immutable from 'immutable';
-import Input from '../Input';
-import InputDateTime, { inputDateTimeTypes } from '../InputDateTime';
-import { buttonTypes } from '../Button';
+import Input, { InputDateTime, inputDateTimeTypes } from '../Input';
 import { getInputError } from '../../actions/utils';
 
-const EventForm = ({ title, description, capacity, startsAt, onSubmit, errors }) => {
+const EventForm = ({ title, description, capacity, startsAt, onSubmit, errors, children }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -30,8 +28,8 @@ const EventForm = ({ title, description, capacity, startsAt, onSubmit, errors })
       <Input name="description" label="Description" type="text" value={description} error={getInputError(errors, 'description')} />
       <InputDateTime name="date" label="Date" type={inputDateTimeTypes.DATE} value={startsAt} error={getInputError(errors, 'startsAt')} />
       <InputDateTime name="time" label="Time" type={inputDateTimeTypes.TIME} value={startsAt} error={getInputError(errors, 'startsAt')} />
-      <Input name="capacity" label="Capacity" type="number" value={capacity.toString()} min="1" error={getInputError(errors, 'capacity')} />
-      <button type={buttonTypes.SUBMIT}>Save</button>
+      <Input name="capacity" label="Capacity" type="text" value={capacity} error={getInputError(errors, 'capacity')} />
+      {children}
     </form>
   );
 };
@@ -40,16 +38,17 @@ EventForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   title: PropTypes.string,
   description: PropTypes.string,
-  capacity: PropTypes.number,
+  capacity: PropTypes.string,
   startsAt: PropTypes.string,
   errors: PropTypes.instanceOf(Immutable.Map).isRequired,
+  children: PropTypes.element.isRequired,
 };
 
 EventForm.defaultProps = {
   title: '',
   description: '',
-  capacity: 10,
-  startsAt: Date.now(),
+  capacity: '',
+  startsAt: new Date().toISOString(),
 };
 
 export default withRouter(EventForm);

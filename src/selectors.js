@@ -1,6 +1,6 @@
 import * as Immutable from 'immutable';
 import { createSelector } from 'reselect';
-import * as filterTypes from './constants/eventFilters';
+import { eventListFilters } from './components/EventList';
 
 export const getEvents = state => state.getIn(['entities', 'events']);
 
@@ -31,25 +31,27 @@ export const getFilteredEvents = createSelector(
   (events, users, timestamp) => {
     const eventsWithUsers = events
       .map(e => e.set('owner', users.get(e.get('owner'))))
-      .map(e => e.set('attendees', e.get('attendees').map(id => users.get(id))));
+      .map(e => e.set('attendees', e.get('attendees').map(id => users.get(id))))
+      .sort((a, b) => a.get('startsAt').localeCompare(b.get('startsAt')))
+      .reverse();
 
     let filteredEvents = Immutable.Map();
 
     filteredEvents = filteredEvents
       .set(
-        filterTypes.PAST,
+        eventListFilters.PAST,
         eventsWithUsers.filter(e => new Date(e.get('startsAt')).getTime() < timestamp),
       );
 
     filteredEvents = filteredEvents
       .set(
-        filterTypes.FUTURE,
+        eventListFilters.FUTURE,
         eventsWithUsers.filter(e => new Date(e.get('startsAt')).getTime() > timestamp),
       );
 
     filteredEvents = filteredEvents
       .set(
-        filterTypes.ALL,
+        eventListFilters.ALL,
         eventsWithUsers,
       );
 
@@ -62,14 +64,12 @@ export const getProfileEvents = createSelector(
   (events, users, id) => {
     const eventsWithUsers = events
       .map(e => e.set('owner', users.get(e.get('owner'))))
-      .map(e => e.set('attendees', e.get('attendees').map(id => users.get(id))));
+      .map(e => e.set('attendees', e.get('attendees').map(id => users.get(id))))
+      .sort((a, b) => a.get('startsAt').localeCompare(b.get('startsAt')))
+      .reverse();
 
-    const organizedEvents = eventsWithUsers
-      .filter(e => e.getIn(['owner', 'id']) === id);
-    const participatedEvents = eventsWithUsers
+    return eventsWithUsers
       .filter(e => (!e.has('attendees') ? false : e.get('attendees').find(a => a.get('id') === id)));
-
-    return organizedEvents.merge(participatedEvents);
   },
 );
 

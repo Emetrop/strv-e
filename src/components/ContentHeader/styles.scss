@@ -1,0 +1,25 @@
+@import "../App/variables.scss";
+
+.contentHeader {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+  padding: 32px 24px;
+
+  @media (min-width: $tablet-min-width) {
+    & {
+      padding: 66px 8px 38px;
+    }
+  }
+
+  &--middle {
+    padding: 18px 8px 14px;
+
+    @media (min-width: $tablet-min-width) {
+      & {
+        padding: 38px 8px 24px;
+      }
+    }
+  }
+}

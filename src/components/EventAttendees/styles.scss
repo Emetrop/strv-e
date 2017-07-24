@@ -1,0 +1,52 @@
+@import "../App/variables.scss";
+
+.attendees {
+  &__container {
+    border-radius: 2px;
+    box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.11);
+    padding: 32px;
+    background-color: $white-color;
+
+    @media (min-width: $tablet-min-width) {
+      & {
+        min-height: calc(296px - 2*32px);
+      }
+    }
+  }
+
+  &__zero {
+    color: $font-color;
+  }
+
+  &__title {
+    font-size: 22px;
+    line-height: 1.45;
+    color: $font-dark-color;
+    font-weight: normal;
+    margin: 0 0 23px;
+  }
+
+  &__name {
+    border-radius: 100px;
+    background-color: $element-background-color;
+    font-size: 13px;
+    line-height: 2.38;
+    text-align: center;
+    color: $font-color;
+    display: inline-block;
+    padding: 0 16px;
+    margin: 0 8px 8px 0;
+  }
+
+  &__you {
+    border-radius: 100px;
+    border: solid 2px $element-background-color;
+    font-size: 13px;
+    line-height: 2;
+    text-align: center;
+    color: $font-color;
+    display: inline-block;
+    padding: 0 16px;
+    margin: 0 8px 8px 0;
+  }
+}

@@ -1,11 +1,10 @@
 import * as Immutable from 'immutable';
-import * as filterTypes from '../../constants/eventFilters';
 import * as actionTypes from '../../constants/actionTypes';
-import { eventListViews } from '../../components/EventList';
+import { eventListViews, eventListFilters } from '../../components/EventList';
 import { getCurrentTimestamp } from '../../actions';
 
 const initialState = Immutable.Map({
-  eventFilterType: filterTypes.ALL,
+  eventFilterType: eventListFilters.ALL,
   eventFilterTimestamp: getCurrentTimestamp(),
   eventListView: eventListViews.GRID,
 });

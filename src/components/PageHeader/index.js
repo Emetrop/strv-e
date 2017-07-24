@@ -2,16 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import PageHeaderLogo from './logo';
 import PageHeaderMenu from './menu';
+import './styles.css';
 
 const PageHeader = ({ contentLeft, contentMiddle, contentRight }) => (
-  <div>
-    <span>
+  <div className="pageHeader__container">
+    <span className="pageHeader__item">
       {contentLeft}
     </span>
-    <span>
+    <span className="pageHeader__item">
       {contentMiddle}
     </span>
-    <span>
+    <span className="pageHeader__item">
       {contentRight}
     </span>
   </div>

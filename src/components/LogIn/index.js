@@ -44,7 +44,7 @@ const LogIn = ({ onSubmit, errors, setFormErrors }) => {
       <p>Enter your details below.</p>
       {formError && <p>{formError}</p>}
       <form onSubmit={handleSubmit}>
-        <Input name="email" label="Email" type="email" error={getInputError(errors, 'email')} />
+        <Input name="email" label="Email" type="text" error={getInputError(errors, 'email')} />
         <Input name="password" label="Password" type="password" error={getInputError(errors, 'password')} />
         <button type="submit">Sign in</button>
       </form>
