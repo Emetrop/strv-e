@@ -1,0 +1,78 @@
+@import "../App/variables.scss";
+
+.logIn {
+  &__content {
+    width: 100%;
+    max-width: 480px;
+    margin: 24px;
+  }
+
+  &__title {
+    font-size: 22px;
+    line-height: 2.18;
+    text-align: center;
+    color: $font-dark-color;
+    margin: 0;
+    font-weight: normal;
+
+    @media (min-width: $tablet-min-width) {
+      & {
+        text-align: left;
+        font-size: 28px;
+        line-height: 1.71;
+      }
+    }
+  }
+
+  &__hint {
+    font-size: 14px;
+    line-height: 1.71;
+    text-align: center;
+    color: $font-color;
+    margin: 0 0 32px;
+
+    @media (min-width: $tablet-min-width) {
+      & {
+        text-align: left;
+      }
+    }
+  }
+
+  &__button {
+    text-align: center;
+
+    @media (min-width: $tablet-min-width) {
+      & {
+        text-align: left;
+      }
+    }
+  }
+
+  &__logo {
+    display: flex;
+  }
+
+  &__linkContainer {
+    text-align: center;
+    margin: 0 0 40px;
+
+    &--header {
+      margin: 0;
+    }
+  }
+
+  &__linkText {
+    font-size: 14px;
+    line-height: 1.71;
+    color: #c9ced3;
+  }
+
+  &__link {
+    font-size: 14px;
+    line-height: 1.71;
+    font-weight: 500;
+    color: #949ea8;
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+}

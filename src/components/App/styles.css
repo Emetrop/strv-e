@@ -762,4 +762,5 @@ body {
   font-family: 'Hind', sans-serif; }
 
 .page--nonPublic {
-  background-color: #f9f9fb; }
+  background-color: #f9f9fb;
+  padding-bottom: 30px; }

@@ -5,7 +5,7 @@ import { persistStore } from 'redux-persist-immutable';
 import configureStore from '../../configureStore';
 import history from '../../history';
 import Routes from '../Routes';
-import './index.css';
+import './styles.css';
 
 const store = configureStore();
 

@@ -23,7 +23,7 @@ const EventForm = ({ title, description, capacity, startsAt, onSubmit, errors, c
 
   return (
     <form onSubmit={handleSubmit}>
-      {formError && <p>{formError}</p>}
+      {formError && <p className="eventForm__error">{formError}</p>}
       <Input name="title" label="Title" type="text" value={title} error={getInputError(errors, 'title')} />
       <Input name="description" label="Description" type="text" value={description} error={getInputError(errors, 'description')} />
       <InputDateTime name="date" label="Date" type={inputDateTimeTypes.DATE} value={startsAt} error={getInputError(errors, 'startsAt')} />

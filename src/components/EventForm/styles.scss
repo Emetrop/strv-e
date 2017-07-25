@@ -1,0 +1,7 @@
+@import "../App/variables.scss";
+
+.eventForm {
+  &__error {
+    color: $red-color;
+  }
+}

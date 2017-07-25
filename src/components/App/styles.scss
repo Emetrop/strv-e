@@ -1,4 +1,4 @@
-@import "../App/variables.scss";
+@import "./variables.scss";
 @import "./containerResponsive.scss";
 
 @font-face {
@@ -30,5 +30,6 @@ body {
 .page {
   &--nonPublic {
     background-color: $page-background-color;
+    padding-bottom: 30px;
   }
 }

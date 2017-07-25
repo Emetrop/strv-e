@@ -5,12 +5,15 @@ import * as Immutable from 'immutable';
 import EventList, { EventListViewToggle } from '../EventList';
 import { getProfileEvents, getCurrentUser } from '../../selectors';
 import ProfileHeader from './header';
-import PageHeader, { PageHeaderMenu } from '../PageHeader';
+import PageHeader, { PageHeaderMenu, PageHeaderLogo } from '../PageHeader';
 import ContentHeader from '../ContentHeader';
 
 const Profile = ({ events, user }) => (
   <div>
-    <PageHeader contentRight={<PageHeaderMenu />} />
+    <PageHeader
+      contentLeft={<PageHeaderLogo link="/dashboard" />}
+      contentRight={<PageHeaderMenu />}
+    />
     <ProfileHeader
       firstName={user.get('firstName')}
       lastName={user.get('lastName')}

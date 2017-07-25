@@ -2,11 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import * as Immutable from 'immutable';
+import { Link } from 'react-router-dom';
 import Input from '../Input';
 import { signUpSubmit, setFormErrors } from '../../actions';
-import Button, { buttonTypes } from '../Button';
+import Button, { buttonTypes, buttonColorTypes, buttonSizeTypes } from '../Button';
 import { getFormErrors } from '../../selectors';
 import { getInputError } from '../../actions/utils';
+import { Mobile, MobileTablet, Desktop, TabletDesktop } from '../Responsive';
+import PublicPage from '../PublicPage';
+import PageHeader, { PageHeaderLogo, pageHeaderLogoStyles } from '../PageHeader';
+import './styles.css';
 
 const SignUp = ({ onSubmit, errors, setFormErrors }) => {
   const validate = (values) => {
@@ -54,17 +59,51 @@ const SignUp = ({ onSubmit, errors, setFormErrors }) => {
 
   return (
     <div>
-      <h1>Get started absolutely free.</h1>
-      <p>Enter your details below.</p>
-      {formError && <p>{formError}</p>}
-      <form onSubmit={handleSubmit}>
-        <Input name="firstName" label="First name" type="text" error={getInputError(errors, 'firstName')} />
-        <Input name="lastName" label="Last name" type="text" error={getInputError(errors, 'lastName')} />
-        <Input name="email" label="Email" type="email" error={getInputError(errors, 'email')} />
-        <Input name="password" label="Password" type="password" error={getInputError(errors, 'password')} />
-        <Input name="repeatPassword" label="Repeat password" type="password" error={getInputError(errors, 'repeatPassword')} />
-        <Button type={buttonTypes.SUBMIT}>Sign in</Button>
-      </form>
+      <PageHeader
+        contentLeft={
+          <span className="signUp__logo">
+            <MobileTablet><PageHeaderLogo link="/login" style={pageHeaderLogoStyles.DARK} /></MobileTablet>
+            <Desktop><PageHeaderLogo link="/login" style={pageHeaderLogoStyles.LIGHT} /></Desktop>
+          </span>
+        }
+        contentRight={
+          <span>
+            <TabletDesktop>
+              <div className="signUp__linkContainer signUp__linkContainer--header">
+                <span className="signUp__linkText">Already have an account? </span>
+                <Link to="/login" className="signUp__link">Sign In</Link>
+              </div>
+            </TabletDesktop>
+          </span>
+        }
+      />
+      <PublicPage>
+        <div className="signUp__content">
+          <h1 className="signUp__title">Get started absolutely free.</h1>
+          <p className="signUp__hint">Enter your details below.</p>
+          {formError && <p className="signUp__error">{formError}</p>}
+          <form onSubmit={handleSubmit}>
+            <Input name="firstName" label="First name" type="text" error={getInputError(errors, 'firstName')} />
+            <Input name="lastName" label="Last name" type="text" error={getInputError(errors, 'lastName')} />
+            <Input name="email" label="Email" type="email" error={getInputError(errors, 'email')} />
+            <Input name="password" label="Password" type="password" error={getInputError(errors, 'password')} />
+            <Input name="repeatPassword" label="Repeat password" type="password" error={getInputError(errors, 'repeatPassword')} />
+            <Mobile>
+              <div className="signUp__linkContainer">
+                <span className="signUp__linkText">Already have an account? </span>
+                <Link to="/login" className="signUp__link">Sign In</Link>
+              </div>
+            </Mobile>
+            <div className="signUp__button">
+              <Button
+                type={buttonTypes.SUBMIT}
+                size={buttonSizeTypes.LARGE}
+                color={buttonColorTypes.GREEN}
+              >Sign Up</Button>
+            </div>
+          </form>
+        </div>
+      </PublicPage>
     </div>
   );
 };

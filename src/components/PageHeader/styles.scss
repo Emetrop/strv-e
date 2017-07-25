@@ -5,6 +5,8 @@
     display: flex;
     justify-content: space-between;
     padding: 24px;
+    position: relative;
+    z-index: 1;
 
     @media (min-width: $tablet-min-width) {
       & {
@@ -26,17 +28,35 @@
   }
 
   &__logo {
-    display: inline-block;
-    width: 22px;
-    height: 23px;
-    background: url(../../images/logo.svg) no-repeat;
-    background-size: 22px 23px;
+    &--dark {
+      display: inline-block;
+      width: 22px;
+      height: 23px;
+      background: url(../../images/logo.svg) no-repeat;
+      background-size: 22px 23px;
 
-    @media (min-width: $tablet-min-width) {
-      & {
-        width: 28px;
-        height: 29px;
-        background-size: 28px 29px;
+      @media (min-width: $tablet-min-width) {
+        & {
+          width: 28px;
+          height: 29px;
+          background-size: 28px 29px;
+        }
+      }
+    }
+
+    &--light {
+      display: inline-block;
+      width: 22px;
+      height: 23px;
+      background: url(../../images/logoLight.svg) no-repeat;
+      background-size: 22px 23px;
+
+      @media (min-width: $tablet-min-width) {
+        & {
+          width: 28px;
+          height: 29px;
+          background-size: 28px 29px;
+        }
       }
     }
 

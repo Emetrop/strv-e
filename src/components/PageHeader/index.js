@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import PageHeaderLogo from './logo';
+import PageHeaderLogo, { pageHeaderLogoStyles } from './logo';
 import PageHeaderMenu from './menu';
 import './styles.css';
 
@@ -25,7 +25,7 @@ PageHeader.propTypes = {
 };
 
 PageHeader.defaultProps = {
-  contentLeft: <PageHeaderLogo />,
+  contentLeft: <span />,
   contentMiddle: <span />,
   contentRight: <span />,
 };
@@ -35,4 +35,5 @@ export default PageHeader;
 export {
   PageHeaderLogo,
   PageHeaderMenu,
+  pageHeaderLogoStyles,
 };

@@ -1,0 +1,55 @@
+.signUp__content {
+  width: 100%;
+  max-width: 480px;
+  margin: 24px; }
+
+.signUp__title {
+  font-size: 22px;
+  line-height: 2.18;
+  text-align: center;
+  color: #323c46;
+  margin: 0;
+  font-weight: normal; }
+  @media (min-width: 640px) {
+    .signUp__title {
+      text-align: left;
+      font-size: 28px;
+      line-height: 1.71; } }
+
+.signUp__hint {
+  font-size: 14px;
+  line-height: 1.71;
+  text-align: center;
+  color: #949ea8;
+  margin: 0 0 32px; }
+  @media (min-width: 640px) {
+    .signUp__hint {
+      text-align: left; } }
+
+.signUp__button {
+  text-align: center; }
+  @media (min-width: 640px) {
+    .signUp__button {
+      text-align: left; } }
+
+.signUp__logo {
+  display: flex; }
+
+.signUp__linkContainer {
+  text-align: center;
+  margin: 0 0 40px; }
+  .signUp__linkContainer--header {
+    margin: 0; }
+
+.signUp__linkText {
+  font-size: 14px;
+  line-height: 1.71;
+  color: #c9ced3; }
+
+.signUp__link {
+  font-size: 14px;
+  line-height: 1.71;
+  font-weight: 500;
+  color: #949ea8;
+  text-transform: uppercase;
+  text-decoration: none; }

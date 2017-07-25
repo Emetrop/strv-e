@@ -5,7 +5,7 @@ import * as Immutable from 'immutable';
 import EventList, { EventListFilter, EventListViewToggle } from '../EventList';
 import { loadEntities, setEventFilterTimestamp, getCurrentTimestamp } from '../../actions';
 import { getFilteredEvents, getEventFilterType } from '../../selectors';
-import PageHeader, { PageHeaderMenu } from '../PageHeader';
+import PageHeader, { PageHeaderMenu, PageHeaderLogo } from '../PageHeader';
 import ContentHeader from '../ContentHeader';
 import { NewEventButton } from '../NewEventButton';
 
@@ -22,7 +22,10 @@ class Dashboard extends Component {
 
     return (
       <div>
-        <PageHeader contentRight={<PageHeaderMenu />} />
+        <PageHeader
+          contentLeft={<PageHeaderLogo link="/dashboard" />}
+          contentRight={<PageHeaderMenu />}
+        />
         <ContentHeader
           contentLeft={<EventListFilter />}
           contentRight={<EventListViewToggle />}

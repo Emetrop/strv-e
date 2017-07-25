@@ -5,7 +5,7 @@ import * as Immutable from 'immutable';
 import { Link } from 'react-router-dom';
 import EventForm from '../EventForm';
 import { createEventSubmit, setFormErrors } from '../../actions';
-import PageHeader from '../PageHeader';
+import PageHeader, { PageHeaderLogo } from '../PageHeader';
 import { getFormErrors } from '../../selectors';
 import { Mobile, Default } from '../Responsive';
 import Button, { buttonTypes, buttonColorTypes, buttonSizeTypes } from '../Button';
@@ -48,6 +48,7 @@ const EventNew = ({ onSubmit, errors, setFormErrors }) => {
   return (
     <div>
       <PageHeader
+        contentLeft={<PageHeaderLogo link="/dashboard" />}
         contentRight={
           <div className="eventNew__close">
             <Mobile>

@@ -6,7 +6,7 @@ import * as Immutable from 'immutable';
 import { updateEventSubmit, setFormErrors } from '../../actions';
 import EventForm from '../EventForm';
 import { getEventWithAuthorAndAttendees, getCurrentUser, getFormErrors } from '../../selectors';
-import PageHeader, { PageHeaderMenu } from '../PageHeader';
+import PageHeader, { PageHeaderMenu, PageHeaderLogo } from '../PageHeader';
 import ContentHeader from '../ContentHeader';
 import EventAttendees from '../EventAttendees';
 import EventDelete from './delete';
@@ -53,7 +53,10 @@ const EventEdit = ({ onSubmit, errors, event, user, setFormErrors, match }) => {
 
   return (
     <div>
-      <PageHeader contentRight={<PageHeaderMenu />} />
+      <PageHeader
+        contentLeft={<PageHeaderLogo link="/dashboard" />}
+        contentRight={<PageHeaderMenu />}
+      />
       <ContentHeader
         contentLeft={
           <div>

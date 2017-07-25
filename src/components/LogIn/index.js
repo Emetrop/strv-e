@@ -2,10 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import * as Immutable from 'immutable';
+import { Link } from 'react-router-dom';
 import Input from '../Input';
 import { logInSubmit, setFormErrors } from '../../actions';
 import { getFormErrors } from '../../selectors';
 import { getInputError } from '../../actions/utils';
+import Button, { buttonColorTypes, buttonSizeTypes, buttonTypes } from '../Button';
+import { Mobile, MobileTablet, Desktop, TabletDesktop } from '../Responsive';
+import PublicPage from '../PublicPage';
+import PageHeader, { PageHeaderLogo, pageHeaderLogoStyles } from '../PageHeader';
+import './styles.css';
 
 const LogIn = ({ onSubmit, errors, setFormErrors }) => {
   const validate = (values) => {
@@ -40,14 +46,48 @@ const LogIn = ({ onSubmit, errors, setFormErrors }) => {
 
   return (
     <div>
-      <h1>Sign in to Eventio</h1>
-      <p>Enter your details below.</p>
-      {formError && <p>{formError}</p>}
-      <form onSubmit={handleSubmit}>
-        <Input name="email" label="Email" type="text" error={getInputError(errors, 'email')} />
-        <Input name="password" label="Password" type="password" error={getInputError(errors, 'password')} />
-        <button type="submit">Sign in</button>
-      </form>
+      <PageHeader
+        contentLeft={
+          <span className="logIn__logo">
+            <MobileTablet><PageHeaderLogo link="/login" style={pageHeaderLogoStyles.DARK} /></MobileTablet>
+            <Desktop><PageHeaderLogo link="/login" style={pageHeaderLogoStyles.LIGHT} /></Desktop>
+          </span>
+        }
+        contentRight={
+          <span>
+            <TabletDesktop>
+              <div className="logIn__linkContainer logIn__linkContainer--header">
+                <span className="logIn__linkText">Don’t have account? </span>
+                <Link to="/signup" className="logIn__link">Sign Up</Link>
+              </div>
+            </TabletDesktop>
+          </span>
+        }
+      />
+      <PublicPage>
+        <div className="logIn__content">
+          <h1 className="logIn__title">Sign in to Eventio</h1>
+          <p className="logIn__hint">Enter your details below.</p>
+          {formError && <p className="logIn__error">{formError}</p>}
+          <form onSubmit={handleSubmit}>
+            <Input name="email" label="Email" type="text" error={getInputError(errors, 'email')} />
+            <Input name="password" label="Password" type="password" error={getInputError(errors, 'password')} />
+            <Mobile>
+              <div className="logIn__linkContainer">
+                <span className="logIn__linkText">Don’t have account? </span>
+                <Link to="/signup" className="logIn__link">Sign Up</Link>
+              </div>
+            </Mobile>
+            <div className="logIn__button">
+              <Button
+                type={buttonTypes.SUBMIT}
+                size={buttonSizeTypes.LARGE}
+                color={buttonColorTypes.GREEN}
+              >Sign in</Button>
+            </div>
+          </form>
+        </div>
+      </PublicPage>
     </div>
   );
 };
