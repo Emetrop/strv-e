@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import * as Immutable from 'immutable';
+import onClickOutside from 'react-onclickoutside';
 import { logOut } from '../../actions';
 import { getCurrentUser } from '../../selectors';
 import { Default } from '../Responsive';
@@ -13,6 +14,12 @@ class PageHeaderMenu extends Component {
     this.state = {
       isMenuOpened: false,
     };
+  }
+
+  handleClickOutside() {
+    this.setState({
+      isMenuOpened: false,
+    });
   }
 
   toggleMenu() {
@@ -68,4 +75,4 @@ const mapDispatchToProps = dispatch => ({
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(PageHeaderMenu);
+export default connect(mapStateToProps, mapDispatchToProps)(onClickOutside(PageHeaderMenu));

@@ -43,6 +43,7 @@
     "react-dom": "^15.6.1",
     "react-error-overlay": "^1.0.9",
     "react-flatpickr": "^3.5.0",
+    "react-onclickoutside": "^6.4.0",
     "react-redux": "^5.0.5",
     "react-responsive": "^1.3.4",
     "react-router": "^4.1.1",

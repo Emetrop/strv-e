@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
+import onClickOutside from 'react-onclickoutside';
 import { Mobile, Default } from '../Responsive';
 import { getEventFilterType } from '../../selectors';
 import { filterEvents } from '../../actions';
@@ -43,6 +44,12 @@ class EventListFilter extends Component {
     return classnames({
       listFilter__menuItem: true,
       'listFilter__menuItem--active': currentFilter === filter,
+    });
+  }
+
+  handleClickOutside() {
+    this.setState({
+      isMenuOpened: false,
     });
   }
 
@@ -150,4 +157,4 @@ const mapDispatchToProps = dispatch => ({
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(EventListFilter);
+export default connect(mapStateToProps, mapDispatchToProps)(onClickOutside(EventListFilter));
