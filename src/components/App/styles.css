@@ -753,7 +753,7 @@
   font-family: "Playfair Display";
   src: url("/fonts/PlayfairDisplay/PlayfairDisplay-Regular.ttf"); }
 
-html, body, .root, .page {
+html, body, #root, .page {
   height: 100%; }
 
 body {
@@ -762,5 +762,10 @@ body {
   font-family: 'Hind', sans-serif; }
 
 .page--nonPublic {
-  background-color: #f9f9fb;
-  padding-bottom: 30px; }
+  background-color: #f9f9fb; }
+  .page--nonPublic > div {
+    padding-bottom: 80px;
+    background-color: #f9f9fb; }
+    @media (min-width: 640px) {
+      .page--nonPublic > div {
+        padding-bottom: 100px; } }
