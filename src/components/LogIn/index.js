@@ -8,7 +8,7 @@ import { logInSubmit, setFormErrors } from '../../actions';
 import { getFormErrors } from '../../selectors';
 import { getInputError } from '../../actions/utils';
 import Button, { buttonColorTypes, buttonSizeTypes, buttonTypes } from '../Button';
-import { Mobile, MobileTablet, Desktop, TabletDesktop } from '../Responsive';
+import { Mobile, MobileTablet, Desktop, Default } from '../Responsive';
 import PublicPage from '../PublicPage';
 import PageHeader, { PageHeaderLogo, pageHeaderLogoStyles } from '../PageHeader';
 import './styles.css';
@@ -59,12 +59,12 @@ const LogIn = ({
         }
         contentRight={
           <span>
-            <TabletDesktop>
+            <Default>
               <div className="logIn__linkContainer logIn__linkContainer--header">
                 <span className="logIn__linkText">Don’t have account? </span>
                 <Link to="/signup" className="logIn__link">Sign Up</Link>
               </div>
-            </TabletDesktop>
+            </Default>
           </span>
         }
       />

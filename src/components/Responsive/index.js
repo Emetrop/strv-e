@@ -14,8 +14,5 @@ export const Mobile = ({ children }) =>
 export const Default = ({ children }) =>
   <Responsive minWidth={640}>{children}</Responsive>;
 
-export const TabletDesktop = ({ children }) =>
-  <Responsive minWidth={640}>{children}</Responsive>;
-
 export const MobileTablet = ({ children }) =>
   <Responsive maxWidth={1023}>{children}</Responsive>;

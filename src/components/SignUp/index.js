@@ -8,7 +8,7 @@ import { signUpSubmit, setFormErrors } from '../../actions';
 import Button, { buttonTypes, buttonColorTypes, buttonSizeTypes } from '../Button';
 import { getFormErrors } from '../../selectors';
 import { getInputError } from '../../actions/utils';
-import { Mobile, MobileTablet, Desktop, TabletDesktop } from '../Responsive';
+import { Mobile, MobileTablet, Desktop, Default } from '../Responsive';
 import PublicPage from '../PublicPage';
 import PageHeader, { PageHeaderLogo, pageHeaderLogoStyles } from '../PageHeader';
 import './styles.css';
@@ -72,12 +72,12 @@ const SignUp = ({
         }
         contentRight={
           <span>
-            <TabletDesktop>
+            <Default>
               <div className="signUp__linkContainer signUp__linkContainer--header">
                 <span className="signUp__linkText">Already have an account? </span>
                 <Link to="/login" className="signUp__link">Sign In</Link>
               </div>
-            </TabletDesktop>
+            </Default>
           </span>
         }
       />
