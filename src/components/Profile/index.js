@@ -8,7 +8,10 @@ import ProfileHeader from './header';
 import PageHeader, { PageHeaderMenu, PageHeaderLogo } from '../PageHeader';
 import ContentHeader from '../ContentHeader';
 
-const Profile = ({ events, user }) => (
+const Profile = ({
+  events,
+  user,
+}) => (
   <div>
     <PageHeader
       contentLeft={<PageHeaderLogo link="/dashboard" />}

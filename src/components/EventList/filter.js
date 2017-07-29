@@ -22,7 +22,9 @@ class EventListFilter extends Component {
   }
 
   getCurrentFilterTitle() {
-    const { currentFilter } = this.props;
+    const {
+      currentFilter,
+    } = this.props;
 
     if (currentFilter === eventListFilters.FUTURE) return 'Future Events';
     if (currentFilter === eventListFilters.PAST) return 'Past Events';
@@ -30,7 +32,9 @@ class EventListFilter extends Component {
   }
 
   getMobileFilterClasses(filter) {
-    const { currentFilter } = this.props;
+    const {
+      currentFilter,
+    } = this.props;
 
     return classnames({
       listFilterMobile__menuItem: true,
@@ -39,7 +43,9 @@ class EventListFilter extends Component {
   }
 
   getFilterClasses(filter) {
-    const { currentFilter } = this.props;
+    const {
+      currentFilter,
+    } = this.props;
 
     return classnames({
       listFilter__menuItem: true,
@@ -54,7 +60,9 @@ class EventListFilter extends Component {
   }
 
   handleMenuSelect(filterType) {
-    const { filterEvents } = this.props;
+    const {
+      filterEvents,
+    } = this.props;
 
     filterEvents(filterType);
     this.toggleMenu();
@@ -67,7 +75,9 @@ class EventListFilter extends Component {
   }
 
   render() {
-    const { filterEvents } = this.props;
+    const {
+      filterEvents,
+    } = this.props;
 
     return (
       <div className="listFilter__container">
@@ -142,9 +152,11 @@ class EventListFilter extends Component {
 
 EventListFilter.propTypes = {
   filterEvents: PropTypes.func.isRequired,
-  currentFilter: PropTypes.oneOf(
-    [eventListFilters.ALL, eventListFilters.FUTURE, eventListFilters.PAST],
-  ).isRequired,
+  currentFilter: PropTypes.oneOf([
+    eventListFilters.ALL,
+    eventListFilters.FUTURE,
+    eventListFilters.PAST,
+  ]).isRequired,
 };
 
 const mapStateToProps = state => ({

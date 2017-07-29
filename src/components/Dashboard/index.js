@@ -11,14 +11,20 @@ import { NewEventButton } from '../NewEventButton';
 
 class Dashboard extends Component {
   componentDidMount() {
-    const { loadEntities, setEventFilterTimestamp } = this.props;
+    const {
+      loadEntities,
+      setEventFilterTimestamp,
+    } = this.props;
 
     setEventFilterTimestamp(getCurrentTimestamp());
     loadEntities();
   }
 
   render() {
-    const { filteredEvents, filter } = this.props;
+    const {
+      filteredEvents,
+      filter,
+    } = this.props;
 
     return (
       <div>

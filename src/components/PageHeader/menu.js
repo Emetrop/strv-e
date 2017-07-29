@@ -29,7 +29,10 @@ class PageHeaderMenu extends Component {
   }
 
   render() {
-    const { user, logOut } = this.props;
+    const {
+      user,
+      logOut,
+    } = this.props;
 
     return (
       <div className="pageHeader__menuContainer">

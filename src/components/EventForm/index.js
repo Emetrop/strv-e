@@ -5,7 +5,15 @@ import * as Immutable from 'immutable';
 import Input, { InputDateTime, inputDateTimeTypes } from '../Input';
 import { getInputError } from '../../actions/utils';
 
-const EventForm = ({ title, description, capacity, startsAt, onSubmit, errors, children }) => {
+const EventForm = ({
+  title,
+  description,
+  capacity,
+  startsAt,
+  onSubmit,
+  errors,
+  children,
+}) => {
   const handleSubmit = (event) => {
     event.preventDefault();
 

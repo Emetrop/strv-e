@@ -2,7 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './styles.css';
 
-const EventAttendees = ({ users, currentUserID }) => (
+const EventAttendees = ({
+  users,
+  currentUserID,
+}) => (
   <div className="attendees__container">
     <h3 className="attendees__title">Attendees</h3>
     {Object.keys(users).length === 0 && <span className="attendees__zero">No attendees</span>}

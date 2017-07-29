@@ -11,7 +11,11 @@ import { Mobile, Default } from '../Responsive';
 import Button, { buttonTypes, buttonColorTypes, buttonSizeTypes } from '../Button';
 import './styles.css';
 
-const EventNew = ({ onSubmit, errors, setFormErrors }) => {
+const EventNew = ({
+  onSubmit,
+  errors,
+  setFormErrors,
+}) => {
   const validate = (values) => {
     const errors = {};
 

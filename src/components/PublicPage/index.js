@@ -2,7 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './styles.css';
 
-const PublicPage = ({ children }) => (
+const PublicPage = ({
+  children,
+}) => (
   <div className="publicPage__container">
     <div className="publicPage__leftSide">
       <div className="publicPage__imageWrap">

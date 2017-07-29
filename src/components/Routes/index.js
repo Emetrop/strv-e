@@ -11,7 +11,9 @@ import LogIn from '../LogIn';
 import SignUp from '../SignUp';
 import { isLoggedIn } from '../../selectors';
 
-const Routes = ({ isLoggedIn }) => (
+const Routes = ({
+  isLoggedIn,
+}) => (
     isLoggedIn
       ?
         <div className="page page--nonPublic">

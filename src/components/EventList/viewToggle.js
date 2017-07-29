@@ -12,7 +12,10 @@ export const eventListViews = {
   LIST: 'LIST',
 };
 
-const EventListViewToggle = ({ setEventListView, currentView }) => {
+const EventListViewToggle = ({
+  setEventListView,
+  currentView,
+}) => {
   const gridClasses = classnames({
     listView__icon: true,
     'listView__icon--active': currentView === eventListViews.GRID,
@@ -46,9 +49,10 @@ const EventListViewToggle = ({ setEventListView, currentView }) => {
 };
 
 EventListViewToggle.propTypes = {
-  currentView: PropTypes.oneOf(
-    [eventListViews.LIST, eventListViews.GRID],
-  ).isRequired,
+  currentView: PropTypes.oneOf([
+    eventListViews.LIST,
+    eventListViews.GRID,
+  ]).isRequired,
   setEventListView: PropTypes.func.isRequired,
 };
 

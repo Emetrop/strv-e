@@ -14,7 +14,14 @@ import EventEditConfirmButton from './confirmButton';
 import { Mobile, Default } from '../Responsive';
 import './styles.css';
 
-const EventEdit = ({ onSubmit, errors, event, user, setFormErrors, match }) => {
+const EventEdit = ({
+  onSubmit,
+  errors,
+  event,
+  user,
+  setFormErrors,
+  match,
+}) => {
   const validate = (values) => {
     const errors = {};
 

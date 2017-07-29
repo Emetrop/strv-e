@@ -18,9 +18,20 @@ export const eventStyleTypes = {
   FULLWIDTH: 'fullwidth',
 };
 
-const Event = ({ title, description, startsAt, capacity,
-                 attendees, firstName, lastName, id,
-                 buttonType, leaveEvent, joinEvent, eventStyle }) => {
+const Event = ({
+  title,
+  description,
+  startsAt,
+  capacity,
+  attendees,
+  firstName,
+  lastName,
+  id,
+  buttonType,
+  leaveEvent,
+  joinEvent,
+  eventStyle,
+}) => {
   const getButton = () => {
     switch (buttonType) {
       case eventButtonTypes.EDIT:

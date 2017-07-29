@@ -13,7 +13,12 @@ import { Default, Mobile } from '../Responsive';
 import { NewEventButton } from '../NewEventButton';
 import './styles.css';
 
-const EventDetail = ({ event, currentUserID, leaveEvent, joinEvent }) => {
+const EventDetail = ({
+  event,
+  currentUserID,
+  leaveEvent,
+  joinEvent,
+}) => {
   if (event.isEmpty()) return <Redirect to="/dashboard" />;
 
   return (

@@ -3,7 +3,14 @@ import PropTypes from 'prop-types';
 import InputDateTime, { inputDateTimeTypes } from './dateTime';
 import './styles.css';
 
-const Input = ({ label, error, name, type, value, ...others }) => (
+const Input = ({
+  label,
+  error,
+  name,
+  type,
+  value,
+  ...others
+}) => (
   <div className="input__group">
     <input name={name} className={error ? 'input input--error' : 'input'} type={type} defaultValue={value} {...others} required />
     <span className="input__highlight" />

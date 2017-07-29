@@ -4,7 +4,11 @@ import PageHeaderLogo, { pageHeaderLogoStyles } from './logo';
 import PageHeaderMenu from './menu';
 import './styles.css';
 
-const PageHeader = ({ contentLeft, contentMiddle, contentRight }) => (
+const PageHeader = ({
+  contentLeft,
+  contentMiddle,
+  contentRight,
+}) => (
   <div className="pageHeader__container">
     <span className="pageHeader__item">
       {contentLeft}

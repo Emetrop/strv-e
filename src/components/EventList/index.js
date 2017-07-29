@@ -9,7 +9,13 @@ import EventListFilter, { eventListFilters } from './filter';
 import EventListViewToggle, { eventListViews } from './viewToggle';
 import './styles.css';
 
-const EventList = ({ events, leaveEvent, joinEvent, currentUserID, currentListView }) => {
+const EventList = ({
+  events,
+  leaveEvent,
+  joinEvent,
+  currentUserID,
+  currentListView,
+}) => {
   const getDescription = (event) => {
     const maxLength = currentListView === eventListViews.GRID ? 60 : 30;
 

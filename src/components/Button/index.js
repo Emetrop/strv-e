@@ -21,7 +21,14 @@ export const buttonTypes = {
   LINK: 'link',
 };
 
-const Button = ({ children, type, onClick, color, size, url }) => {
+const Button = ({
+  children,
+  type,
+  onClick,
+  color,
+  size,
+  url,
+}) => {
   const classes = classnames({
     button: true,
     'button--normal': size === buttonSizeTypes.NORMAL,

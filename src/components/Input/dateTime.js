@@ -9,7 +9,13 @@ export const inputDateTimeTypes = {
   DATETIME: 'datetime',
 };
 
-const InputDateTime = ({ label, error, name, type, value }) => {
+const InputDateTime = ({
+  label,
+  error,
+  name,
+  type,
+  value,
+}) => {
   const options = {
     defaultDate: value,
     enableTime: type === inputDateTimeTypes.TIME || type === inputDateTimeTypes.DATETIME,

@@ -13,7 +13,11 @@ import PublicPage from '../PublicPage';
 import PageHeader, { PageHeaderLogo, pageHeaderLogoStyles } from '../PageHeader';
 import './styles.css';
 
-const SignUp = ({ onSubmit, errors, setFormErrors }) => {
+const SignUp = ({
+  onSubmit,
+  errors,
+  setFormErrors,
+}) => {
   const validate = (values) => {
     const errors = {};
 

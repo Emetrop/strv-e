@@ -4,7 +4,10 @@ import { connect } from 'react-redux';
 import { deleteEvent } from '../../actions';
 import { Default, Mobile } from '../Responsive';
 
-const EventDelete = ({ id, deleteEvent }) => {
+const EventDelete = ({
+  id,
+  deleteEvent,
+}) => {
   const handleDelete = () => {
 // eslint-disable-next-line no-alert
     if (confirm('Delete the item?')) {

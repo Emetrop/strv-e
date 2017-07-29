@@ -2,7 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './styles.css';
 
-const ProfileHeader = ({ firstName, lastName, email }) => (
+const ProfileHeader = ({
+  firstName,
+  lastName,
+  email,
+}) => (
   <div className="containerResponsive">
     <div className="profileHeader">
       <div className="profileHeader__content">
