@@ -6,10 +6,8 @@
   bottom: 16px;
 
   @media (min-width: $tablet-min-width) {
-    & {
-      right: 32px;
-      bottom: 32px;
-    }
+    right: 32px;
+    bottom: 32px;
   }
 
   &__icon {

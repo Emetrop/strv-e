@@ -8,9 +8,7 @@
     background-color: $white-color;
 
     @media (min-width: $tablet-min-width) {
-      & {
-        min-height: calc(296px - 2*32px);
-      }
+      min-height: calc(296px - 2*32px);
     }
   }
 

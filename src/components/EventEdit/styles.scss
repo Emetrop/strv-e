@@ -46,9 +46,7 @@
       background-color: $white-color;
 
       @media (min-width: $tablet-min-width) {
-        & {
-          padding: 42px 32px;
-        }
+        padding: 42px 32px;
       }
     }
   }
@@ -68,10 +66,8 @@
     background-color: transparent;
 
     @media (min-width: $tablet-min-width) {
-      & {
-        right: 32px;
-        bottom: 32px;
-      }
+      right: 32px;
+      bottom: 32px;
     }
 
     &__icon {

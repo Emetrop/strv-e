@@ -16,11 +16,9 @@
     font-weight: normal;
 
     @media (min-width: $tablet-min-width) {
-      & {
-        text-align: left;
-        font-size: 28px;
-        line-height: 1.71;
-      }
+      text-align: left;
+      font-size: 28px;
+      line-height: 1.71;
     }
   }
 
@@ -32,9 +30,7 @@
     margin: 0 0 32px;
 
     @media (min-width: $tablet-min-width) {
-      & {
-        text-align: left;
-      }
+      text-align: left;
     }
   }
 
@@ -42,9 +38,7 @@
     text-align: center;
 
     @media (min-width: $tablet-min-width) {
-      & {
-        text-align: left;
-      }
+      text-align: left;
     }
   }
 

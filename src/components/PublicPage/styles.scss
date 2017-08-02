@@ -19,10 +19,8 @@
     background-color: $font-dark-color;
 
     @media (min-width: $desktop-min-width) {
-      & {
-        display: block;
-        width: 33%;
-      }
+      display: block;
+      width: 33%;
     }
   }
 
@@ -38,10 +36,8 @@
     justify-content: center;
 
     @media (min-width: $desktop-min-width) {
-      & {
-        width: 66%;
-        left: 33%;
-      }
+      width: 66%;
+      left: 33%;
     }
   }
 

@@ -13,9 +13,7 @@
     text-align: center;
 
     @media (min-width: $tablet-min-width) {
-      & {
-        margin-top: 90px;
-      }
+      margin-top: 90px;
     }
   }
 
@@ -35,9 +33,7 @@
     font-size: 27px;
 
     @media (min-width: $tablet-min-width) {
-      & {
-        top: 135px;
-      }
+      top: 135px;
     }
   }
 
@@ -64,10 +60,8 @@
     font-weight: normal;
 
     @media (min-width: $tablet-min-width) {
-      & {
-        font-size: 28px;
-        line-height: 1.71;
-      }
+      font-size: 28px;
+      line-height: 1.71;
     }
   }
 }
