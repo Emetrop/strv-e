@@ -787,12 +787,9 @@
     justify-content: space-between;
     height: 32px; }
   .event__user {
-    display: inline-block;
-    color: #d9dce1;
+    fill: #949ea8;
     width: 16px;
-    height: 16px;
-    background: url(../../images/user.svg) no-repeat;
-    background-size: 16px; }
+    height: 16px; }
 
 .eventList {
   margin-bottom: 16px;

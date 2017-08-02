@@ -9,6 +9,7 @@ import PageHeader, { PageHeaderLogo } from '../PageHeader';
 import { getFormErrors } from '../../selectors';
 import { Mobile, Default } from '../Responsive';
 import Button, { buttonTypes, buttonColorTypes, buttonSizeTypes } from '../Button';
+import CloseIcon from '../../images/close';
 import './styles.css';
 
 const EventNew = ({
@@ -57,12 +58,12 @@ const EventNew = ({
           <div className="eventNew__close">
             <Mobile>
               <Link to="/dashboard" className="eventNew__closeLink">
-                <span className="eventNew__closeIcon" />
+                <CloseIcon className="eventNew__closeIcon" />
               </Link>
             </Mobile>
             <Default>
               <Link to="/dashboard" className="eventNew__closeLink">
-                <span className="eventNew__closeIcon" />
+                <CloseIcon className="eventNew__closeIcon" />
                 <span className="eventNew__closeText">Close</span>
               </Link>
             </Default>

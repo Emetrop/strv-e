@@ -17,28 +17,22 @@
       min-width: 100px; } }
 
 .pageHeader__logo--dark {
-  display: inline-block;
   width: 22px;
   height: 23px;
-  background: url(../../images/logo.svg) no-repeat;
-  background-size: 22px 23px; }
+  fill: #323c46; }
   @media (min-width: 640px) {
     .pageHeader__logo--dark {
       width: 28px;
-      height: 29px;
-      background-size: 28px 29px; } }
+      height: 29px; } }
 
 .pageHeader__logo--light {
-  display: inline-block;
   width: 22px;
   height: 23px;
-  background: url(../../images/logoLight.svg) no-repeat;
-  background-size: 22px 23px; }
+  fill: #ffffff; }
   @media (min-width: 640px) {
     .pageHeader__logo--light {
       width: 28px;
-      height: 29px;
-      background-size: 28px 29px; } }
+      height: 29px; } }
 
 .pageHeader__logoLink {
   display: inline-flex; }
@@ -73,11 +67,9 @@
 
 .pageHeader__arrowDown {
   margin-left: 6px;
-  color: #d9dce1;
+  fill: #d9dce1;
   width: 14px;
   height: 7px;
-  background: url(../../images/arrowHeader.svg) no-repeat;
-  background-size: 14px 7px;
   cursor: pointer; }
 
 .pageHeader__menu {

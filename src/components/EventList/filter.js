@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
 import onClickOutside from 'react-onclickoutside';
+import ArrowDownIcon from '../../images/arrowDown';
 import { Mobile, Default } from '../Responsive';
 import { getEventFilterType } from '../../selectors';
 import { filterEvents } from '../../actions';
@@ -89,7 +90,7 @@ class EventListFilter extends Component {
             onClick={() => this.toggleMenu()}
           >
             <span>{this.getCurrentFilterTitle()}</span>
-            <span className="listFilterMobile__arrowDown" />
+            <ArrowDownIcon className="listFilterMobile__arrowDown" />
           </span>
           <ul className={this.state.isMenuOpened ?
             'listFilterMobile__menu listFilterMobile__menu--active' : 'listFilterMobile__menu'}

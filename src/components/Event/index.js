@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Default } from '../Responsive';
 import Button, { buttonTypes, buttonColorTypes } from '../Button';
+import UserIcon from '../../images/user';
 import './styles.css';
 
 export const eventButtonTypes = {
@@ -106,7 +107,7 @@ const Event = ({
           </div>
           <div className="event__bottom">
             <span className="event__attendees">
-              <span className="event__user" />
+              <UserIcon className="event__user" />
               <span className="event__count">{attendees}{' of '}{capacity}</span>
             </span>
             <span>

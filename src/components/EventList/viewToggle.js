@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
-import gridIcon from '../../images/grid.svg';
-import listIcon from '../../images/list.svg';
+import GridIcon from '../../images/grid';
+import ListIcon from '../../images/list';
 import { setEventListView } from '../../actions';
 import { getEventListView } from '../../selectors';
 
@@ -28,21 +28,17 @@ const EventListViewToggle = ({
 
   return (
     <ul className="listView">
-      <li className="listView__item listView__item--first">
-        <img
-          src={gridIcon}
-          alt="Grid view"
-          className={gridClasses}
-          onClick={() => setEventListView(eventListViews.GRID)}
-        />
+      <li
+        className="listView__item listView__item--first"
+        onClick={() => setEventListView(eventListViews.GRID)}
+      >
+        <GridIcon className={gridClasses} />
       </li>
-      <li className="listView__item">
-        <img
-          src={listIcon}
-          alt="List view"
-          className={listClasses}
-          onClick={() => setEventListView(eventListViews.LIST)}
-        />
+      <li
+        className="listView__item"
+        onClick={() => setEventListView(eventListViews.LIST)}
+      >
+        <ListIcon className={listClasses} />
       </li>
     </ul>
   );

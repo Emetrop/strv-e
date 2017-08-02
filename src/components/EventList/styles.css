@@ -14,11 +14,11 @@
     height: 16px;
     cursor: pointer;
     outline: none;
-    opacity: 0.1; }
+    fill: #d9dce1; }
     .listView__icon:hover {
-      opacity: 1; }
+      fill: #323c46; }
     .listView__icon--active {
-      opacity: 1; }
+      fill: #323c46; }
     .listView__iconContainer {
       outline: none; }
 
@@ -80,13 +80,10 @@
   cursor: pointer; }
 
 .listFilterMobile__arrowDown {
-  display: inline-block;
   margin-left: 6px;
-  color: #d9dce1;
+  fill: #323c46;
   width: 14px;
   height: 7px;
-  background: url(../../images/arrowDown.svg) no-repeat;
-  background-size: 14px 7px;
   cursor: pointer; }
 
 .listFilterMobile__menu {

@@ -21,14 +21,14 @@
     height: 16px;
     cursor: pointer;
     outline: none;
-    opacity: 0.1;
+    fill: $grey-color;
 
     &:hover {
-      opacity: 1;
+      fill: $font-dark-color;
     }
 
     &--active {
-      opacity: 1;
+      fill: $font-dark-color;
     }
 
     &Container {
@@ -109,13 +109,10 @@
   }
 
   &__arrowDown {
-    display: inline-block;
     margin-left: 6px;
-    color: $element-background-color;
+    fill: $font-dark-color;
     width: 14px;
     height: 7px;
-    background: url(../../images/arrowDown.svg) no-repeat;
-    background-size: 14px 7px;
     cursor: pointer;
   }
 

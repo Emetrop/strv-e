@@ -74,11 +74,8 @@
     margin-left: auto;
 
     &Icon {
-      display: inline-block;
       width: 14px;
       height: 14px;
-      background: url(../../images/close.svg) no-repeat;
-      background-size: 14px;
     }
 
     &Link {
@@ -91,7 +88,7 @@
 
     &Text {
       height: 24px;
-      margin-left: 14px;
+      margin-left: 12px;
     }
   }
 }

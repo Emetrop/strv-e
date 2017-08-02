@@ -740,26 +740,24 @@
   color: #a9aeb4;
   margin: 0; }
 
-.eventEdit__deleteIcon {
-  display: inline-block;
-  width: 10px;
-  height: 12px;
-  background: url(../../images/delete.svg) no-repeat;
-  background-size: 10px 12px;
-  margin-right: 8px;
-  position: relative;
-  bottom: 1px; }
-
 .eventEdit__delete {
   display: flex;
   align-items: center;
-  font-size: 12px;
-  font-weight: 600;
-  line-height: 2;
-  letter-spacing: 1px;
-  color: #ff4081;
   cursor: pointer;
   outline: none; }
+  .eventEdit__deleteIcon {
+    width: 10px;
+    height: 12px;
+    position: relative;
+    bottom: 1px;
+    fill: #ff4081; }
+  .eventEdit__deleteText {
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 2;
+    letter-spacing: 1px;
+    color: #ff4081;
+    margin-left: 8px; }
 
 .eventEdit__event {
   margin-bottom: 16px; }
@@ -777,16 +775,17 @@
 
 .eventEditConfirmButton {
   display: inline-block;
-  width: 56px;
-  height: 56px;
-  background: url(../../images/confirm.svg) no-repeat;
-  background-size: 56px;
   position: fixed;
   right: 16px;
   bottom: 16px;
   border: none;
-  cursor: pointer; }
+  cursor: pointer;
+  background-color: transparent; }
   @media (min-width: 640px) {
     .eventEditConfirmButton {
       right: 32px;
       bottom: 32px; } }
+  .eventEditConfirmButton__icon {
+    width: 56px;
+    height: 56px;
+    fill: #22d486; }

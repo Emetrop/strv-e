@@ -749,11 +749,8 @@
   align-items: center; }
 
 .eventDetail__backIcon {
-  display: inline-block;
   width: 16px;
   height: 16px;
-  background: url(../../images/back.svg) no-repeat;
-  background-size: 16px;
   margin-right: 8px; }
 
 .eventDetail__event {

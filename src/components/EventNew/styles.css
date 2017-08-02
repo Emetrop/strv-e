@@ -780,11 +780,8 @@
 .eventNew__close {
   margin-left: auto; }
   .eventNew__closeIcon {
-    display: inline-block;
     width: 14px;
-    height: 14px;
-    background: url(../../images/close.svg) no-repeat;
-    background-size: 14px; }
+    height: 14px; }
   .eventNew__closeLink {
     font-size: 16px;
     color: #323c46;
@@ -793,4 +790,4 @@
     align-items: center; }
   .eventNew__closeText {
     height: 24px;
-    margin-left: 14px; }
+    margin-left: 12px; }

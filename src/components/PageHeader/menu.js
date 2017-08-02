@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Immutable from 'immutable';
 import onClickOutside from 'react-onclickoutside';
+import ArrowDownIcon from '../../images/arrowDown';
 import { logOut } from '../../actions';
 import { getCurrentUser } from '../../selectors';
 import { Default } from '../Responsive';
@@ -45,7 +46,9 @@ class PageHeaderMenu extends Component {
             {user.get('firstName')} {user.get('lastName')}
           </span>
         </Default>
-        <span role="presentation" className="pageHeader__arrowDown" onClick={() => this.toggleMenu()} />
+        <span role="presentation" onClick={() => this.toggleMenu()}>
+          <ArrowDownIcon className="pageHeader__arrowDown" />
+        </span>
         <ul className={this.state.isMenuOpened ? 'pageHeader__menu pageHeader__menu--active' : 'pageHeader__menu'} >
           <li className="pageHeader__menuItem">
             <Link to="/profile" className="pageHeader__menuLink">

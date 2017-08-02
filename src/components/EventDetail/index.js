@@ -11,6 +11,7 @@ import { getFormattedDateTime, leaveEvent, joinEvent } from '../../actions';
 import ContentHeader from '../ContentHeader';
 import { Default, Mobile } from '../Responsive';
 import { NewEventButton } from '../NewEventButton';
+import BackIcon from '../../images/back';
 import './styles.css';
 
 const EventDetail = ({
@@ -28,7 +29,7 @@ const EventDetail = ({
         contentMiddle={
           <Default>
             <Link to="/dashboard" className="eventDetail__backLink">
-              <span className="eventDetail__backIcon" />
+              <BackIcon className="eventDetail__backIcon" />
               <span className="eventDetail__backText">Back to events</span>
             </Link>
           </Default>}

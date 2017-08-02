@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import DeleteIcon from '../../images/delete';
 import { deleteEvent } from '../../actions';
 import { Default, Mobile } from '../Responsive';
 
@@ -23,7 +24,9 @@ const EventDelete = ({
           tabIndex={0}
           onClick={handleDelete}
           className="eventEdit__delete"
-        ><span className="eventEdit__deleteIcon" /></span>
+        >
+          <DeleteIcon className="eventEdit__deleteIcon" />
+        </span>
       </Mobile>
       <Default>
         <span
@@ -31,7 +34,10 @@ const EventDelete = ({
           tabIndex={0}
           onClick={handleDelete}
           className="eventEdit__delete"
-        ><span className="eventEdit__deleteIcon" /><span>DELETE EVENT</span></span>
+        >
+          <DeleteIcon className="eventEdit__deleteIcon" />
+          <span className="eventEdit__deleteText" >DELETE EVENT</span>
+        </span>
       </Default>
     </span>
   );

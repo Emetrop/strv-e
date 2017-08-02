@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import LogoIcon from '../../images/logo';
 
 export const pageHeaderLogoStyles = {
   DARK: 'dark',
@@ -10,12 +11,13 @@ export const pageHeaderLogoStyles = {
 const PageHeaderLogo = ({ style, link }) => (
   <Link
     to={link}
-    className={
-          style === pageHeaderLogoStyles.DARK ?
-            'pageHeader__logo--dark pageHeader__logoLink' : 'pageHeader__logo--light pageHeader__logoLink'
-        }
+    className="pageHeader__logoLink"
   >
-    <span className="pageHeader__logo" />
+    <LogoIcon className={
+        style === pageHeaderLogoStyles.DARK ?
+          'pageHeader__logo--dark pageHeader__logo' : 'pageHeader__logo--light pageHeader__logo'
+      }
+    />
   </Link>
 );
 
