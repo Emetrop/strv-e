@@ -1,6 +1,6 @@
 /* eslint-disable no-constant-condition */
 import { take, put, call, select } from 'redux-saga/effects';
-import * as Immutable from 'immutable';
+import Immutable from 'immutable';
 import { deleteEventRequest, deleteEventError, deleteEventSuccess, deleteEntity } from '../../actions';
 import * as actionTypes from '../../constants/actionTypes';
 import { deleteEvent } from '../../api';

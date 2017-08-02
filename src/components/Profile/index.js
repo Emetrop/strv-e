@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import * as Immutable from 'immutable';
+import Immutable from 'immutable';
 import EventList, { EventListViewToggle } from '../EventList';
 import { getProfileEvents, getCurrentUser } from '../../selectors';
 import ProfileHeader from './header';

@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import * as Immutable from 'immutable';
+import Immutable from 'immutable';
 import { Link } from 'react-router-dom';
 import EventForm from '../EventForm';
 import { createEventSubmit, setFormErrors } from '../../actions';

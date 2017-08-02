@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
-import * as Immutable from 'immutable';
+import Immutable from 'immutable';
 import Input, { InputDateTime, inputDateTimeTypes } from '../Input';
 import { getInputError } from '../../actions/utils';
 

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Redirect, withRouter } from 'react-router-dom';
-import * as Immutable from 'immutable';
+import Immutable from 'immutable';
 import { updateEventSubmit, setFormErrors } from '../../actions';
 import EventForm from '../EventForm';
 import { getEventWithAuthorAndAttendees, getCurrentUser, getFormErrors } from '../../selectors';

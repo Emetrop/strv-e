@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import * as Immutable from 'immutable';
+import Immutable from 'immutable';
 import { Link, Redirect } from 'react-router-dom';
 import Event, { getEventButtonType, eventStyleTypes } from '../Event';
 import EventAttendees from '../EventAttendees';

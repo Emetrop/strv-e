@@ -1,6 +1,6 @@
 /* eslint-disable no-constant-condition */
 import { take, put, call } from 'redux-saga/effects';
-import * as Immutable from 'immutable';
+import Immutable from 'immutable';
 import { signUpRequest, signUpError, signUpSuccess, setFormErrors } from '../../actions';
 import * as actionTypes from '../../constants/actionTypes';
 import { signUp as signUpAPI } from '../../api';

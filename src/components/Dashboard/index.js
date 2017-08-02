@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import * as Immutable from 'immutable';
+import Immutable from 'immutable';
 import EventList, { EventListFilter, EventListViewToggle } from '../EventList';
 import { loadEntities, setEventFilterTimestamp, getCurrentTimestamp } from '../../actions';
 import { getFilteredEvents, getEventFilterType } from '../../selectors';
