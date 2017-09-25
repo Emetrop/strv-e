@@ -1,5 +1,5 @@
-@import "../App/variables.scss";
-@import "../App/flexboxgrid.scss";
+@import "../../components/App/variables";
+@import "../../components/App/flexboxgrid";
 
 .profileHeader {
   @extend .col-xs-12;

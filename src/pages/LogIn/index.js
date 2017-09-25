@@ -3,14 +3,14 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Immutable from 'immutable';
 import { Link } from 'react-router-dom';
-import Input from '../Input';
-import { logInSubmit, setFormErrors } from '../../actions';
+import Input from '../../components/Input/index';
+import { logInSubmit, setFormErrors } from '../../actions/index';
 import { getFormErrors } from '../../selectors';
-import { getInputError } from '../../actions/utils';
-import Button, { buttonColorTypes, buttonSizeTypes, buttonTypes } from '../Button';
-import { Mobile, MobileTablet, Desktop, Default } from '../Responsive';
-import PublicPage from '../PublicPage';
-import PageHeader, { PageHeaderLogo, pageHeaderLogoStyles } from '../PageHeader';
+import { getInputError } from '../../actions/utils/index';
+import Button, { buttonColorTypes, buttonSizeTypes, buttonTypes } from '../../components/Button/index';
+import { Mobile, MobileTablet, Desktop, Default } from '../../components/Responsive/index';
+import PublicPage from '../../components/PublicPage/index';
+import PageHeader, { PageHeaderLogo, pageHeaderLogoStyles } from '../../components/PageHeader/index';
 import './styles.css';
 
 const LogIn = ({

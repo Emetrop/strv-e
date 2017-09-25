@@ -3,15 +3,15 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Redirect, withRouter } from 'react-router-dom';
 import Immutable from 'immutable';
-import { updateEventSubmit, setFormErrors } from '../../actions';
-import EventForm from '../EventForm';
+import { updateEventSubmit, setFormErrors } from '../../actions/index';
+import EventForm from '../../components/EventForm/index';
 import { getEventWithAuthorAndAttendees, getCurrentUser, getFormErrors } from '../../selectors';
-import PageHeader, { PageHeaderMenu, PageHeaderLogo } from '../PageHeader';
-import ContentHeader from '../ContentHeader';
-import EventAttendees from '../EventAttendees';
+import PageHeader, { PageHeaderMenu, PageHeaderLogo } from '../../components/PageHeader/index';
+import ContentHeader from '../../components/ContentHeader/index';
+import EventAttendees from '../../components/EventAttendees/index';
 import EventDelete from './delete';
 import EventEditConfirmButton from './confirmButton';
-import { Mobile, Default } from '../Responsive';
+import { Mobile, Default } from '../../components/Responsive/index';
 import './styles.css';
 
 const EventEdit = ({

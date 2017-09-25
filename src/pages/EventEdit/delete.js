@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import DeleteIcon from '../../images/delete';
-import { deleteEvent } from '../../actions';
-import { Default, Mobile } from '../Responsive';
+import { deleteEvent } from '../../actions/index';
+import { Default, Mobile } from '../../components/Responsive/index';
 
 const EventDelete = ({
   id,

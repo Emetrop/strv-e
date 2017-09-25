@@ -3,12 +3,12 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Immutable from 'immutable';
 import { Link } from 'react-router-dom';
-import EventForm from '../EventForm';
-import { createEventSubmit, setFormErrors } from '../../actions';
-import PageHeader, { PageHeaderLogo } from '../PageHeader';
+import EventForm from '../../components/EventForm/index';
+import { createEventSubmit, setFormErrors } from '../../actions/index';
+import PageHeader, { PageHeaderLogo } from '../../components/PageHeader/index';
 import { getFormErrors } from '../../selectors';
-import { Mobile, Default } from '../Responsive';
-import Button, { buttonTypes, buttonColorTypes, buttonSizeTypes } from '../Button';
+import { Mobile, Default } from '../../components/Responsive/index';
+import Button, { buttonTypes, buttonColorTypes, buttonSizeTypes } from '../../components/Button/index';
 import CloseIcon from '../../images/close';
 import './styles.css';
 

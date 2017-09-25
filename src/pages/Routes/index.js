@@ -2,13 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Route, Redirect, Switch, withRouter } from 'react-router-dom';
-import Dashboard from '../Dashboard';
-import Profile from '../Profile';
-import EventDetail from '../EventDetail';
-import EventNew from '../EventNew';
-import EventEdit from '../EventEdit';
-import LogIn from '../LogIn';
-import SignUp from '../SignUp';
+import Dashboard from '../Dashboard/index';
+import Profile from '../Profile/index';
+import EventDetail from '../EventDetail/index';
+import EventNew from '../EventNew/index';
+import EventEdit from '../EventEdit/index';
+import LogIn from '../LogIn/index';
+import SignUp from '../SignUp/index';
 import { isLoggedIn } from '../../selectors';
 
 const Routes = ({
