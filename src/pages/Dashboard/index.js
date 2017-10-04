@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Immutable from 'immutable';
-import EventList, { EventListFilter, EventListViewToggle } from '../../components/EventList/index';
-import { loadEntities, setEventFilterTimestamp, getCurrentTimestamp } from '../../actions/index';
+import EventList, { EventListFilter, EventListViewToggle } from '../../components/EventList';
+import { loadEntities, setEventFilterTimestamp, getCurrentTimestamp } from '../../actions';
 import { getFilteredEvents, getEventFilterType } from '../../selectors';
-import PageHeader, { PageHeaderMenu, PageHeaderLogo } from '../../components/PageHeader/index';
-import ContentHeader from '../../components/ContentHeader/index';
-import { NewEventButton } from '../../components/NewEventButton/index';
+import PageHeader, { PageHeaderMenu, PageHeaderLogo } from '../../components/PageHeader';
+import ContentHeader from '../../components/ContentHeader';
+import { NewEventButton } from '../../components/NewEventButton';
 
 class Dashboard extends Component {
   componentDidMount() {

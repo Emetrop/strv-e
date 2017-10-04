@@ -2,11 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Immutable from 'immutable';
-import EventList, { EventListViewToggle } from '../../components/EventList/index';
+import EventList, { EventListViewToggle } from '../../components/EventList';
 import { getProfileEvents, getCurrentUser } from '../../selectors';
 import ProfileHeader from './header';
-import PageHeader, { PageHeaderMenu, PageHeaderLogo } from '../../components/PageHeader/index';
-import ContentHeader from '../../components/ContentHeader/index';
+import PageHeader, { PageHeaderMenu, PageHeaderLogo } from '../../components/PageHeader';
+import ContentHeader from '../../components/ContentHeader';
 
 const Profile = ({
   events,

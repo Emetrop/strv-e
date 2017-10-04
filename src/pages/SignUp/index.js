@@ -3,14 +3,14 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Immutable from 'immutable';
 import { Link } from 'react-router-dom';
-import Input from '../../components/Input/index';
-import { signUpSubmit, setFormErrors } from '../../actions/index';
-import Button, { buttonTypes, buttonColorTypes, buttonSizeTypes } from '../../components/Button/index';
+import Input from '../../components/Input';
+import { signUpSubmit, setFormErrors } from '../../actions';
+import Button, { buttonTypes, buttonColorTypes, buttonSizeTypes } from '../../components/Button';
 import { getFormErrors } from '../../selectors';
-import { getInputError } from '../../actions/utils/index';
-import { Mobile, MobileTablet, Desktop, Default } from '../../components/Responsive/index';
-import PublicPage from '../../components/PublicPage/index';
-import PageHeader, { PageHeaderLogo, pageHeaderLogoStyles } from '../../components/PageHeader/index';
+import { getInputError } from '../../actions/utils';
+import { Mobile, MobileTablet, Desktop, Default } from '../../components/Responsive';
+import PublicPage from '../../components/PublicPage';
+import PageHeader, { PageHeaderLogo, pageHeaderLogoStyles } from '../../components/PageHeader';
 import './styles.css';
 
 const SignUp = ({
